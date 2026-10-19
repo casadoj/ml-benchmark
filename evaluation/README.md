@@ -4,7 +4,7 @@ This module provides the set of evaluation diagnostics recommended by CORDEX-ML-
 
 ## Indices
 
-Indices quantify particular characteristics or properties of a single simulation `x`, for example, the mean, specific quantiles, or extremes. These indices are always calculated for an individual simulation and often form the foundation for various diagnostics.
+Indices quantify particular characteristics or properties of a single simulation `x`, for example, the mean, specific quantiles, or extremes. These indices are always calculated for an individual simulation and often form the foundation for many diagnostics.
 
 | Index | Description | Key parameters |
 |-------|-------------|----------------|
@@ -28,17 +28,17 @@ To simplify comparisons between models in the benchmark, every diagnostic should
 
 | Diagnostic | Description | Key parameters |
 |------------|-------------|----------------|
-| `rmse` | Root mean square error between x0 and x1. | `x0`, `x1`, `var`, `season`, `dim` |
+| `rmse` | Root mean square error between `x0` and `x1`. | `x0`, `x1`, `var`, `season`, `dim` |
 | `psd` | Power spectral density with radial averaging for 2D spatial fields. | `x0`, `x1`, `var`, `season` |
 | `ralsd` | Radially averaged log spectral distance between two RAPSD curves (Harris et al., 2022). | `psd_x0`, `psd_x1` |
-| `wasserstein_distance` | Wasserstein distance between the distributions of x0 and x1. With `spatial=False`, returns a single scalar (all values flattened); with `spatial=True`, returns a field of distances at each grid point (computed over time). | `x0`, `x1`, `var`, `season`, `spatial` |
+| `wasserstein_distance` | Wasserstein distance between the distributions of `x0` and `x1`. With `spatial=False`, returns a single scalar (all values flattened); with `spatial=True`, returns a field of distances at each grid point (computed over time). | `x0`, `x1`, `var`, `season`, `spatial` |
 | `bias_index` | Absolute or relative bias for any index function. | `x0`, `x1`, `index_fn`, `season`, index-specific kwargs |
-| `ratio_index` | Ratio (x1 / x0) for any index function. | `x0`, `x1`, `index_fn`, `season`, index-specific kwargs |
+| `ratio_index` | Ratio (`x1` / `x0`) for any index function. | `x0`, `x1`, `index_fn`, `season`, index-specific kwargs |
 | `bias_multivariable_correlation` | Bias in correlations between two variables. | `x0`, `x1`, `var_x`, `var_y`, `season` |
 
 ## Examples
 
-### Tasmax diagnostics
+### Maximum temperature diagnostics
 
 ```python
 import xarray as xr
