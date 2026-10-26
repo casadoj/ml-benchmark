@@ -9,3 +9,18 @@
 !format_predictions/templates/*.nc
 format_predictions/generate_templates.py
 **/submission_files/
+
+# --- Heavy output trees ------------------------------------------------------
+# Ignored at directory level so git never walks these very large trees.
+data/OLD/
+data/*/predictions/*
+# AI_READY_DATASETS/files/
+# SOURCE_FILES/train/
+# SOURCE_FILES/test/
+
+# Exception: the evaluation metric zarr stores ARE versioned — they are the
+# benchmark results the FIGURES plotting scripts consume. Checkpoints
+# (outputs/models) and predictions (outputs/predictions) stay excluded above.
+!data/*/evaluation/
+!data/*/evaluation/**
+data/*/evaluation/**/*.nc
