@@ -29,11 +29,11 @@
 #        DRY_RUN=1 below prints the ml-eval calls without running them.
 # ============================================================================
 #SBATCH --job-name=eval_master
-#SBATCH --output=./logs/evaluation.out
-#SBATCH --error=./logs/evaluation.err
-#SBATCH --partition=wncompute_meteo
-#SBATCH --time=12:00:00
-#SBATCH --mem=0
+#SBATCH --output=./logs/evaluation-%x-%j.out
+#SBATCH --error=./logs/evaluation-%x-%j.err
+#SBATCH --partition=sci
+#SBATCH --time=06:00:00
+#SBATCH --mem=24GB
 
 # --- Environment (must contain the ml-evaluation package: `ml-eval`) --------
 source /home/casadoj/miniconda3/etc/profile.d/conda.sh
@@ -94,7 +94,6 @@ PROB_HORIZON="mid_century"
 
 DATA_DIR="$PROJECT/data"
 
-mkdir -p "$DATA_DIR/$SIMULATION/logs"
 cd "$PROJECT" || exit 1
 [ "$SEASON" = "annual" ] && SEASON_FLAG="" || SEASON_FLAG="--season $SEASON"
 
