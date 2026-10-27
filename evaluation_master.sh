@@ -55,8 +55,8 @@ PROJECT="/home/casadoj/Git/ml-benchmark"
 SIMULATION="DeepESD-IFCAv1"     # your directory under ./data/
 
 # --- Which case ------------------------------------------------------------
-VARS=("pr") # "tasmax")
-DOMAINS=("ALPS") # "NZ")           #("ALPS" "SA" "NZ")
+VARS=("pr" "tasmax")
+DOMAINS=("ALPS" "NZ" "SA")
 TRAIN_EXPERIMENTS=("ESD_pseudo_reality" "Emulator_hist_future")
 SEASON="annual"                 # annual, DJF, JJA, ...
 OVERWRITE=0                     # 1 = recompute metrics that already exist
@@ -412,7 +412,6 @@ for domain in "${DOMAINS[@]}"; do
                 else
                     for var in "${VARS[@]}"; do
                         out_dir="$(eval_dir "$horizon" "$framework" "$var")"
-                        echo "$out_dir"
                         ensure_dir "$out_dir"
                         echo "[fast] START: computing fast evaluation for '$var'..."
                         run_eval fast --x0 "$ref" --x1 "$pred" --var "$var" --output "$out_dir" \
