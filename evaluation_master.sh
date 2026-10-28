@@ -368,7 +368,7 @@ eval_dir() {
     gcm="$(gcm_for_framework "$framework")" || return 1
 
     printf '%s\n' \
-        "$DATA_DIR/$SIMULATION/evaluation/${domain}_Domain/${rcm}_${train_gcm}_${gcm}_${period}/$SEASON/$variable/"
+        "$DATA_DIR/$SIMULATION/evaluation/${domain}_Domain/${train_exp}/${rcm}_${train_gcm}_${gcm}_${period}/$SEASON/$variable/"
 }
 
 have() { [ "$OVERWRITE" != "1" ] && [ -e "$1/$2" ]; }
