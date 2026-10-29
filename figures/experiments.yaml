@@ -1,0 +1,14 @@
+ESD_pseudo_reality:
+    Perfect_cross_validation:
+        period: 1981-2000
+        case: perfect
+    Perfect_extrapolation:
+        period: 2041-2060
+        case: perfect
+Emulator_hist_future: 
+    Perfect_cross_validation: 
+        period: 1981-2000
+        case: perfect
+    Perfect_interpolation: 
+        period: 2041-2060
+        case: perfect

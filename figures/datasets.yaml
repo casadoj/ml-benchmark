@@ -1,0 +1,12 @@
+ALPS: 
+    rcm: CNRM-ALADIN63
+    train_gcm: CNRM-CM5
+    test_gcm: MPI-ESM-LR
+SA:
+    rcm: CCAM
+    train_gcm: ACCESS-CM2
+    test_gcm: NorESM2-MM
+NZ:
+    rcm: CCAM
+    train_gcm: ACCESS-CM2
+    test_gcm: EC-Earth3
