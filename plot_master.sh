@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================================
-# Redraw EVERY figure of this project: run the plot.sh of each FIGURES/<figure>/
+# Redraw EVERY figure of this project: run the plot.sh of each figures/<figure>/
 # directory, in turn, and report what was drawn and what failed.
 #
 # Each figure directory owns its own plot.sh -- that is where the parameters of
@@ -26,7 +26,7 @@
 #
 # Each script's output goes to its own log, and only a failure's tail is echoed
 # here, so this job's log stays readable:
-#   FIGURES/logs/plot_<figure>.log
+#   figures/logs/plot_<figure>.log
 #
 # Run:   bash   plot_master.sh                 (from anywhere)
 #        sbatch plot_master.sh
@@ -39,9 +39,9 @@
 # Quote them, or the shell expands them against the current directory first.
 # ============================================================================
 #SBATCH --job-name=plot_all
-#SBATCH --output=./FIGURES/logs/plot_master.out
-#SBATCH --error=./FIGURES/logs/plot_master.err
-#SBATCH --partition=wncompute_meteo
+#SBATCH --output=./figures/logs/plot_master.out
+#SBATCH --error=./figures/logs/plot_master.err
+#SBATCH --partition=sci
 #SBATCH --time=06:00:00
 #SBATCH --mem=0
 
@@ -88,15 +88,19 @@ mkdir -p logs
 # hold the same models.
 
 MODELS=(
-    # "UNET-SINGLE,UNET-SINGLE,UNET-SINGLE"
-    # "UNET-MULTI,UNET-MULTI,UNET-MULTI"          # regressor of RESDIFF
-    # "CPMGEM,CPMGEM,CPMGEM600"
-    # "RESDIFF,RESDIFF,RESDIFF500"
-    # "UIBCORRDIFF,UIBCORRDIFF,UiBCorrDiff"
-    # "FLOWMATCHING,FLOWMATCHING,FlowMatchingLocalTargets"
-    # "FLOWMATCHINGPRECIP,FLOWMATCHINGPRECIP,FlowMatchingLocalPrecip"
-    # "DOWNVIT,DOWNVIT,DOWNVIT"
+    # "ANN,ANN,ANN"
+    # "ANN-orog,ANN-orog,ANN-orog"
+    # # "CorrDiff-TW1,CorrDiff-TW1,CorrDiff-TW1"
+    # # "CorrDiff-TW1_NTNU-CWA,CorrDiff-TW1_NTNU-CWA,CorrDiff-TW1_NTNU-CWA"
+    # # "CorrDiff-TW1_NTNU-CWA-orog,CorrDiff-TW1_NTNU-CWA-orog,CorrDiff-TW1_NTNU-CWA-orog"
+    # "DeepESD_IDL,DeepESD_IDL,DeepESD_IDL"
     "DeepESD-IFCAv1,DeepESD-IFCAv1,DeepESD-IFCAv1"
+    "DeepESD-IFCAv1-orog,DeepESD-IFCAv1-orog,DeepESD-IFCAv1-orog"
+    "DetUNet,DetUNet,DetUNet"
+    "DetUNet-orog,DetUNet-orog,DetUNet-orog"
+    "DetUNet-v2,DetUNet-v2,DetUNet-v2"
+    "DetUNet-v2-orog,DetUNet-v2-orog,DetUNet-v2-orog"
+    # "DeepESDcrps_IFCAv2-orog,DeepESDcrps_IFCAv2-orog,DeepESDcrps_IFCAv2-orog"
 )
 
 export PLOT_MODELS="${MODELS[*]}"
