@@ -28,16 +28,16 @@
 #        sbatch evaluation_master.sh
 #        DRY_RUN=1 below prints the ml-eval calls without running them.
 # ============================================================================
-#SBATCH --job-name=eval_master
-#SBATCH --output=./logs/evaluation.out
-#SBATCH --error=./logs/evaluation.err
-#SBATCH --partition=wncompute_meteo
-#SBATCH --time=12:00:00
-#SBATCH --mem=0
+#SBATCH --job-name=eval_DeepESD-IFCAv1
+#SBATCH --output=./logs/evaluation-%x-%j.out
+#SBATCH --error=./logs/evaluation-%x-%j.err
+#SBATCH --partition=sci
+#SBATCH --time=06:00:00
+#SBATCH --mem=24GB
 
 # --- Environment (must contain the ml-evaluation package: `ml-eval`) --------
-source /home/casadoj/miniconda3/etc/profile.d/conda.sh
-conda activate /home/casadoj/miniconda3/envs/rcm-emulation
+source /nfs/home/gmeteo/casadoj/miniconda3/etc/profile.d/conda.sh
+conda activate /nfs/home/gmeteo/casadoj/miniconda3/envs/ml-evaluation
 
 
 # ###########################################################################
@@ -48,7 +48,7 @@ conda activate /home/casadoj/miniconda3/envs/rcm-emulation
 # ============================ EDIT ME ======================================
 # Absolute path to the CORDEX-ML-Bench project root. This is the ONE line to
 # change if you work on a copy of the tree somewhere else.
-PROJECT="/home/casadoj/Git/ml-benchmark"
+PROJECT="/lustre/gmeteo/WORK/casadoj/ml-benchmark"
 # ===========================================================================
 
 # --- Which simulation ------------------------------------------------------
@@ -56,7 +56,7 @@ SIMULATION="DeepESD-IFCAv1"     # your directory under ./data/
 
 # --- Which case ------------------------------------------------------------
 VARS=("pr" "tasmax")
-DOMAINS=("ALPS" "NZ")           #("ALPS" "SA" "NZ")
+DOMAINS=("ALPS" "NZ" "SA")
 TRAIN_EXPERIMENTS=("ESD_pseudo_reality" "Emulator_hist_future")
 SEASON="annual"                 # annual, DJF, JJA, ...
 OVERWRITE=0                     # 1 = recompute metrics that already exist
@@ -69,8 +69,8 @@ MEMBER=0                        # every track scores this member (prob keeps all
 # Set to 0 to skip. PROB is for emulators whose sampler produces an ensemble 
 DO_FAST=1
 DO_SLOW=1
-DO_SIGNAL=1
-DO_MULTIVAR=1
+DO_SIGNAL=0
+DO_MULTIVAR=0
 DO_PROB=0                       # 1 for an ensemble emulator
 
 # --- Track-specific settings -----------------------------------------------
@@ -94,7 +94,6 @@ PROB_HORIZON="mid_century"
 
 DATA_DIR="$PROJECT/data"
 
-mkdir -p "$DATA_DIR/$SIMULATION/logs"
 cd "$PROJECT" || exit 1
 [ "$SEASON" = "annual" ] && SEASON_FLAG="" || SEASON_FLAG="--season $SEASON"
 
@@ -350,6 +349,16 @@ pred_file() {
 #     printf '%s\n' \
 #         "$DATA_DIR/$SIMULATION/evaluation/${domain}_Domain/$train_exp/$test_exp/$variable/"
 # }
+
+# Returns the directory where results will be saved.
+#
+#   Parameters
+#   horizon:    "historical", "mid_century" or "end_century"
+#   framework:  "perfect" or "imperfect"    
+#   variable:   
+#
+#   Returns
+#   A string with the output directory.
 eval_dir() {
     local horizon="$1"
     local framework="$2"
@@ -359,7 +368,7 @@ eval_dir() {
     gcm="$(gcm_for_framework "$framework")" || return 1
 
     printf '%s\n' \
-        "$DATA_DIR/$SIMULATION/evaluation/${domain}_Domain/${rcm}_${train_gcm}_${gcm}_${period}/$SEASON/$variable/"
+        "$DATA_DIR/$SIMULATION/evaluation/${domain}_Domain/${train_exp}/${rcm}_${train_gcm}_${gcm}_${period}/$SEASON/$variable/"
 }
 
 have() { [ "$OVERWRITE" != "1" ] && [ -e "$1/$2" ]; }
@@ -402,7 +411,6 @@ for domain in "${DOMAINS[@]}"; do
                 else
                     for var in "${VARS[@]}"; do
                         out_dir="$(eval_dir "$horizon" "$framework" "$var")"
-                        echo "$out_dir"
                         ensure_dir "$out_dir"
                         echo "[fast] START: computing fast evaluation for '$var'..."
                         run_eval fast --x0 "$ref" --x1 "$pred" --var "$var" --output "$out_dir" \
