@@ -1,6 +1,7 @@
 *.nc
 *.pt
 *.zip
+*.zarr
 **/models/
 **/__pycache__/
 **/models/
@@ -9,6 +10,7 @@
 !format_predictions/templates/*.nc
 format_predictions/generate_templates.py
 **/submission_files/
+CLAUDE.md
 
 # --- Heavy output trees ------------------------------------------------------
 # Ignored at directory level so git never walks these very large trees.
