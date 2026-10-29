@@ -26,3 +26,11 @@ data/*/predictions/*
 !data/*/evaluation/
 !data/*/evaluation/**
 data/*/evaluation/**/*.nc
+data/*/evaluation/**/*.zarr
+
+
+# --- Logs ---------------------------------------------------------------------
+**/logs/
+*.err
+*.out
+*.log
