@@ -38,8 +38,6 @@ HERE="$PROJECT/figures/scorecard_tasmax_skill"       # figures are written here,
 cd "$HERE"
 
 # ---------------------------- PARAMETERS ------------------------------------
-# Python helpers shared by the figure scripts live in figures/utils.py
-export PYTHONPATH="$PROJECT/figures${PYTHONPATH:+:$PYTHONPATH}"
 export DATA_DIR="$PROJECT/data"
 export DOMAINS="ALPS NZ SA"
 export TRAIN_EXPERIMENTS="ESD_pseudo_reality Emulator_hist_future"
@@ -58,6 +56,7 @@ export METRICS="rmse bias_mean bias_txx ralsd pss bias_annstd"
 # ---------------------------- RUN ------------------------------------------
 python <<'PY'
 import os
+import sys
 from pathlib import Path
 import yaml
 
@@ -65,6 +64,8 @@ from ml_evaluation.viz.plot_var_skill_scorecard import (
     read_var_skill_metrics,
     render_var_skill_scorecard,
 )
+
+sys.path.insert(0, str(Path.cwd().parent))
 from utils import (
     aggregate_domains,
     apply_model_override,
@@ -136,7 +137,7 @@ for train_exp in TRAIN_EXPERIMENTS:
             paths[model] = run_dirs
 
         for var in VARS:
-            available_paths = keep(paths, DOMAINS, var)
+            available_paths = keep(paths, DOMAINS, [var])
             per_model = {}
             for model, domain_dict in available_paths.items():
                 # load results for each domain
