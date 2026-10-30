@@ -10,7 +10,7 @@
 # viz searches nothing: every source is passed as an explicit label -> path,
 # where <path> is one run's <SEASON> dir and viz appends <var> itself.
 #
-# Reads   data/<SIM>/evaluation/<DOMAIN>/<RCM>_<TRAIN_GCM>_<DATASET>_<PERIOD>/<SEASON>/pr/
+# Reads   data/<SIM>/evaluation/<DOMAIN>/<EXPERIMENT>/<RCM>_<TRAIN_GCM>_<DATASET>_<PERIOD>/<SEASON>/pr/
 # Writes  the PNG(s) next to this script.
 #
 # Run:   bash   figures/scorecard_pr_skill/plot.sh      (from anywhere)
@@ -37,8 +37,6 @@ HERE="$PROJECT/figures/scorecard_pr_skill"       # figures are written here, nex
 cd "$HERE" || exit 1
 
 # ---------------------------- PARAMETERS ------------------------------------
-# Python helpers shared by the figure scripts live in figures/utils.py
-export PYTHONPATH="$PROJECT/figures${PYTHONPATH:+:$PYTHONPATH}"
 export DATA_DIR="$PROJECT/data"
 export DOMAINS="ALPS NZ SA"
 export TRAIN_EXPERIMENTS="ESD_pseudo_reality Emulator_hist_future"
@@ -48,12 +46,13 @@ export OUT="$HERE"
 # Columns, in order. The 10 fast-track metrics; append the slow-track ones
 #   wd wdh fcss lhd bias_annstd bias_p90
 # once data/*/evaluation.sh has run its `ml-eval slow` block.
-export METRICS="rmse bias_mean bias_sdii bias_rx1day ralsd lhd" # bias_p01 bias_p99 bias_r01 bias_p98wet bias_acorr"
+export METRICS="rmse bias_mean bias_sdii bias_rx1day ralsd lhd"
 
 
 # ---------------------------- RUN ------------------------------------------
 python <<'PY'
 import os
+import sys
 from pathlib import Path
 import yaml
 
@@ -61,6 +60,8 @@ from ml_evaluation.viz.plot_var_skill_scorecard import (
     read_var_skill_metrics,
     render_var_skill_scorecard,
 )
+
+sys.path.insert(0, str(Path.cwd().parent))
 from utils import (
     aggregate_domains,
     apply_model_override,
@@ -132,7 +133,7 @@ for train_exp in TRAIN_EXPERIMENTS:
             paths[model] = run_dirs
 
         for var in VARS:
-            available_paths = keep(paths, DOMAINS, var)
+            available_paths = keep(paths, DOMAINS, [var])
             per_model = {}
             for model, domain_dict in available_paths.items():
                 # load results for each domain
