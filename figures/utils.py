@@ -61,11 +61,11 @@ def run_dir(
 def keep(
     paths: dict[str, dict[str, Path]],
     domains: list[str],
-    var: str,
+    vars: list[str],
 ) -> dict[str, dict[str, Path]]:
-    """Keep only models with metric directories for every requested domain.
+    """Keep only models with metric directories for every domain and variable.
 
-    Models with a missing domain are reported on stdout and dropped.
+    Models with a missing domain or variable are reported on stdout and dropped.
 
     Parameters
     ----------
@@ -73,8 +73,9 @@ def keep(
         For each model and domain, the run's season directory.
     domains : list of str
         Domains that must all be present.
-    var : str
-        Variable whose sub-directory (``<path>/<var>``) must exist.
+    vars : list of str
+        Variables whose sub-directories (``<path>/<var>``) must all exist in
+        every domain.
 
     Returns
     -------
@@ -83,16 +84,16 @@ def keep(
     """
     out = {}
     for model, path_dict in paths.items():
-        missing = [
-            domain
-            for domain in domains
-            if domain not in path_dict or not (path_dict[domain] / var).is_dir()
-        ]
+        missing = []
+        for domain in domains:
+            if domain not in path_dict:
+                missing.append(f"{domain} (all)")
+                continue
+            absent = [var for var in vars if not (path_dict[domain] / var).is_dir()]
+            if absent:
+                missing.append(f"{domain} ({', '.join(absent)})")
         if missing:
-            print(
-                f"[plot] SKIP {model}: {var} metrics missing for "
-                f"domain(s) {', '.join(missing)}"
-            )
+            print(f"[plot] SKIP {model}: metrics missing for {'; '.join(missing)}")
             continue
         out[model] = path_dict
     return out

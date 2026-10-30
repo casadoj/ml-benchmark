@@ -88,19 +88,20 @@ mkdir -p logs
 # hold the same models.
 
 MODELS=(
-    # "ANN,ANN,ANN"
-    # "ANN-orog,ANN-orog,ANN-orog"
+    "ANN,ANN,ANN"
+    "ANN-orog,ANN-orog,ANN-orog"
     # # "CorrDiff-TW1,CorrDiff-TW1,CorrDiff-TW1"
     # # "CorrDiff-TW1_NTNU-CWA,CorrDiff-TW1_NTNU-CWA,CorrDiff-TW1_NTNU-CWA"
     # # "CorrDiff-TW1_NTNU-CWA-orog,CorrDiff-TW1_NTNU-CWA-orog,CorrDiff-TW1_NTNU-CWA-orog"
-    # "DeepESD_IDL,DeepESD_IDL,DeepESD_IDL"
+    "DeepESD_IDL,DeepESD_IDL,DeepESD_IDL"
     "DeepESD-IFCAv1,DeepESD-IFCAv1,DeepESD-IFCAv1"
     "DeepESD-IFCAv1-orog,DeepESD-IFCAv1-orog,DeepESD-IFCAv1-orog"
+    "DeepESDcrps_IFVAv2,DeepESDcrps_IFVAv2,DeepESDcrps_IFVAv2"
+    # "DeepESDcrps_IFVAv2-orog,DeepESDcrps_IFVAv2-orog,DeepESDcrps_IFVAv2-orog"
     "DetUNet,DetUNet,DetUNet"
     "DetUNet-orog,DetUNet-orog,DetUNet-orog"
     "DetUNet-v2,DetUNet-v2,DetUNet-v2"
     "DetUNet-v2-orog,DetUNet-v2-orog,DetUNet-v2-orog"
-    # "DeepESDcrps_IFCAv2-orog,DeepESDcrps_IFCAv2-orog,DeepESDcrps_IFCAv2-orog"
 )
 
 export PLOT_MODELS="${MODELS[*]}"
