@@ -1,0 +1,11 @@
+model: YOUR-MODEL-NAME
+domains:
+  - ALPS
+  - NZ
+  - SA
+experiments:
+  - ESD_pseudo_reality
+  - Emulator_hist_future
+variables:
+  - tasmax
+  - pr
