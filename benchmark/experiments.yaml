@@ -1,14 +1,62 @@
 ESD_pseudo_reality:
-    Perfect_cross_validation:
-        period: 1981-2000
-        case: perfect
-    Perfect_extrapolation:
-        period: 2041-2060
-        case: perfect
+  Perfect_cross_validation:
+    horizon: historical
+    period: 1981-2000
+    case: perfect # upscaled RCM
+  # Imperfect_cross_validation:
+  #   horizon: historical
+  #   period: 1981-2000
+  #   case: imperfect # raw GCM
+  Perfect_extrapolation:
+    horizon: mid_century
+    period: 2041-2060
+    case: perfect
+  # Imperfect_extrapolation:
+    # horizon: 
+    #   - mid_century
+    #   - end_century
+    # period: 
+    #   - 2041-2060
+    #   - 2080-2099
+    # case: imperfect # raw GCM
+  # Perfect_extrapolation_transfer:
+  #   horizon: 
+  #     - mid_century
+  #     - end_century
+  #   period: 
+  #     - 2041-2060
+  #     - 2080-2099
+  #   case: perfect # upscaled out-of-sample RCM
 Emulator_hist_future: 
-    Perfect_cross_validation: 
-        period: 1981-2000
-        case: perfect
-    Perfect_interpolation: 
-        period: 2041-2060
-        case: perfect
+  Perfect_cross_validation:
+    horizon: historical
+    period: 1981-2000
+    case: perfect
+  # Imperfect_cross_validation:
+  #   horizon: historical
+  #   period: 1981-2000
+  #   case: imperfect # raw GCM
+  Perfect_interpolation:
+    horizon: mid_century
+    period: 2041-2060
+    case: perfect
+  # Imperfect_interpolation:
+  #   horizon: mid_century
+  #   period: 2041-2060
+  #   case: imperfect # raw GCM
+  # Perfect_interpolation_transfer:
+  #   horizon: 
+  #     - mid_century
+  #     - end_century
+  #   period: 
+  #     - 2041-2060
+  #     - 2080-2099
+  #   case: perfect # upscaled out-of-sample RCM
+  # Imperfect_interpolation_transfer:
+  #   horizon: 
+  #     - mid_century
+  #     - end_century
+  #   period: 
+  #     - 2041-2060
+  #     - 2080-2099
+  #   case: imperfect # raw out-of-sample GCM
