@@ -11,11 +11,12 @@
 format_predictions/generate_templates.py
 **/submission_files/
 CLAUDE.md
+# Pixi environments (pixi.toml and pixi.lock are versioned)
+.pixi/
 
 # --- Heavy output trees ------------------------------------------------------
 # Ignored at directory level so git never walks these very large trees.
-data/OLD/
-data/*/predictions/*
+**/predictions/*
 # AI_READY_DATASETS/files/
 # SOURCE_FILES/train/
 # SOURCE_FILES/test/
