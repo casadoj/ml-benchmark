@@ -2,7 +2,7 @@
 #
 # Structure
 # ---------
-# <HORIZON>: <START_YEAR>-<END_YEAR>     
+# <HORIZONd>: <START_YEAR>-<END_YEAR>     
 
 historical: 1981-2000
 mid_century: 2041-2060
