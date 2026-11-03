@@ -65,6 +65,10 @@ AGGREGATION = {
     "txx": np.mean,
 }
 
+# horizon -> 20-year period, as in the benchmark file names
+with open(BENCHMARK_DIR / "horizons.yaml") as f:
+    PERIODS = yaml.safe_load(f)
+
 
 def parse_args() -> argparse.Namespace:
     """
@@ -152,9 +156,10 @@ def evaluate_experiment(
     test_exp : str
         Test experiment, e.g. `Perfect_cross_validation`.
     attrs : dict
-        Test attributes from `experiments.yaml` (`horizon`, `period`, `case`).
+        Test attributes from `experiments.yaml` (`horizon`, `case`, `transfer`).
     dataset_mapping : dict
-        Domain attributes from `datasets.yaml` (`train_gcm`, ...).
+        Domain attributes from `datasets.yaml`. The GCM is `test_gcm` if
+        `transfer` is true, otherwise `train_gcm`.
     overwrite : bool, default False
         Recompute per-domain metric files that already exist. If False, they are
         reused.
@@ -164,13 +169,15 @@ def evaluate_experiment(
     int
         Number of failed `ml-eval` calls.
     """
-    horizon, period, case = attrs["horizon"], attrs["period"], attrs["case"]
+    horizon, case = attrs["horizon"], attrs["case"]
+    period = PERIODS[horizon]
+    gcm_key = "test_gcm" if attrs["transfer"] else "train_gcm"
     out_dir = experiment_dir(config, train_exp, test_exp)
     out_dir.mkdir(parents=True, exist_ok=True)
 
     n_failed = 0
     for domain in config.domains:
-        forcing = dataset_mapping[domain]["train_gcm"]
+        forcing = dataset_mapping[domain][gcm_key]
 
         # x0: reference file
         x0 = (
@@ -313,8 +320,9 @@ def main() -> None:
     experiment_mapping = load_yaml(BENCHMARK_DIR / "experiments.yaml")
 
     n_failed = 0
-    for train_exp in config.experiments:
-        for test_exp, attrs in experiment_mapping[train_exp].items():
+    for train_exp, test_exps in config.experiments.items():
+        for test_exp in test_exps:
+            attrs = experiment_mapping[train_exp][test_exp]
             print(f"[main] INFO | Train/test experiments: {train_exp} / {test_exp}")
             summary_file = experiment_dir(config, train_exp, test_exp) / SUMMARY_FILE
 

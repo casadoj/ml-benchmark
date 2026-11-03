@@ -4,8 +4,12 @@ domains:
   - NZ
   - SA
 experiments:
-  - ESD_pseudo_reality
-  - Emulator_hist_future
+  ESD_pseudo_reality:
+    - Perfect_cross_validation
+    - Perfect_extrapolation
+  Emulator_hist_future:
+    - Perfect_cross_validation
+    - Perfect_interpolation
 variables:
   - tasmax
   - pr

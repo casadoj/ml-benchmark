@@ -6,6 +6,8 @@ from pathlib import Path
 import yaml
 
 DEFAULT_CONFIG_FILE = Path(__file__).parent / "config.yaml"
+BENCHMARK_DIR = Path(__file__).resolve().parent.parent / "benchmark"
+EXPERIMENTS_FILE = BENCHMARK_DIR / "experiments.yaml"
 
 
 @dataclass
@@ -19,18 +21,76 @@ class Config:
         Name of the model. It must match the directory `data/<model>`.
     domains : list[str]
         Domains to evaluate.
-    experiments : list[str]
-        Training experiments to evaluate.
+    experiments : dict[str, list[str] | None]
+        Training experiment -> test experiments to evaluate. None (an empty entry
+        in the YAML file) means all the tests of that training experiment defined
+        in `benchmark/experiments.yaml`. A plain list of training experiments
+        (the former format) is also accepted and means all their tests.
     variables : list[str]
         Variables to evaluate.
     """
 
     model: str
     domains: list[str] = field(default_factory=lambda: ["ALPS", "NZ", "SA"])
-    experiments: list[str] = field(
-        default_factory=lambda: ["ESD_pseudo_reality", "Emulator_hist_future"]
+    experiments: dict[str, list[str] | None] = field(
+        default_factory=lambda: {
+            "ESD_pseudo_reality": [
+                "Perfect_cross_validation",
+                "Perfect_extrapolation",
+            ],
+            "Emulator_hist_future": [
+                "Perfect_cross_validation",
+                "Perfect_interpolation",
+            ],
+        }
     )
     variables: list[str] = field(default_factory=lambda: ["tasmax", "pr"])
+
+    def __post_init__(self) -> None:
+        """
+        Convert `experiments` to a dictionary of lists and check it against
+        `benchmark/experiments.yaml`.
+
+        Training or test experiments not defined in that file are reported with a
+        warning and removed, so `experiments` only holds valid combinations.
+        """
+        if isinstance(self.experiments, list):
+            self.experiments = {train_exp: None for train_exp in self.experiments}
+        if not isinstance(self.experiments, dict):
+            raise TypeError(
+                "'experiments' must map each training experiment to a list of "
+                f"test experiments, got {type(self.experiments).__name__}"
+            )
+
+        with open(EXPERIMENTS_FILE) as f:
+            experiment_mapping = yaml.safe_load(f)
+
+        valid = {}
+        for train_exp, tests in self.experiments.items():
+            if train_exp not in experiment_mapping:
+                print(
+                    f"[config] WARNING | Training experiment {train_exp!r} not in "
+                    f"{EXPERIMENTS_FILE}; skipped"
+                )
+                continue
+            available = experiment_mapping[train_exp]
+            if tests is None:
+                tests = list(available)
+            elif not isinstance(tests, list):
+                raise TypeError(
+                    f"The tests of '{train_exp}' must be a list, "
+                    f"got {type(tests).__name__}"
+                )
+            for test_exp in tests:
+                if test_exp not in available:
+                    print(
+                        f"[config] WARNING | Test {test_exp!r} of {train_exp!r} not in "
+                        f"{EXPERIMENTS_FILE}; skipped"
+                    )
+            valid_tests = [test_exp for test_exp in tests if test_exp in available]
+            if valid_tests:
+                valid[train_exp] = valid_tests
+        self.experiments = valid
 
     @classmethod
     def from_yaml(cls, path: str | Path = DEFAULT_CONFIG_FILE) -> Config:
