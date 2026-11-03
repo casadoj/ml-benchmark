@@ -1,0 +1,51 @@
+{
+  "model": "Prithvi-UNet-orog",
+  "train_experiment": "Emulator_hist_future",
+  "test_experiment": "Perfect_cross_validation",
+  "variables": {
+    "pr": {
+      "rmse": {
+        "aggregation": "quadratic_mean",
+        "aggregate": 0.0001012860520859249,
+        "domains": {
+          "SA": 0.0001012860520859249
+        }
+      },
+      "clim_mean": {
+        "aggregation": "mean",
+        "aggregate": 1.2263862117833924e-05,
+        "domains": {
+          "SA": 1.2263862117833924e-05
+        }
+      },
+      "ralsd": {
+        "aggregation": "mean",
+        "aggregate": 566.3560482611153,
+        "domains": {
+          "SA": 566.3560482611153
+        }
+      },
+      "sdii": {
+        "aggregation": "mean",
+        "aggregate": 5.2349369070725515e-05,
+        "domains": {
+          "SA": 5.2349369070725515e-05
+        }
+      },
+      "rx1day": {
+        "aggregation": "mean",
+        "aggregate": 0.0008046897128224373,
+        "domains": {
+          "SA": 0.0008046897128224373
+        }
+      },
+      "lhd": {
+        "aggregation": "quadratic_mean",
+        "aggregate": 14.917694572913396,
+        "domains": {
+          "SA": 14.917694572913396
+        }
+      }
+    }
+  }
+}
