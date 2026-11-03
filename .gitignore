@@ -16,7 +16,7 @@ CLAUDE.md
 
 # --- Heavy output trees ------------------------------------------------------
 # Ignored at directory level so git never walks these very large trees.
-**/predictions/*
+data/*/predictions
 # AI_READY_DATASETS/files/
 # SOURCE_FILES/train/
 # SOURCE_FILES/test/
@@ -24,8 +24,8 @@ CLAUDE.md
 # Exception: the evaluation metric zarr stores ARE versioned — they are the
 # benchmark results the FIGURES plotting scripts consume. Checkpoints
 # (outputs/models) and predictions (outputs/predictions) stay excluded above.
-!data/*/evaluation/
-!data/*/evaluation/**
+#!data/*/evaluation/
+#!data/*/evaluation/**
 data/*/evaluation/**/*.nc
 data/*/evaluation/**/*.zarr
 
