@@ -85,7 +85,166 @@ The table below summarizes the contributing models and provides links to their r
 
 ## Scoreboard
 
-We are currently working on the evaluation of the models presented above. Summary tables, as well as the corresponding references containing more detailed results, are being prepared and will be made available here soon.
+Performance of the submitted models in the four perfect-predictor tests, one table per variable. The tables are generated automatically from the evaluation results in `data/<MODEL>/evaluation/` by [`evaluation/scoreboard.py`](./evaluation/scoreboard.py); do not edit them by hand.
+
+<!-- SCOREBOARD:START -->
+
+Metrics are computed per domain by `ml-eval benchmark` and aggregated across
+domains (quadratic mean for RMSE and LHD, arithmetic mean otherwise). Biases are
+spatial means of the absolute bias, in the units of the variable. ↓ lower is
+better, ↑ higher is better. Each cell shows the two tests of a training
+experiment, in the order given in the column header; the best value of each test
+is in bold, and – marks results not available.
+
+### Daily maximum temperature
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Model</th>
+      <th colspan="6">ESD<br><sub>Perfect cross-validation / Perfect extrapolation</sub></th>
+      <th colspan="6">Emulator<br><sub>Perfect cross-validation / Perfect interpolation</sub></th>
+    </tr>
+    <tr>
+      <th>RMSE ↓</th>
+      <th>Clim Mean ↓</th>
+      <th>TXx ↓</th>
+      <th>RALSD ↓</th>
+      <th>PSS ↑</th>
+      <th>IAV ↓</th>
+      <th>RMSE ↓</th>
+      <th>Clim Mean ↓</th>
+      <th>TXx ↓</th>
+      <th>RALSD ↓</th>
+      <th>PSS ↑</th>
+      <th>IAV ↓</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DeepESD-IFCAv1</td>
+      <td align="right">1.52<br>1.81</td>
+      <td align="right">0.178<br>0.61</td>
+      <td align="right">0.681<br>1.09</td>
+      <td align="right">6.41<br>7</td>
+      <td align="right">0.976<br>0.952</td>
+      <td align="right">0.126<br>0.128</td>
+      <td align="right">–<br><b>1.44</b></td>
+      <td align="right">–<br><b>0.208</b></td>
+      <td align="right">–<br><b>0.606</b></td>
+      <td align="right">–<br><b>4.63</b></td>
+      <td align="right">–<br><b>0.976</b></td>
+      <td align="right">–<br><b>0.0907</b></td>
+    </tr>
+    <tr>
+      <td>DeepESD-IFCAv1-orog</td>
+      <td align="right">1.39<br><b>1.5</b></td>
+      <td align="right"><b>0.156</b><br><b>0.304</b></td>
+      <td align="right"><b>0.601</b><br><b>0.693</b></td>
+      <td align="right"><b>3.6</b><br><b>2.83</b></td>
+      <td align="right"><b>0.981</b><br><b>0.975</b></td>
+      <td align="right"><b>0.116</b><br><b>0.09</b></td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+    </tr>
+    <tr>
+      <td>DetUNet</td>
+      <td align="right"><b>1.31</b><br>1.74</td>
+      <td align="right">0.239<br>0.888</td>
+      <td align="right">0.793<br>1.97</td>
+      <td align="right">5.49<br>4.43</td>
+      <td align="right">0.978<br>0.926</td>
+      <td align="right">0.188<br>0.19</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+    </tr>
+  </tbody>
+</table>
+
+### Daily precipitation
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Model</th>
+      <th colspan="6">ESD<br><sub>Perfect cross-validation / Perfect extrapolation</sub></th>
+      <th colspan="6">Emulator<br><sub>Perfect cross-validation / Perfect interpolation</sub></th>
+    </tr>
+    <tr>
+      <th>RMSE ↓</th>
+      <th>Clim Mean ↓</th>
+      <th>SDII ↓</th>
+      <th>Rx1day ↓</th>
+      <th>RALSD ↓</th>
+      <th>LHD ↓</th>
+      <th>RMSE ↓</th>
+      <th>Clim Mean ↓</th>
+      <th>SDII ↓</th>
+      <th>Rx1day ↓</th>
+      <th>RALSD ↓</th>
+      <th>LHD ↓</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DeepESD-IFCAv1</td>
+      <td align="right"><b>4.1</b><br><b>4.64</b></td>
+      <td align="right">0.145<br>0.185</td>
+      <td align="right">0.918<br>1.08</td>
+      <td align="right"><b>13.3</b><br>16.9</td>
+      <td align="right">84.4<br>104</td>
+      <td align="right">10.6<br>10.7</td>
+      <td align="right">–<br><b>4.42</b></td>
+      <td align="right">–<br><b>0.129</b></td>
+      <td align="right">–<br><b>0.588</b></td>
+      <td align="right">–<br><b>12.1</b></td>
+      <td align="right">–<br><b>91.8</b></td>
+      <td align="right">–<br><b>7.9</b></td>
+    </tr>
+    <tr>
+      <td>DeepESD-IFCAv1-orog</td>
+      <td align="right">4.13<br>4.67</td>
+      <td align="right"><b>0.11</b><br><b>0.134</b></td>
+      <td align="right"><b>0.681</b><br><b>0.82</b></td>
+      <td align="right">13.8<br>17.7</td>
+      <td align="right">83.2<br><b>99</b></td>
+      <td align="right">9.41<br>10.2</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+    </tr>
+    <tr>
+      <td>DetUNet<sup>†</sup></td>
+      <td align="right">5.54<br>5.14</td>
+      <td align="right">0.496<br>0.46</td>
+      <td align="right">1.57<br>1.38</td>
+      <td align="right">14.7<br><b>14.9</b></td>
+      <td align="right"><b>45</b><br>135</td>
+      <td align="right"><b>2.06</b><br><b>6.04</b></td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+    </tr>
+  </tbody>
+</table>
+
+† Aggregated over a subset of domains only (DetUNet, ESD, Perfect cross-validation: ALPS, NZ).
+
+<!-- SCOREBOARD:END -->
 
 ## Requirements
 
