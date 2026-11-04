@@ -54,20 +54,25 @@ def quadratic_mean(values: np.ndarray) -> float:
 
 # metric -> aggregation across domains
 AGGREGATION = {
-    "clim_mean": np.mean,
-    "iav": np.mean,
+    "bias_annstd": np.mean,
+    "bias_max1day": np.mean,
+    "bias_mean": np.mean,
+    "bias_sdii": np.mean,
     "lhd": quadratic_mean,
     "pss": np.mean,
     "ralsd": np.mean,
     "rmse": quadratic_mean,
-    "rx1day": np.mean,
-    "sdii": np.mean,
-    "txx": np.mean,
 }
 
 # horizon -> 20-year period, as in the benchmark file names
 with open(BENCHMARK_DIR / "horizons.yaml") as f:
     PERIODS = yaml.safe_load(f)
+
+# ensemble member to be used in probabilistic models:
+#   a non-negative integer selects that member. By default 0.
+#   -1 uses the ensemble mean
+# Ignored by `ml-eval` for deterministic models
+MEMBER_NUMBER = 0
 
 
 def parse_args() -> argparse.Namespace:
@@ -125,6 +130,21 @@ def experiment_dir(config: Config, train_exp: str, test_exp: str) -> Path:
 def metrics_file(out_dir: Path, var: str, domain: str) -> Path:
     """Per-domain metric file written by `ml-eval benchmark`."""
     return out_dir / f"metrics_{var}_{domain}.json"
+
+
+def _check_attributes(values: list, name: str, out_dir: Path) -> object:
+    """
+    Value shared by all the per-domain metric files of an experiment.
+
+    Returns None (null in the JSON), with a warning, if the files disagree; a
+    value is never picked silently.
+    """
+    unique = list(dict.fromkeys(values))
+    if len(unique) == 1:
+        return unique[0]
+    if unique:
+        print(f"[aggregate] WARNING | Inconsistent {name!r} {unique} in {out_dir}")
+    return None
 
 
 def _to_json_float(x: float) -> float | None:
@@ -209,6 +229,7 @@ def evaluate_experiment(
                 "--x1", str(x1),
                 "--var", var,
                 "--output", str(out_file),
+                "--member-num", str(MEMBER_NUMBER),
             ]
             result = subprocess.run(cmd)
             if result.returncode != 0:
@@ -235,6 +256,8 @@ def aggregate_experiment(
     (null in the JSON). Domains listed in the configuration without a metric file
     are reported, and the aggregate covers only the domains found. If no metric
     file is found, nothing is written and an existing summary is left untouched.
+    `member_num` and `n_members` are null if the domain files disagree or lack
+    them (files written by older versions of `ml-eval`).
 
     Parameters
     ----------
@@ -255,9 +278,14 @@ def aggregate_experiment(
         "model": config.model,
         "train_experiment": train_exp,
         "test_experiment": test_exp,
+        "ensemble": {
+            "n_members": None,
+            "member": None,
+        },
         "variables": {},
     }
     src_files = []
+    n_members, member_num = [], []
     for var in config.variables:
         # read domain-specific metrics
         results = {}
@@ -268,6 +296,10 @@ def aggregate_experiment(
                 continue
             with open(file) as f:
                 results[domain] = json.load(f)
+            # extract ensemble information
+            attrs = results[domain].pop("attrs", {})
+            n_members.append(attrs.get("n_members"))
+            member_num.append(attrs.get("member"))
             src_files.append(file)
         if not results:
             continue
@@ -296,6 +328,8 @@ def aggregate_experiment(
     if not summary["variables"]:
         print(f"[aggregate] WARNING | No metric files in {out_dir}")
         return
+    summary["ensemble"]["n_members"] = _check_attributes(n_members, "n_members", out_dir)
+    summary["ensemble"]["member"] = _check_attributes(member_num, "member", out_dir)
 
     # export
     summary_file = out_dir / SUMMARY_FILE

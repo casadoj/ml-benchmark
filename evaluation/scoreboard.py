@@ -59,17 +59,17 @@ SCOREBOARD_EXPERIMENTS = {
 METRICS = {
     "tasmax": {
         "rmse": ("RMSE", False),
-        "clim_mean": ("Clim Mean", False),
-        "txx": ("TXx", False),
+        "bias_mean": ("Clim. Mean", False),
+        "bias_max1day": ("TXx", False),
         "ralsd": ("RALSD", False),
         "pss": ("PSS", True),
-        "iav": ("IAV", False),
+        "bias_annstd": ("IAV", False),
     },
     "pr": {
         "rmse": ("RMSE", False),
-        "clim_mean": ("Clim Mean", False),
-        "sdii": ("SDII", False),
-        "rx1day": ("Rx1day", False),
+        "bias_mean": ("Clim. Mean", False),
+        "bias_sdii": ("SDII", False),
+        "bias_max1day": ("Rx1day", False),
         "ralsd": ("RALSD", False),
         "lhd": ("LHD", False),
     },
