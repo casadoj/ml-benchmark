@@ -1,0 +1,119 @@
+{
+  "model": "Rossby-UNet",
+  "train_experiment": "ESD_pseudo_reality",
+  "test_experiment": "Perfect_extrapolation",
+  "variables": {
+    "tasmax": {
+      "rmse": {
+        "aggregation": "quadratic_mean",
+        "aggregate": 1.881873227382723,
+        "domains": {
+          "ALPS": 1.809934139251709,
+          "NZ": 1.6591119766235352,
+          "SA": 2.1437878608703613
+        }
+      },
+      "clim_mean": {
+        "aggregation": "mean",
+        "aggregate": 0.7995333472887675,
+        "domains": {
+          "ALPS": 0.6104618310928345,
+          "NZ": 1.1646850109100342,
+          "SA": 0.6234531998634338
+        }
+      },
+      "ralsd": {
+        "aggregation": "mean",
+        "aggregate": 1.4694120177671735,
+        "domains": {
+          "ALPS": 2.503752499768921,
+          "NZ": 0.1664138041784397,
+          "SA": 1.73806974935416
+        }
+      },
+      "txx": {
+        "aggregation": "mean",
+        "aggregate": 2.6321083704630532,
+        "domains": {
+          "ALPS": 2.233191967010498,
+          "NZ": 2.9390358924865723,
+          "SA": 2.72409725189209
+        }
+      },
+      "pss": {
+        "aggregation": "mean",
+        "aggregate": 0.9309436492122029,
+        "domains": {
+          "ALPS": 0.9480121884385666,
+          "NZ": 0.8921644298966149,
+          "SA": 0.9526543293014269
+        }
+      },
+      "iav": {
+        "aggregation": "mean",
+        "aggregate": 0.2507808307806651,
+        "domains": {
+          "ALPS": 0.13415196537971497,
+          "NZ": 0.314028263092041,
+          "SA": 0.30416226387023926
+        }
+      }
+    },
+    "pr": {
+      "rmse": {
+        "aggregation": "quadratic_mean",
+        "aggregate": 5.091452611203105,
+        "domains": {
+          "ALPS": 5.082478046417236,
+          "NZ": 7.206738927573758,
+          "SA": 0.00011773116420954466
+        }
+      },
+      "clim_mean": {
+        "aggregation": "mean",
+        "aggregate": 0.18736410180603333,
+        "domains": {
+          "ALPS": 0.16204673051834106,
+          "NZ": 0.4000410821068905,
+          "SA": 4.492792868404649e-06
+        }
+      },
+      "ralsd": {
+        "aggregation": "mean",
+        "aggregate": 107.50284132542629,
+        "domains": {
+          "ALPS": 34.67266521119284,
+          "NZ": 73.41870096580253,
+          "SA": 214.41715779928353
+        }
+      },
+      "sdii": {
+        "aggregation": "mean",
+        "aggregate": 2.123089973192763,
+        "domains": {
+          "ALPS": 2.9027767181396484,
+          "NZ": 3.4664414550281775,
+          "SA": 5.1746410463238135e-05
+        }
+      },
+      "rx1day": {
+        "aggregation": "mean",
+        "aggregate": 20.096107531954562,
+        "domains": {
+          "ALPS": 17.222576141357422,
+          "NZ": 43.06489456443404,
+          "SA": 0.0008518900722265244
+        }
+      },
+      "lhd": {
+        "aggregation": "quadratic_mean",
+        "aggregate": 12.099844999929973,
+        "domains": {
+          "ALPS": 6.544691402154669,
+          "NZ": 10.454344735492073,
+          "SA": 16.94380233799495
+        }
+      }
+    }
+  }
+}
