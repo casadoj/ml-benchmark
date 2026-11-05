@@ -25,6 +25,8 @@ DATA_DIR = ROOT_DIR / "data"
 BENCHMARK_DIR = ROOT_DIR / "benchmark"
 README_FILE = ROOT_DIR / "README.md"
 SUMMARY_FILE = "metrics_summary.json"
+METADATA_FILE = "metadata.yaml"
+OROG_SUFFIX = "-orog"
 START_MARKER = "<!-- SCOREBOARD:START -->"
 END_MARKER = "<!-- SCOREBOARD:END -->"
 
@@ -75,6 +77,14 @@ METRICS = {
     },
 }
 
+# `stochastic_output` in data/<MODEL>/metadata.yaml -> model type; the scoreboard
+# shows one group of rows per type, in this order (models without metadata last)
+MODEL_TYPES = {
+    False: "Deterministic",
+    True: "Generative",
+}
+UNKNOWN_TYPE = "Type not registered"
+
 VARIABLE_LABELS = {
     "tasmax": "Daily maximum temperature",
     "pr": "Daily precipitation",
@@ -86,7 +96,7 @@ domains (quadratic mean for RMSE and LHD, arithmetic mean otherwise). Biases are
 spatial means of the absolute bias, in the units of the variable. ↓ lower is
 better, ↑ higher is better. Each cell shows the two tests of a training
 experiment, in the order given in the column header; the best value of each test
-is in bold, and – marks results not available.
+is in bold, and – marks results not available. Models using orography as a predictor are in italics.
 """
 
 
@@ -135,6 +145,30 @@ def collect(data_dir: Path = DATA_DIR) -> dict[str, dict[tuple[str, str], dict]]
     return dict(sorted(results.items(), key=lambda item: item[0].lower()))
 
 
+def model_type(model: str, data_dir: Path = DATA_DIR) -> str:
+    """
+    Type of a model (a value of `MODEL_TYPES`), from its metadata.
+
+    Parameters
+    ----------
+    model : str
+        Model directory name under `data_dir`.
+    data_dir : Path
+        Directory holding one sub-directory per model.
+
+    Returns
+    -------
+    str
+        Value of `MODEL_TYPES` for its `stochastic_output`, or `UNKNOWN_TYPE` if the
+        model has no metadata file or the field is missing/null.
+    """
+    file = data_dir / model / METADATA_FILE
+    if not file.exists():
+        return UNKNOWN_TYPE
+    metadata = yaml.safe_load(file.read_text()) or {}
+    return MODEL_TYPES.get(metadata.get("stochastic_output"), UNKNOWN_TYPE)
+
+
 def _format(value: float | None) -> str:
     """Format a metric value with 3 significant digits; None -> en dash."""
     if value is None:
@@ -154,11 +188,15 @@ def build_table(
     results: dict[str, dict[tuple[str, str], dict]],
     var: str,
     all_domains: list[str],
+    types: dict[str, str],
 ) -> str:
     """
     Build the HTML table of one variable.
 
-    Missing experiments, metrics or null aggregates are shown as an en dash; they
+    Rows are grouped by model type (deterministic, generative, then models without
+    metadata), each group under a header row; the best values are marked over all
+    models. Models using orography (`-orog` suffix) are in italics. Missing
+    experiments, metrics or null aggregates are shown as an en dash; they
     are never filled. Models whose aggregates do not cover all the benchmark
     domains in some experiment are marked with a dagger and listed, with the
     experiment and the domains used, in a footnote.
@@ -171,6 +209,8 @@ def build_table(
         Variable, a key of `METRICS`.
     all_domains : list[str]
         All benchmark domains, from `benchmark/datasets.yaml`.
+    types : dict[str, str]
+        Type of each model in `results` (see `model_type`).
 
     Returns
     -------
@@ -198,7 +238,14 @@ def build_table(
         if any(v is not None for v in row.values()):
             values[model] = row
 
-    # best value per test and metric
+    # models per type, in display order (alphabetical within a type)
+    groups: dict[str, list[str]] = {}
+    for group in [*MODEL_TYPES.values(), UNKNOWN_TYPE]:
+        members = [model for model in values if types[model] == group]
+        if members:
+            groups[group] = members
+
+    # best value per test and metric, over all models
     best = {}
     for exp in SCOREBOARD_EXPERIMENTS:
         for metric, (_, higher_is_better) in metrics.items():
@@ -220,20 +267,26 @@ def build_table(
             arrow = "↑" if higher_is_better else "↓"
             lines.append(f"      <th>{label} {arrow}</th>")
     lines += ["    </tr>", "  </thead>", "  <tbody>"]
-    for model, row in values.items():
-        name = f"{model}<sup>†</sup>" if model in partial else model
-        lines += ["    <tr>", f"      <td>{name}</td>"]
-        for train_exp, (_, tests) in TRAINING_GROUPS.items():
-            for metric in metrics:
-                cell = []
-                for test_exp in tests:
-                    key = ((train_exp, test_exp), metric)
-                    text = _format(row[key])
-                    if row[key] is not None and row[key] == best.get(key):
-                        text = f"<b>{text}</b>"
-                    cell.append(text)
-                lines.append(f'      <td align="right">{"<br>".join(cell)}</td>')
-        lines.append("    </tr>")
+    n_columns = 1 + len(TRAINING_GROUPS) * len(metrics)
+    for group, members in groups.items():
+        lines.append(f'    <tr><th colspan="{n_columns}" align="left">{group}</th></tr>')
+        for model in members:
+            row = values[model]
+            name = f"<i>{model}</i>" if model.endswith(OROG_SUFFIX) else model
+            if model in partial:
+                name += "<sup>†</sup>"
+            lines += ["    <tr>", f"      <td>{name}</td>"]
+            for train_exp, (_, tests) in TRAINING_GROUPS.items():
+                for metric in metrics:
+                    cell = []
+                    for test_exp in tests:
+                        key = ((train_exp, test_exp), metric)
+                        text = _format(row[key])
+                        if row[key] is not None and row[key] == best.get(key):
+                            text = f"<b>{text}</b>"
+                        cell.append(text)
+                    lines.append(f'      <td align="right">{"<br>".join(cell)}</td>')
+            lines.append("    </tr>")
     lines += ["  </tbody>", "</table>"]
 
     if partial:
@@ -264,24 +317,32 @@ def render(results: dict[str, dict[tuple[str, str], dict]]) -> str:
     with open(BENCHMARK_DIR / "datasets.yaml") as f:
         all_domains = list(yaml.safe_load(f))
 
+    types = {model: model_type(model) for model in results}
     parts = [LEGEND]
     for var in METRICS:
         parts.append(f"### {VARIABLE_LABELS[var]}\n")
         # blank lines around the HTML so GitHub renders the Markdown that follows
-        parts.append(build_table(results, var, all_domains) + "\n")
+        parts.append(build_table(results, var, all_domains, types) + "\n")
     return "\n".join(parts)
 
 
-def update_readme(readme: Path, block: str) -> bool:
+def update_readme(
+    readme: Path,
+    block: str,
+    start_marker: str = START_MARKER,
+    end_marker: str = END_MARKER,
+) -> bool:
     """
-    Replace the text between the scoreboard markers of a README file.
+    Replace the text between two markers of a README file.
 
     Parameters
     ----------
     readme : Path
-        README file containing `START_MARKER` and `END_MARKER`.
+        README file containing `start_marker` and `end_marker`.
     block : str
         New content between the markers.
+    start_marker, end_marker : str
+        Markers delimiting the block; by default, those of the scoreboard.
 
     Returns
     -------
@@ -294,12 +355,12 @@ def update_readme(readme: Path, block: str) -> bool:
         If the markers are missing or in the wrong order.
     """
     text = readme.read_text()
-    start = text.find(START_MARKER)
-    end = text.find(END_MARKER)
+    start = text.find(start_marker)
+    end = text.find(end_marker)
     if start < 0 or end < start:
-        raise ValueError(f"Scoreboard markers not found in {readme}")
+        raise ValueError(f"Markers {start_marker} / {end_marker} not found in {readme}")
     new_text = (
-        text[: start + len(START_MARKER)] + "\n\n" + block.strip() + "\n\n" + text[end:]
+        text[: start + len(start_marker)] + "\n\n" + block.strip() + "\n\n" + text[end:]
     )
     if new_text == text:
         return False
