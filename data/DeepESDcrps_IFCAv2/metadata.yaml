@@ -1,0 +1,72 @@
+# Metadata of a model contributing to the benchmark.
+#
+# One file per model, stored as data/<MODEL>/metadata.yaml. It is normally written
+# automatically from the submission issue (.github/ISSUE_TEMPLATE/
+# ml_benchmark_submission.yaml) when a maintainer adds the `approved` label, and it
+# is the source of the "Models contributing to the benchmark" table in README.md.
+# Edit it by hand only to fix mistakes; never edit the README table directly.
+#
+# Fields
+# ------
+# Fields from the submission issue (keys match the `id` of each form field):
+# emulator_id                Model identifier, `{emulator name}-{version}`, with the
+#                            suffix `-orog` if orography is used as a predictor. It
+#                            must match the directory data/<MODEL>.
+# institution_id             Short acronym of the institution.
+# institution                Full name of the institution.
+# short_description          One-line description shown in the README table.
+# description                Detailed description of the method (architecture, loss,
+#                            optimizer, predictors, standardization, ...).
+# hardware_training_details  Hardware, training time and inference time.
+# stochastic_output          true if the emulator generates stochastic realizations
+#                            (generative/probabilistic models), false otherwise.
+# reference_label            Citation text shown in the README table, e.g.
+#                            "Author et al., 2025". null -> "In preparation".
+# reference_url              URL of the reference (DOI, publication, docs).
+#                            null -> no link.
+#                            Several references: give reference_label and
+#                            reference_url as lists of the same length.
+# reproducibility_url        URL of the code/data for reproducibility (GitHub,
+#                            Zenodo, ...). null -> "In preparation".
+# additional_notes           Any other relevant information (optional).
+#
+# Fields added by the registration workflow:
+# issue                      Number of the submission issue in the repository.
+# submitted                  Date the issue was opened (YYYY-MM-DD, UTC).
+# approved                   Date the `approved` label was added (YYYY-MM-DD, UTC).
+#
+# Optional fields (from the form or unknown for older models) are `null`; they are
+# never filled with guessed values.
+#
+# The values below are only an example (taken from the issue form placeholders).
+
+# --- Submission issue ---------------------------------------------------------
+emulator_id: DeepESDcrps_IFCAv2
+institution_id: IFCA
+institution: Instituto de Física de Cantabria (IFCA), CSIC-Universidad de Cantabria
+short_description: Deep CNN (3 conv + 1 dense)
+description: >-
+  @TOBECHECKED
+  The architecture consists of three convolutional layers with 50, 25, and 1 kernels, 
+  respectively, each using a ReLU activation function. The output of the final 
+  convolutional layer is flattened and passed through a fully connected layer that maps 
+  the resulting latent representation to the final prediction. CRPS (Continuos Ranked
+  Probabiliy Score) is used as the loss function. Input data are standardized at the 
+  grid-point level using the mean and standard deviation of the predictors corresponding 
+  to each training experiment. Models are trained for a variable number of epochs, 
+  determined via an early-stopping strategy based on a randomly split validation dataset.
+hardware_training_details: >-
+  @TOBECHECKED
+  Hardware: One node with two NVIDIA A100 GPUs (40GB). Training time: ~15 minutes
+  per epoch, ~5 hours total (20 epochs). Inference time: ~2 minutes per year of
+  predictions.
+stochastic_output: true
+reference_label: 
+reference_url: 
+reproducibility_url: 
+additional_notes: description and hardware details taken from DeepESD-IFCAv1
+
+# --- Registration workflow ----------------------------------------------------
+issue: 
+submitted: 
+approved: 
