@@ -1133,25 +1133,23 @@ is in bold, and – marks results not available. Models using orography as a pre
 
 ## Requirements
 
-The [./requirements](./requirements) directory contains an `environment.yaml` file that allows users to easily recreate the Conda environment required to run all scripts in this repository. To create the environment, run the following command:
+The scripts in this repository, including the evaluation with [`ml-evaluation`](https://github.com/c3s-cordex-ml/ml-evaluation), run in a Python environment that can be created in two ways.
+
+**Option 1: Pixi (recommended).** [Pixi](https://pixi.sh) creates the environment inside the repository (in `.pixi/`) from `pixi.toml`, with the exact versions pinned in `pixi.lock`. Install Pixi once (on Windows or for other options, see the [installation guide](https://pixi.sh/latest/installation/)), then create the environment from the root of the repository:
 
 ```bash
-conda env create -f environment.yaml
+curl -fsSL https://pixi.sh/install.sh | sh   # install Pixi (Linux/macOS), only once
+pixi install                                 # create the environment
 ```
-Alternatively, the basic requirements to run these scripts are:
 
+Commands are then run with `pixi run`, e.g. `pixi run evaluate-model ...` (see [evaluation](./evaluation/README.md)).
+
+**Option 2: Conda.** The [./requirements](./requirements) directory contains an `environment.yaml` file to create the Conda environment `ml-benchmark`:
+
+```bash
+conda env create -f requirements/environment.yaml
+conda activate ml-benchmark
 ```
-os
-requests
-zipfile
-xarray
-netcdf4
-matplotlib
-cartopy
-numpy
-torch
-```
-These packages can be installed using any package management tool.
 
 ## Citation
 
