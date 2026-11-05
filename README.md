@@ -58,34 +58,161 @@ The table below summarizes the contributing models and provides links to their r
 
 ## Models contributing to the benchmark
 
-| Model | Description | Reference | Implementation |
-|-------|-------------|-----------|----------------|
-| ViT-IFCAv1 | Vision Transformer (ViT) | [In preparation]() | [GitHub](https://github.com/jgonzalezab/ViT_CORDEX-ML-Bench) |
-| Rossby-UNet | U-Net + CBAM (5 enc/dec layers) | [In preparation]() | [In preparation]() |
-| DetUNet | U-Net + self-attention + FiLM (~3M params) | [Rampal et al., 2025](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024MS004668) | [GitHub](https://github.com/nram812/Generative-CORDEX-ML-Bench/tree/main/models) |
-| CNRM-UNeT | Asymmetric U-Net + 1D bottleneck | [Doury et al., 2022](https://link.springer.com/article/10.1007/s00382-022-06343-9); [Doury et al., 2024](https://link.springer.com/article/10.1007/s00382-024-07350-8) | [GitHub](https://github.com/antoinedoury/RCM-Emulator) |
-| Prithvi-UNet | Foundation model (Prithvi-WxC) + UNet decoder | [Schmude et al., 2024](https://arxiv.org/abs/2409.13598) | [GitHub](https://github.com/midatm1234/granite-wxc/tree/CORDEX_ML) |
-| GNN4CD_Rall | Graph Neural Network (GATv2Conv, 10 layers) | [In Blasone et al., 2025](https://www.cambridge.org/core/journals/environmental-data-science/article/graph-neural-networks-for-hourly-precipitation-projections-at-the-convection-permitting-scale-with-a-novel-hybrid-imperfect-framework/97EEB267EA2AE5F9D87D50A9492264A7) | [GitHub](https://github.com/valebl/GNN4CD) |
-| ParamUNET | U-Net outputting distribution parameters | [In preparation]() | [In preparation]() |
-| DeepESD-IFCAv1 | Deep CNN (3 conv + 1 dense) | [González-Abad et al., 2025](https://journals.ametsoc.org/view/journals/aies/4/4/AIES-D-24-0121.1.xml) | [GitHub](https://github.com/jgonzalezab/deepESD_CORDEX-ML-Bench) |
-| DeepESD-IDL | Deep CNN (3 conv + 1 dense) | [Soares et al., 2024](https://gmd.copernicus.org/articles/17/229/2024/) | [GitHub](https://github.com/rtomeidl/CordexML_DeepESD) |
-| DeepSensor | Neural Process (parameterized GP) | [DeepSensor's Documentation](https://alan-turing-institute.github.io/deepsensor/) | [GitHub](https://github.com/alan-turing-institute/deepsensor) |
-| ANN | Multi-layer perceptron (2 layers) | [Olmo and Bettolli, 2021](https://rmets.onlinelibrary.wiley.com/doi/10.1002/joc.7303) | [GitLab](https://gitlab.earth.bsc.es/molmo/ann_cordex_ml) |
-| XGBoost | Gradient boosted decision trees | [Bushenkova et al., 2021](https://www.sciencedirect.com/science/article/pii/S2212095524001780) | [GitHub](https://github.com/rtomeidl/CordexML_XGBoost) |
-| FlowMatching-v1 | Flow matching + ADM U-Net | [Wetherell 2026](https://arxiv.org/abs/2606.00281) | [GitHub](https://github.com/mo-tomaswetherell/mo-flow-cordexbench) |
-| ResGAN | Residual WGAN (U-Net mean + GAN residual) | [Rampal et al., 2025](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024MS004668) | [GitHub](https://github.com/nram812/Generative-CORDEX-ML-Bench/tree/main/models) |
-| SpaGAN | UNet2D GAN + convolutional discriminator | [Glawion et al., 2025](https://www.nature.com/articles/s41612-025-01103-y) | [GitHub](https://github.com/jpolz/ml-benchmark-spategan) |
-| EnScale | Multi-step sparse localised downscaling | [Schillinger et al., 2025](https://arxiv.org/abs/2509.26258v2) | [GitHub](https://github.com/m-schillinger/cordexbench) |
-| EnScale-linex | EnScale + linear residual model | [Schillinger et al., 2025](https://arxiv.org/abs/2509.26258v2) | [GitHub](https://github.com/m-schillinger/cordexbench) |
-| UiBCorrDiff | Corrective diffusion (regression U-Net + EDM diffusion) | [Marani et al., 2025](https://www.nature.com/articles/s43247-025-02042-5) | [GitHub](https://github.com/joshdorrington/UiBcorrdiff) |
-| CorrDiff-TW1 | Physics-inspired UNet regression + EDM diffusion | [Marani et al., 2025](https://www.nature.com/articles/s43247-025-02042-5) | [GitHub](https://github.com/NVIDIA/physicsnemo/tree/main/examples/weather/corrdiff) |
-| ParamDiffusion | Diffusion on ParamUNET background | [In preparation]() | [In preparation]() |
-| RCMGEM | NCSN++ diffusion (sub-VP SDE) | [Addison et al., 2026](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025MS005140) | [Zenodo](https://zenodo.org/records/18481925) |
+<!-- MODELS:START -->
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Description</th>
+      <th>Reference</th>
+      <th>Implementation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><th colspan="4" align="left">Deterministic</th></tr>
+    <tr>
+      <td>ANN</td>
+      <td>Multi-layer perceptron (2 layers)</td>
+      <td><a href="https://doi.org/10.1002/joc.7303">Olmo and Bettolli, 2021</a></td>
+      <td><a href="https://gitlab.earth.bsc.es/molmo/ann_cordex_ml">GitLab</a></td>
+    </tr>
+    <tr>
+      <td>CNRM-UNeT</td>
+      <td>Asymmetric U-Net + 1D bottleneck</td>
+      <td><a href="https://link.springer.com/article/10.1007/s00382-022-06343-9">Doury et al., 2022</a>; <a href="https://link.springer.com/article/10.1007/s00382-024-07350-8">Doury et al., 2024</a></td>
+      <td><a href="https://github.com/antoinedoury/RCM-Emulator">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>DeepESD-IFCAv1</td>
+      <td>Deep CNN (3 conv + 1 dense)</td>
+      <td><a href="https://journals.ametsoc.org/view/journals/aies/4/4/AIES-D-24-0121.1.xml">González-Abad et al., 2025</a></td>
+      <td><a href="https://github.com/jgonzalezab/deepESD_CORDEX-ML-Bench">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>DeepESD_IDL</td>
+      <td>Deep CNN (3 conv + 1 dense)</td>
+      <td><a href="https://doi.org/10.5194/gmd-17-229-2024">Soares et al., 2024</a></td>
+      <td><a href="https://github.com/rtomeidl/CordexML_DeepESD">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>DeepSensor</td>
+      <td>Neural Process (parameterized GP)</td>
+      <td><a href="https://alan-turing-institute.github.io/deepsensor/">DeepSensor's Documentation</a></td>
+      <td><a href="https://github.com/alan-turing-institute/deepsensor">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>DetUNet</td>
+      <td>U-Net + self-attention + FiLM (~3M params)</td>
+      <td><a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024MS004668">Rampal et al., 2025</a></td>
+      <td><a href="https://github.com/nram812/Generative-CORDEX-ML-Bench/tree/main/models">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>GNN4CD</td>
+      <td>Graph Neural Network (GATv2Conv, 10 layers)</td>
+      <td><a href="https://doi.org/10.1017/eds.2025.10022">Blasone et al., 2025</a></td>
+      <td><a href="https://github.com/valebl/GNN4CD">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>ParamUNET</td>
+      <td>U-Net outputting distribution parameters</td>
+      <td>In preparation</td>
+      <td>In preparation</td>
+    </tr>
+    <tr>
+      <td>Prithvi-UNet</td>
+      <td>Foundation model (Prithvi-WxC) + UNet decoder</td>
+      <td><a href="https://arxiv.org/abs/2409.13598">Schmude et al., 2024</a></td>
+      <td><a href="https://github.com/midatm1234/granite-wxc/tree/CORDEX_ML">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>Rossby-UNet</td>
+      <td>U-Net + CBAM (5 enc/dec layers)</td>
+      <td>In preparation</td>
+      <td>In preparation</td>
+    </tr>
+    <tr>
+      <td>XGBoost_IDL</td>
+      <td>Gradient boosted decision trees</td>
+      <td><a href="https://doi.org/10.1016/j.uclim.2024.101982">Bushenkova et al., 2021</a></td>
+      <td><a href="https://github.com/rtomeidl/CordexML_XGBoost">GitHub</a></td>
+    </tr>
+    <tr><th colspan="4" align="left">Generative</th></tr>
+    <tr>
+      <td>CorrDiff-TW1</td>
+      <td>Physics-inspired UNet regression + EDM diffusion</td>
+      <td><a href="https://www.nature.com/articles/s43247-025-02042-5">Marani et al., 2025</a></td>
+      <td><a href="https://github.com/NVIDIA/physicsnemo/tree/main/examples/weather/corrdiff">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>EnScale</td>
+      <td>Multi-step sparse localised downscaling</td>
+      <td><a href="https://arxiv.org/abs/2509.26258v2">Schillinger et al., 2025</a></td>
+      <td><a href="https://github.com/m-schillinger/cordexbench">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>EnScale-linex</td>
+      <td>EnScale + linear residual model</td>
+      <td><a href="https://arxiv.org/abs/2509.26258v2">Schillinger et al., 2025</a></td>
+      <td><a href="https://github.com/m-schillinger/cordexbench">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>FlowMatching-v1</td>
+      <td>Flow matching + ADM U-Net</td>
+      <td><a href="https://arxiv.org/abs/2606.00281">Wetherell 2026</a></td>
+      <td><a href="https://github.com/mo-tomaswetherell/mo-flow-cordexbench">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>ParamDiffusion</td>
+      <td>Diffusion on ParamUNET background</td>
+      <td>In preparation</td>
+      <td>In preparation</td>
+    </tr>
+    <tr>
+      <td>RCMFlow</td>
+      <td></td>
+      <td><a href="https://arxiv.org/abs/2512.13987">Link</a></td>
+      <td><a href="https://github.com/nram812/Generative-CORDEX-ML-Bench/tree/non_linear_activation_dev_branch/models">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>RCMGEM</td>
+      <td>NCSN++ diffusion (sub-VP SDE)</td>
+      <td><a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025MS005140">Addison et al., 2026</a></td>
+      <td><a href="https://zenodo.org/records/18481925">Zenodo</a></td>
+    </tr>
+    <tr>
+      <td>ResGAN</td>
+      <td>Residual WGAN (U-Net mean + GAN residual)</td>
+      <td><a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024MS004668">Rampal et al., 2025</a></td>
+      <td><a href="https://github.com/nram812/Generative-CORDEX-ML-Bench/tree/main/models">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>SpaGAN</td>
+      <td>UNet2D GAN + convolutional discriminator</td>
+      <td><a href="https://www.nature.com/articles/s41612-025-01103-y">Glawion et al., 2025</a></td>
+      <td><a href="https://github.com/jpolz/ml-benchmark-spategan">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>UiBCorrDiff</td>
+      <td>Corrective diffusion (regression U-Net + EDM diffusion)</td>
+      <td><a href="https://www.nature.com/articles/s43247-025-02042-5">Marani et al., 2025</a></td>
+      <td><a href="https://github.com/joshdorrington/UiBcorrdiff">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>ViT-IFCAv1</td>
+      <td>Vision Transformer (ViT)</td>
+      <td>In preparation</td>
+      <td><a href="https://github.com/jgonzalezab/ViT_CORDEX-ML-Bench">GitHub</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- MODELS:END -->
 
 
 ## Scoreboard
 
-Performance of the submitted models in the four perfect-predictor tests, one table per variable. The tables are generated automatically from the evaluation results in `data/<MODEL>/evaluation/` by [`evaluation/scoreboard.py`](./evaluation/scoreboard.py); do not edit them by hand.
+Performance of the submitted models in the four perfect-predictor tests, one table per variable.
 
 <!-- SCOREBOARD:START -->
 
@@ -94,7 +221,7 @@ domains (quadratic mean for RMSE and LHD, arithmetic mean otherwise). Biases are
 spatial means of the absolute bias, in the units of the variable. ↓ lower is
 better, ↑ higher is better. Each cell shows the two tests of a training
 experiment, in the order given in the column header; the best value of each test
-is in bold, and – marks results not available.
+is in bold, and – marks results not available. Models using orography as a predictor are in italics.
 
 ### Daily maximum temperature
 
@@ -121,6 +248,7 @@ is in bold, and – marks results not available.
     </tr>
   </thead>
   <tbody>
+    <tr><th colspan="13" align="left">Deterministic</th></tr>
     <tr>
       <td>ANN</td>
       <td align="right">1.94<br>2.83</td>
@@ -137,7 +265,7 @@ is in bold, and – marks results not available.
       <td align="right">0.155<br>0.107</td>
     </tr>
     <tr>
-      <td>ANN-orog</td>
+      <td><i>ANN-orog</i></td>
       <td align="right">1.62<br>1.76</td>
       <td align="right">0.137<br>0.348</td>
       <td align="right">0.824<br>1.03</td>
@@ -167,7 +295,7 @@ is in bold, and – marks results not available.
       <td align="right">0.118<br>0.0907</td>
     </tr>
     <tr>
-      <td>DeepESD-IFCAv1-orog</td>
+      <td><i>DeepESD-IFCAv1-orog</i></td>
       <td align="right">1.39<br><b>1.5</b></td>
       <td align="right">0.156<br><b>0.304</b></td>
       <td align="right">0.601<br><b>0.693</b></td>
@@ -197,36 +325,6 @@ is in bold, and – marks results not available.
       <td align="right">0.248<br>0.189</td>
     </tr>
     <tr>
-      <td>DeepESDcrps_IFCAv2</td>
-      <td align="right">4.2<br>4.46</td>
-      <td align="right">0.253<br>0.961</td>
-      <td align="right">5.24<br>6</td>
-      <td align="right">35.1<br>34.7</td>
-      <td align="right">0.904<br>0.877</td>
-      <td align="right"><b>0.0976</b><br>0.126</td>
-      <td align="right">2.37<br>2.41</td>
-      <td align="right">0.275<br>0.301</td>
-      <td align="right">1.62<br>1.79</td>
-      <td align="right">12.8<br>12.5</td>
-      <td align="right">0.964<br>0.961</td>
-      <td align="right">0.128<br>0.0904</td>
-    </tr>
-    <tr>
-      <td>DeepESDcrps_IFCAv2-orog</td>
-      <td align="right">2.19<br>2.32</td>
-      <td align="right">0.216<br>0.434</td>
-      <td align="right">0.978<br>1.42</td>
-      <td align="right">2.28<br>1.72</td>
-      <td align="right">0.976<br>0.963</td>
-      <td align="right">0.141<br>0.096</td>
-      <td align="right">2.12<br>2.12</td>
-      <td align="right">0.281<br>0.229</td>
-      <td align="right">1.26<br>1.2</td>
-      <td align="right"><b>2.65</b><br><b>2.33</b></td>
-      <td align="right">0.974<br>0.975</td>
-      <td align="right">0.13<br>0.0899</td>
-    </tr>
-    <tr>
       <td>DeepSensor</td>
       <td align="right">2.27<br>2.33</td>
       <td align="right">0.67<br>0.723</td>
@@ -242,7 +340,7 @@ is in bold, and – marks results not available.
       <td align="right">0.121<br>0.0965</td>
     </tr>
     <tr>
-      <td>DeepSensor-orog</td>
+      <td><i>DeepSensor-orog</i></td>
       <td align="right">1.5<br>1.67</td>
       <td align="right">0.333<br>0.349</td>
       <td align="right">0.844<br>0.871</td>
@@ -259,20 +357,20 @@ is in bold, and – marks results not available.
     <tr>
       <td>DetUNet</td>
       <td align="right">1.31<br>1.74</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
+      <td align="right">0.239<br>0.888</td>
+      <td align="right">0.793<br>1.97</td>
       <td align="right">5.49<br>4.43</td>
       <td align="right">0.978<br>0.926</td>
-      <td align="right">–<br>–</td>
-      <td align="right">1.56<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">7.03<br>–</td>
-      <td align="right">0.92<br>–</td>
-      <td align="right">–<br>–</td>
+      <td align="right">0.188<br>0.19</td>
+      <td align="right">1.56<br>1.33</td>
+      <td align="right">0.833<br>0.437</td>
+      <td align="right">0.881<br>0.54</td>
+      <td align="right">7.03<br>5.52</td>
+      <td align="right">0.92<br>0.953</td>
+      <td align="right">0.159<br>0.136</td>
     </tr>
     <tr>
-      <td>DetUNet-orog</td>
+      <td><i>DetUNet-orog</i></td>
       <td align="right"><b>1.3</b><br>1.75</td>
       <td align="right">0.259<br>0.935</td>
       <td align="right">1.28<br>2.46</td>
@@ -287,37 +385,7 @@ is in bold, and – marks results not available.
       <td align="right">0.149<br>0.138</td>
     </tr>
     <tr>
-      <td>DetUNet-v2</td>
-      <td align="right">1.46<br>1.69</td>
-      <td align="right">0.124<br>0.419</td>
-      <td align="right">1.02<br>2.14</td>
-      <td align="right">5.59<br>4.38</td>
-      <td align="right">0.972<br>0.952</td>
-      <td align="right">0.165<br>0.139</td>
-      <td align="right">1.39<br>1.36</td>
-      <td align="right">0.297<br>0.223</td>
-      <td align="right">0.522<br>0.508</td>
-      <td align="right">7.68<br>5.7</td>
-      <td align="right">0.955<br>0.967</td>
-      <td align="right">0.128<br>0.101</td>
-    </tr>
-    <tr>
-      <td>DetUNet-v2-orog</td>
-      <td align="right">1.37<br>1.61</td>
-      <td align="right">0.136<br>0.399</td>
-      <td align="right"><b>0.599</b><br>1.66</td>
-      <td align="right">4.89<br>3.7</td>
-      <td align="right">0.982<br>0.958</td>
-      <td align="right">0.151<br>0.125</td>
-      <td align="right">1.37<br>1.33</td>
-      <td align="right">0.333<br>0.244</td>
-      <td align="right"><b>0.499</b><br>0.501</td>
-      <td align="right">7.25<br>5.48</td>
-      <td align="right">0.955<br>0.968</td>
-      <td align="right">0.123<br>0.0976</td>
-    </tr>
-    <tr>
-      <td>GNN4CD-orog</td>
+      <td><i>GNN4CD-orog</i></td>
       <td align="right">1.49<br>1.68</td>
       <td align="right">0.224<br>0.417</td>
       <td align="right">0.918<br>1.59</td>
@@ -329,22 +397,22 @@ is in bold, and – marks results not available.
       <td align="right">0.695<br>0.726</td>
       <td align="right">8.04<br>7.7</td>
       <td align="right">–<br>–</td>
-      <td align="right"><b>0.0887</b><br>0.0815</td>
+      <td align="right">0.0887<br>0.0815</td>
     </tr>
     <tr>
       <td>ParamUNET</td>
       <td align="right">1.32<br>1.52</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
+      <td align="right">0.265<br>0.429</td>
+      <td align="right">0.709<br>1.26</td>
       <td align="right">14.6<br>13.4</td>
       <td align="right"><b>0.986</b><br>0.971</td>
-      <td align="right">–<br>–</td>
+      <td align="right">0.119<br>0.1</td>
       <td align="right"><b>1.23</b><br><b>1.28</b></td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
+      <td align="right">0.21<br>0.215</td>
+      <td align="right">0.643<br>0.762</td>
       <td align="right">17.4<br>16.1</td>
       <td align="right">0.982<br>0.976</td>
-      <td align="right">–<br>–</td>
+      <td align="right">0.118<br>0.0849</td>
     </tr>
     <tr>
       <td>Prithvi-UNet</td>
@@ -362,7 +430,7 @@ is in bold, and – marks results not available.
       <td align="right">0.103<br>0.0955</td>
     </tr>
     <tr>
-      <td>Prithvi-UNet-orog<sup>†</sup></td>
+      <td><i>Prithvi-UNet-orog</i><sup>†</sup></td>
       <td align="right">1.59<br>1.9</td>
       <td align="right">0.692<br>0.848</td>
       <td align="right">0.809<br>1.23</td>
@@ -392,11 +460,11 @@ is in bold, and – marks results not available.
       <td align="right">0.139<br><b>0.0534</b></td>
     </tr>
     <tr>
-      <td>Rossby-UNet-orog</td>
+      <td><i>Rossby-UNet-orog</i></td>
       <td align="right">1.4<br>1.8</td>
       <td align="right">0.137<br>0.683</td>
       <td align="right">0.765<br>2.04</td>
-      <td align="right"><b>2.27</b><br><b>1.21</b></td>
+      <td align="right">2.27<br>1.21</td>
       <td align="right">0.985<br>0.938</td>
       <td align="right">0.172<br>0.22</td>
       <td align="right">1.24<br>1.3</td>
@@ -420,6 +488,188 @@ is in bold, and – marks results not available.
       <td align="right">12.3<br>12.6</td>
       <td align="right">0.979<br>0.979</td>
       <td align="right">0.138<br>0.0987</td>
+    </tr>
+    <tr><th colspan="13" align="left">Generative</th></tr>
+    <tr>
+      <td>CorrDiff-TW1</td>
+      <td align="right">2.44<br>2.72</td>
+      <td align="right">1.9<br>2.27</td>
+      <td align="right">3.18<br>3.69</td>
+      <td align="right">0.625<br>0.678</td>
+      <td align="right">0.857<br>0.834</td>
+      <td align="right">0.158<br>0.143</td>
+      <td align="right">1.26<br>1.29</td>
+      <td align="right">0.297<br>0.306</td>
+      <td align="right"><b>0.456</b><br>0.482</td>
+      <td align="right">0.609<br>0.589</td>
+      <td align="right">0.986<br>0.987</td>
+      <td align="right">0.0984<br>0.0807</td>
+    </tr>
+    <tr>
+      <td>EnScale</td>
+      <td align="right">1.77<br>2</td>
+      <td align="right">0.123<br>0.585</td>
+      <td align="right">0.676<br>0.865</td>
+      <td align="right">1.46<br>2.15</td>
+      <td align="right">0.985<br>0.951</td>
+      <td align="right">0.152<br>0.132</td>
+      <td align="right">1.73<br>1.77</td>
+      <td align="right">0.134<br>0.132</td>
+      <td align="right">0.756<br>0.831</td>
+      <td align="right">1.44<br>1.6</td>
+      <td align="right">0.985<br>0.985</td>
+      <td align="right">0.13<br>0.0916</td>
+    </tr>
+    <tr>
+      <td>EnScale-linex</td>
+      <td align="right">1.63<br>1.74</td>
+      <td align="right">0.16<br>0.332</td>
+      <td align="right">0.62<br>0.757</td>
+      <td align="right">1.72<br>1.66</td>
+      <td align="right">0.982<br>0.974</td>
+      <td align="right">0.128<br>0.109</td>
+      <td align="right">1.61<br>1.65</td>
+      <td align="right">0.104<br>0.113</td>
+      <td align="right">0.739<br>0.776</td>
+      <td align="right">2.45<br>2.19</td>
+      <td align="right">0.984<br>0.987</td>
+      <td align="right">0.121<br>0.0944</td>
+    </tr>
+    <tr>
+      <td><i>EnScale-orog</i></td>
+      <td align="right">1.78<br>2</td>
+      <td align="right">0.122<br>0.582</td>
+      <td align="right">0.627<br>0.801</td>
+      <td align="right">2.15<br>2.83</td>
+      <td align="right">0.985<br>0.951</td>
+      <td align="right">0.152<br>0.133</td>
+      <td align="right">1.73<br>1.78</td>
+      <td align="right">0.136<br>0.134</td>
+      <td align="right">0.767<br>0.794</td>
+      <td align="right">2.22<br>2.36</td>
+      <td align="right">0.985<br>0.985</td>
+      <td align="right">0.131<br>0.0916</td>
+    </tr>
+    <tr>
+      <td>FlowMatching-v1</td>
+      <td align="right">1.53<br>1.69</td>
+      <td align="right">0.282<br>0.487</td>
+      <td align="right"><b>0.548</b><br>1.19</td>
+      <td align="right">0.528<br>0.513</td>
+      <td align="right">0.975<br>0.96</td>
+      <td align="right">0.125<br>0.111</td>
+      <td align="right">1.5<br>1.55</td>
+      <td align="right">0.252<br>0.289</td>
+      <td align="right">0.544<br>0.555</td>
+      <td align="right"><b>0.234</b><br><b>0.271</b></td>
+      <td align="right">0.976<br>0.978</td>
+      <td align="right">0.0991<br>0.0779</td>
+    </tr>
+    <tr>
+      <td><i>FlowMatching-v1-orog</i></td>
+      <td align="right">1.59<br>1.73</td>
+      <td align="right">0.35<br>0.427</td>
+      <td align="right">0.68<br>0.955</td>
+      <td align="right"><b>0.34</b><br><b>0.353</b></td>
+      <td align="right">0.964<br>0.954</td>
+      <td align="right">0.136<br>0.109</td>
+      <td align="right">1.54<br>1.56</td>
+      <td align="right">0.28<br>0.266</td>
+      <td align="right">0.52<br>0.543</td>
+      <td align="right">0.347<br>0.326</td>
+      <td align="right">0.981<br>0.984</td>
+      <td align="right">0.114<br>0.0826</td>
+    </tr>
+    <tr><th colspan="13" align="left">Type not registered</th></tr>
+    <tr>
+      <td>CorrDiff-TW1_NTNU-CWA</td>
+      <td align="right">2.51<br>2.75</td>
+      <td align="right">2.04<br>2.35</td>
+      <td align="right">3.04<br>3.48</td>
+      <td align="right">0.599<br>0.648</td>
+      <td align="right">0.85<br>0.83</td>
+      <td align="right">0.146<br>0.132</td>
+      <td align="right">1.28<br>1.32</td>
+      <td align="right">0.342<br>0.355</td>
+      <td align="right">0.466<br>0.521</td>
+      <td align="right">0.66<br>0.632</td>
+      <td align="right">0.983<br>0.981</td>
+      <td align="right">0.0866<br>0.0692</td>
+    </tr>
+    <tr>
+      <td><i>CorrDiff-TW1_NTNU-CWA-orog</i></td>
+      <td align="right">2.56<br>2.79</td>
+      <td align="right">2.08<br>2.37</td>
+      <td align="right">3<br>3.41</td>
+      <td align="right">0.578<br>0.649</td>
+      <td align="right">0.849<br>0.828</td>
+      <td align="right">0.142<br>0.132</td>
+      <td align="right">1.31<br>1.35</td>
+      <td align="right">0.352<br>0.363</td>
+      <td align="right">0.473<br>0.517</td>
+      <td align="right">0.579<br>0.564</td>
+      <td align="right">0.982<br>0.979</td>
+      <td align="right"><b>0.0853</b><br>0.0675</td>
+    </tr>
+    <tr>
+      <td>DeepESDcrps_IFCAv2</td>
+      <td align="right">4.2<br>4.46</td>
+      <td align="right">0.253<br>0.961</td>
+      <td align="right">5.24<br>6</td>
+      <td align="right">35.1<br>34.7</td>
+      <td align="right">0.904<br>0.877</td>
+      <td align="right"><b>0.0976</b><br>0.126</td>
+      <td align="right">2.37<br>2.41</td>
+      <td align="right">0.275<br>0.301</td>
+      <td align="right">1.62<br>1.79</td>
+      <td align="right">12.8<br>12.5</td>
+      <td align="right">0.964<br>0.961</td>
+      <td align="right">0.128<br>0.0904</td>
+    </tr>
+    <tr>
+      <td><i>DeepESDcrps_IFCAv2-orog</i></td>
+      <td align="right">2.19<br>2.32</td>
+      <td align="right">0.216<br>0.434</td>
+      <td align="right">0.978<br>1.42</td>
+      <td align="right">2.28<br>1.72</td>
+      <td align="right">0.976<br>0.963</td>
+      <td align="right">0.141<br>0.096</td>
+      <td align="right">2.12<br>2.12</td>
+      <td align="right">0.281<br>0.229</td>
+      <td align="right">1.26<br>1.2</td>
+      <td align="right">2.65<br>2.33</td>
+      <td align="right">0.974<br>0.975</td>
+      <td align="right">0.13<br>0.0899</td>
+    </tr>
+    <tr>
+      <td>DetUNet-v2</td>
+      <td align="right">1.46<br>1.69</td>
+      <td align="right">0.124<br>0.419</td>
+      <td align="right">1.02<br>2.14</td>
+      <td align="right">5.59<br>4.38</td>
+      <td align="right">0.972<br>0.952</td>
+      <td align="right">0.165<br>0.139</td>
+      <td align="right">1.39<br>1.36</td>
+      <td align="right">0.297<br>0.223</td>
+      <td align="right">0.522<br>0.508</td>
+      <td align="right">7.68<br>5.7</td>
+      <td align="right">0.955<br>0.967</td>
+      <td align="right">0.128<br>0.101</td>
+    </tr>
+    <tr>
+      <td><i>DetUNet-v2-orog</i></td>
+      <td align="right">1.37<br>1.61</td>
+      <td align="right">0.136<br>0.399</td>
+      <td align="right">0.599<br>1.66</td>
+      <td align="right">4.89<br>3.7</td>
+      <td align="right">0.982<br>0.958</td>
+      <td align="right">0.151<br>0.125</td>
+      <td align="right">1.37<br>1.33</td>
+      <td align="right">0.333<br>0.244</td>
+      <td align="right">0.499<br>0.501</td>
+      <td align="right">7.25<br>5.48</td>
+      <td align="right">0.955<br>0.968</td>
+      <td align="right">0.123<br>0.0976</td>
     </tr>
   </tbody>
 </table>
@@ -451,6 +701,7 @@ is in bold, and – marks results not available.
     </tr>
   </thead>
   <tbody>
+    <tr><th colspan="13" align="left">Deterministic</th></tr>
     <tr>
       <td>ANN</td>
       <td align="right">6.89<br>7.8</td>
@@ -467,7 +718,7 @@ is in bold, and – marks results not available.
       <td align="right">12.2<br>12.6</td>
     </tr>
     <tr>
-      <td>ANN-orog</td>
+      <td><i>ANN-orog</i></td>
       <td align="right">6.89<br>7.82</td>
       <td align="right">0.236<br>0.302</td>
       <td align="right">2.6<br>2.85</td>
@@ -497,7 +748,7 @@ is in bold, and – marks results not available.
       <td align="right">8.25<br>7.9</td>
     </tr>
     <tr>
-      <td>DeepESD-IFCAv1-orog</td>
+      <td><i>DeepESD-IFCAv1-orog</i></td>
       <td align="right">6.37<br>7.23</td>
       <td align="right">0.311<br>0.352</td>
       <td align="right">1.62<br>2.01</td>
@@ -527,36 +778,6 @@ is in bold, and – marks results not available.
       <td align="right">6.63<br>6.89</td>
     </tr>
     <tr>
-      <td>DeepESDcrps_IFCAv2</td>
-      <td align="right">8.02<br>8.83</td>
-      <td align="right">0.236<br>0.38</td>
-      <td align="right">0.692<br>1.02</td>
-      <td align="right">28.8<br>38.1</td>
-      <td align="right">51.9<br>58.5</td>
-      <td align="right">8.8<br>9.74</td>
-      <td align="right">8.36<br>9.25</td>
-      <td align="right">0.156<br>0.174</td>
-      <td align="right">0.745<br>0.778</td>
-      <td align="right"><b>12.4</b><br><b>18.1</b></td>
-      <td align="right">41.1<br>46.2</td>
-      <td align="right">4.9<br>5.3</td>
-    </tr>
-    <tr>
-      <td>DeepESDcrps_IFCAv2-orog</td>
-      <td align="right">8<br>8.8</td>
-      <td align="right">0.334<br>0.374</td>
-      <td align="right">0.856<br><b>0.832</b></td>
-      <td align="right">30.8<br>40.7</td>
-      <td align="right"><b>30.6</b><br><b>34.7</b></td>
-      <td align="right">9.35<br>9.83</td>
-      <td align="right">8.05<br>8.83</td>
-      <td align="right">0.579<br>0.587</td>
-      <td align="right">1.18<br>1.02</td>
-      <td align="right">27.7<br>36.4</td>
-      <td align="right"><b>28</b><br><b>28.8</b></td>
-      <td align="right">8.76<br>9.38</td>
-    </tr>
-    <tr>
       <td>DeepSensor</td>
       <td align="right">7.86<br>8.76</td>
       <td align="right">1.55<br>1.61</td>
@@ -572,7 +793,7 @@ is in bold, and – marks results not available.
       <td align="right">17.9<br>18.8</td>
     </tr>
     <tr>
-      <td>DeepSensor-orog</td>
+      <td><i>DeepSensor-orog</i></td>
       <td align="right">6.76<br>7.71</td>
       <td align="right">0.481<br>0.604</td>
       <td align="right">2.52<br>2.49</td>
@@ -587,22 +808,22 @@ is in bold, and – marks results not available.
       <td align="right">13.1<br>13.7</td>
     </tr>
     <tr>
-      <td>DetUNet<sup>†</sup></td>
-      <td align="right">5.54<br>5.14</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">45<br>135</td>
-      <td align="right"><b>2.06</b><br>6.04</td>
-      <td align="right">4.59<br><b>0.000121</b></td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">101<br>311</td>
-      <td align="right">2.76<br>5.65</td>
+      <td>DetUNet</td>
+      <td align="right">6.99<br>8.03</td>
+      <td align="right">0.603<br>0.728</td>
+      <td align="right">2.08<br>2.67</td>
+      <td align="right">24.9<br>33.9</td>
+      <td align="right">123<br>135</td>
+      <td align="right">5.13<br>6.04</td>
+      <td align="right">7.1<br>7.88</td>
+      <td align="right">0.399<br>0.505</td>
+      <td align="right">1.38<br>1.74</td>
+      <td align="right">14.8<br>21.1</td>
+      <td align="right">101<br>117</td>
+      <td align="right">2.76<br>3.68</td>
     </tr>
     <tr>
-      <td>DetUNet-orog</td>
+      <td><i>DetUNet-orog</i></td>
       <td align="right">6.91<br>7.91</td>
       <td align="right">0.582<br>0.707</td>
       <td align="right">2.16<br>2.7</td>
@@ -614,40 +835,10 @@ is in bold, and – marks results not available.
       <td align="right">1.15<br>1.51</td>
       <td align="right">13.3<br>19.9</td>
       <td align="right">75.7<br>89.9</td>
-      <td align="right"><b>2.5</b><br><b>3.16</b></td>
+      <td align="right">2.5<br>3.16</td>
     </tr>
     <tr>
-      <td>DetUNet-v2</td>
-      <td align="right">7.47<br>8.7</td>
-      <td align="right">0.575<br>0.648</td>
-      <td align="right">1.78<br>2.12</td>
-      <td align="right"><b>16.3</b><br><b>21.9</b></td>
-      <td align="right">199<br>199</td>
-      <td align="right">2.93<br><b>3.17</b></td>
-      <td align="right">7.2<br>8.02</td>
-      <td align="right">0.576<br>0.649</td>
-      <td align="right">1.71<br>2.02</td>
-      <td align="right">17.4<br>21.9</td>
-      <td align="right">159<br>179</td>
-      <td align="right">3.12<br>3.25</td>
-    </tr>
-    <tr>
-      <td>DetUNet-v2-orog</td>
-      <td align="right">7.23<br>8.39</td>
-      <td align="right">0.59<br>0.668</td>
-      <td align="right">1.84<br>2.2</td>
-      <td align="right">19.8<br>24.4</td>
-      <td align="right">113<br>117</td>
-      <td align="right">2.92<br>3.18</td>
-      <td align="right">7.07<br>7.98</td>
-      <td align="right">0.501<br>0.571</td>
-      <td align="right">1.55<br>1.83</td>
-      <td align="right">18.1<br>22.3</td>
-      <td align="right">110<br>129</td>
-      <td align="right">2.96<br>3.76</td>
-    </tr>
-    <tr>
-      <td>GNN4CD-orog</td>
+      <td><i>GNN4CD-orog</i></td>
       <td align="right">6.99<br>8.07</td>
       <td align="right">0.471<br>0.6</td>
       <td align="right">2.45<br>2.54</td>
@@ -663,16 +854,16 @@ is in bold, and – marks results not available.
     </tr>
     <tr>
       <td>ParamUNET</td>
-      <td align="right"><b>4.23</b><br><b>4.79</b></td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
+      <td align="right">6.56<br>7.48</td>
+      <td align="right">0.453<br>0.508</td>
+      <td align="right">1.36<br>1.55</td>
+      <td align="right">26.4<br>33.5</td>
       <td align="right">335<br>363</td>
       <td align="right">6.1<br>5.38</td>
-      <td align="right"><b>3.97</b><br>4.49</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
+      <td align="right">6.22<br>7.07</td>
+      <td align="right">0.378<br>0.397</td>
+      <td align="right">1.65<br>1.87</td>
+      <td align="right">29.9<br>36</td>
       <td align="right">298<br>318</td>
       <td align="right">8.58<br>7.94</td>
     </tr>
@@ -692,7 +883,7 @@ is in bold, and – marks results not available.
       <td align="right">10.9<br>12.8</td>
     </tr>
     <tr>
-      <td>Prithvi-UNet-orog<sup>†</sup></td>
+      <td><i>Prithvi-UNet-orog</i><sup>†</sup></td>
       <td align="right">6.81<br>8.07</td>
       <td align="right">0.774<br>0.924</td>
       <td align="right">3.64<br>4.56</td>
@@ -722,7 +913,7 @@ is in bold, and – marks results not available.
       <td align="right">7.59<br>7.95</td>
     </tr>
     <tr>
-      <td>Rossby-UNet-orog</td>
+      <td><i>Rossby-UNet-orog</i></td>
       <td align="right">6.79<br>7.71</td>
       <td align="right">0.177<br>0.358</td>
       <td align="right">2.79<br>3.6</td>
@@ -751,10 +942,192 @@ is in bold, and – marks results not available.
       <td align="right">49.3<br>46.1</td>
       <td align="right">10.1<br>10.7</td>
     </tr>
+    <tr><th colspan="13" align="left">Generative</th></tr>
+    <tr>
+      <td>CorrDiff-TW1</td>
+      <td align="right"><b>6.3</b><br><b>7.17</b></td>
+      <td align="right">0.861<br>0.924</td>
+      <td align="right">2.48<br>2.95</td>
+      <td align="right">34.6<br>42.7</td>
+      <td align="right">31.5<br>37.4</td>
+      <td align="right">9.75<br>10.4</td>
+      <td align="right"><b>6.11</b><br><b>6.97</b></td>
+      <td align="right">0.686<br>0.748</td>
+      <td align="right">1.83<br>2.17</td>
+      <td align="right">28.4<br>34.7</td>
+      <td align="right">18.3<br>24.7</td>
+      <td align="right">7.63<br>7.83</td>
+    </tr>
+    <tr>
+      <td>EnScale</td>
+      <td align="right">8.74<br>9.44</td>
+      <td align="right">0.226<br>0.342</td>
+      <td align="right">0.757<br>1.16</td>
+      <td align="right">16.1<br>24.7</td>
+      <td align="right">12.5<br>8.88</td>
+      <td align="right"><b>1.63</b><br>2.98</td>
+      <td align="right">9.4<br>10</td>
+      <td align="right">0.245<br>0.224</td>
+      <td align="right">0.693<br>0.797</td>
+      <td align="right">15.3<br>17.4</td>
+      <td align="right">24.3<br>16</td>
+      <td align="right">3.37<br>2.71</td>
+    </tr>
+    <tr>
+      <td>EnScale-linex</td>
+      <td align="right">8.44<br>9.27</td>
+      <td align="right">0.193<br>0.287</td>
+      <td align="right">2.41<br>2.84</td>
+      <td align="right">19.1<br>24.3</td>
+      <td align="right">13.8<br>9.59</td>
+      <td align="right">2.96<br><b>2.75</b></td>
+      <td align="right">9.22<br>9.89</td>
+      <td align="right">0.206<br>0.226</td>
+      <td align="right">2.05<br>2.54</td>
+      <td align="right">20.7<br>24.2</td>
+      <td align="right">36.3<br>26.2</td>
+      <td align="right">4.88<br>4.03</td>
+    </tr>
+    <tr>
+      <td><i>EnScale-orog</i></td>
+      <td align="right">7.97<br>8.75</td>
+      <td align="right">0.239<br>0.383</td>
+      <td align="right">0.859<br>1.39</td>
+      <td align="right">22.7<br>32.8</td>
+      <td align="right">19.5<br>21</td>
+      <td align="right">5.83<br>7.33</td>
+      <td align="right">8.19<br>8.89</td>
+      <td align="right">0.216<br>0.225</td>
+      <td align="right">0.652<br>0.897</td>
+      <td align="right">16.8<br>25</td>
+      <td align="right">19.4<br>18.8</td>
+      <td align="right">4.23<br>5.54</td>
+    </tr>
+    <tr>
+      <td>FlowMatching-v1</td>
+      <td align="right">8.38<br>9.33</td>
+      <td align="right">0.462<br>0.543</td>
+      <td align="right">1.22<br>1.71</td>
+      <td align="right">13.9<br>18.8</td>
+      <td align="right">1.38<br>2.77</td>
+      <td align="right">3.16<br>3.48</td>
+      <td align="right">8.95<br>10.1</td>
+      <td align="right">0.523<br>0.534</td>
+      <td align="right">0.992<br>1.1</td>
+      <td align="right">14.1<br><b>16.4</b></td>
+      <td align="right"><b>1.51</b><br><b>1.31</b></td>
+      <td align="right"><b>2.43</b><br><b>2.58</b></td>
+    </tr>
+    <tr>
+      <td><i>FlowMatching-v1-orog</i></td>
+      <td align="right">8.37<br>9.44</td>
+      <td align="right">0.437<br>0.547</td>
+      <td align="right">0.811<br>1.03</td>
+      <td align="right"><b>11</b><br><b>15.5</b></td>
+      <td align="right"><b>0.795</b><br><b>2.11</b></td>
+      <td align="right">2.96<br>3.63</td>
+      <td align="right">8.06<br>9.18</td>
+      <td align="right">0.418<br>0.466</td>
+      <td align="right">0.926<br>1.11</td>
+      <td align="right">13.9<br>16.9</td>
+      <td align="right">3.82<br>5.02</td>
+      <td align="right">3.11<br>2.96</td>
+    </tr>
+    <tr><th colspan="13" align="left">Type not registered</th></tr>
+    <tr>
+      <td>CorrDiff-TW1_NTNU-CWA</td>
+      <td align="right">6.3<br>7.17</td>
+      <td align="right">0.849<br>0.935</td>
+      <td align="right">2.45<br>2.93</td>
+      <td align="right">34.5<br>42.7</td>
+      <td align="right">29.4<br>36.2</td>
+      <td align="right">9.36<br>10.5</td>
+      <td align="right">6.13<br>6.99</td>
+      <td align="right">0.697<br>0.779</td>
+      <td align="right">1.82<br>2.17</td>
+      <td align="right">28.5<br>34.9</td>
+      <td align="right">16.3<br>23.3</td>
+      <td align="right">7.66<br>7.79</td>
+    </tr>
+    <tr>
+      <td><i>CorrDiff-TW1_NTNU-CWA-orog</i></td>
+      <td align="right">6.31<br>7.17</td>
+      <td align="right">0.805<br>0.873</td>
+      <td align="right">2.48<br>2.96</td>
+      <td align="right">34.4<br>42.4</td>
+      <td align="right">30.2<br>36.7</td>
+      <td align="right">9.26<br>9.85</td>
+      <td align="right">6.16<br>7.02</td>
+      <td align="right">0.698<br>0.785</td>
+      <td align="right">1.81<br>2.16</td>
+      <td align="right">28.1<br>34.7</td>
+      <td align="right">16.8<br>24.4</td>
+      <td align="right">7.15<br>7.13</td>
+    </tr>
+    <tr>
+      <td>DeepESDcrps_IFCAv2</td>
+      <td align="right">8.02<br>8.83</td>
+      <td align="right">0.236<br>0.38</td>
+      <td align="right">0.692<br>1.02</td>
+      <td align="right">28.8<br>38.1</td>
+      <td align="right">51.9<br>58.5</td>
+      <td align="right">8.8<br>9.74</td>
+      <td align="right">8.36<br>9.25</td>
+      <td align="right">0.156<br>0.174</td>
+      <td align="right">0.745<br>0.778</td>
+      <td align="right"><b>12.4</b><br>18.1</td>
+      <td align="right">41.1<br>46.2</td>
+      <td align="right">4.9<br>5.3</td>
+    </tr>
+    <tr>
+      <td><i>DeepESDcrps_IFCAv2-orog</i></td>
+      <td align="right">8<br>8.8</td>
+      <td align="right">0.334<br>0.374</td>
+      <td align="right">0.856<br><b>0.832</b></td>
+      <td align="right">30.8<br>40.7</td>
+      <td align="right">30.6<br>34.7</td>
+      <td align="right">9.35<br>9.83</td>
+      <td align="right">8.05<br>8.83</td>
+      <td align="right">0.579<br>0.587</td>
+      <td align="right">1.18<br>1.02</td>
+      <td align="right">27.7<br>36.4</td>
+      <td align="right">28<br>28.8</td>
+      <td align="right">8.76<br>9.38</td>
+    </tr>
+    <tr>
+      <td>DetUNet-v2</td>
+      <td align="right">7.47<br>8.7</td>
+      <td align="right">0.575<br>0.648</td>
+      <td align="right">1.78<br>2.12</td>
+      <td align="right">16.3<br>21.9</td>
+      <td align="right">199<br>199</td>
+      <td align="right">2.93<br>3.17</td>
+      <td align="right">7.2<br>8.02</td>
+      <td align="right">0.576<br>0.649</td>
+      <td align="right">1.71<br>2.02</td>
+      <td align="right">17.4<br>21.9</td>
+      <td align="right">159<br>179</td>
+      <td align="right">3.12<br>3.25</td>
+    </tr>
+    <tr>
+      <td><i>DetUNet-v2-orog</i></td>
+      <td align="right">7.23<br>8.39</td>
+      <td align="right">0.59<br>0.668</td>
+      <td align="right">1.84<br>2.2</td>
+      <td align="right">19.8<br>24.4</td>
+      <td align="right">113<br>117</td>
+      <td align="right">2.92<br>3.18</td>
+      <td align="right">7.07<br>7.98</td>
+      <td align="right">0.501<br>0.571</td>
+      <td align="right">1.55<br>1.83</td>
+      <td align="right">18.1<br>22.3</td>
+      <td align="right">110<br>129</td>
+      <td align="right">2.96<br>3.76</td>
+    </tr>
   </tbody>
 </table>
 
-† Aggregated over a subset of domains only (DetUNet, ESD, Perfect cross-validation: ALPS, NZ; DetUNet, Emulator, Perfect interpolation: SA; Prithvi-UNet-orog, ESD, Perfect extrapolation: ALPS, SA).
+† Aggregated over a subset of domains only (Prithvi-UNet-orog, ESD, Perfect extrapolation: ALPS, SA).
 
 <!-- SCOREBOARD:END -->
 
