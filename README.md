@@ -107,13 +107,13 @@ is in bold, and – marks results not available.
     </tr>
     <tr>
       <th>RMSE ↓</th>
-      <th>Clim Mean ↓</th>
+      <th>Clim. Mean ↓</th>
       <th>TXx ↓</th>
       <th>RALSD ↓</th>
       <th>PSS ↑</th>
       <th>IAV ↓</th>
       <th>RMSE ↓</th>
-      <th>Clim Mean ↓</th>
+      <th>Clim. Mean ↓</th>
       <th>TXx ↓</th>
       <th>RALSD ↓</th>
       <th>PSS ↑</th>
@@ -122,6 +122,36 @@ is in bold, and – marks results not available.
   </thead>
   <tbody>
     <tr>
+      <td>ANN</td>
+      <td align="right">1.94<br>2.83</td>
+      <td align="right">0.157<br>0.336</td>
+      <td align="right">1.7<br>11</td>
+      <td align="right">4.28<br>4.65</td>
+      <td align="right">0.966<br>0.951</td>
+      <td align="right">0.153<br>0.111</td>
+      <td align="right">1.69<br>1.74</td>
+      <td align="right">0.175<br>0.248</td>
+      <td align="right">1.1<br>1.07</td>
+      <td align="right">5.8<br>5.38</td>
+      <td align="right">0.967<br>0.967</td>
+      <td align="right">0.155<br>0.107</td>
+    </tr>
+    <tr>
+      <td>ANN-orog</td>
+      <td align="right">1.62<br>1.76</td>
+      <td align="right">0.137<br>0.348</td>
+      <td align="right">0.824<br>1.03</td>
+      <td align="right">3.61<br>2.62</td>
+      <td align="right">0.973<br>0.969</td>
+      <td align="right">0.149<br>0.118</td>
+      <td align="right">1.52<br>1.58</td>
+      <td align="right">0.189<br>0.226</td>
+      <td align="right">0.96<br>0.954</td>
+      <td align="right">4.67<br>4.18</td>
+      <td align="right">0.972<br>0.973</td>
+      <td align="right">0.145<br>0.109</td>
+    </tr>
+    <tr>
       <td>DeepESD-IFCAv1</td>
       <td align="right">1.52<br>1.81</td>
       <td align="right">0.178<br>0.61</td>
@@ -129,45 +159,272 @@ is in bold, and – marks results not available.
       <td align="right">6.41<br>7</td>
       <td align="right">0.976<br>0.952</td>
       <td align="right">0.126<br>0.128</td>
-      <td align="right">–<br><b>1.44</b></td>
-      <td align="right">–<br><b>0.208</b></td>
-      <td align="right">–<br><b>0.606</b></td>
-      <td align="right">–<br><b>4.63</b></td>
-      <td align="right">–<br><b>0.976</b></td>
-      <td align="right">–<br><b>0.0907</b></td>
+      <td align="right">1.4<br>1.44</td>
+      <td align="right">0.176<br>0.208</td>
+      <td align="right">0.579<br>0.606</td>
+      <td align="right">4.73<br>4.63</td>
+      <td align="right">0.976<br>0.976</td>
+      <td align="right">0.118<br>0.0907</td>
     </tr>
     <tr>
       <td>DeepESD-IFCAv1-orog</td>
       <td align="right">1.39<br><b>1.5</b></td>
-      <td align="right"><b>0.156</b><br><b>0.304</b></td>
-      <td align="right"><b>0.601</b><br><b>0.693</b></td>
-      <td align="right"><b>3.6</b><br><b>2.83</b></td>
-      <td align="right"><b>0.981</b><br><b>0.975</b></td>
-      <td align="right"><b>0.116</b><br><b>0.09</b></td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
+      <td align="right">0.156<br><b>0.304</b></td>
+      <td align="right">0.601<br><b>0.693</b></td>
+      <td align="right">3.6<br>2.83</td>
+      <td align="right">0.981<br>0.975</td>
+      <td align="right">0.116<br>0.09</td>
+      <td align="right">1.36<br>1.38</td>
+      <td align="right">0.212<br>0.196</td>
+      <td align="right">0.61<br>0.581</td>
+      <td align="right">4.01<br>3.69</td>
+      <td align="right">0.973<br>0.974</td>
+      <td align="right">0.115<br>0.0913</td>
+    </tr>
+    <tr>
+      <td>DeepESD_IDL</td>
+      <td align="right">8.94<br>8.59</td>
+      <td align="right">2.1<br>2.22</td>
+      <td align="right">6.78<br>5.35</td>
+      <td align="right">10.1<br>10.7</td>
+      <td align="right">0.82<br>0.847</td>
+      <td align="right">0.356<br>0.191</td>
+      <td align="right">6.9<br>7.56</td>
+      <td align="right">1.22<br>1.51</td>
+      <td align="right">4.8<br>4.47</td>
+      <td align="right">9.9<br>10</td>
+      <td align="right">0.858<br>0.86</td>
+      <td align="right">0.248<br>0.189</td>
+    </tr>
+    <tr>
+      <td>DeepESDcrps_IFCAv2</td>
+      <td align="right">4.2<br>4.46</td>
+      <td align="right">0.253<br>0.961</td>
+      <td align="right">5.24<br>6</td>
+      <td align="right">35.1<br>34.7</td>
+      <td align="right">0.904<br>0.877</td>
+      <td align="right"><b>0.0976</b><br>0.126</td>
+      <td align="right">2.37<br>2.41</td>
+      <td align="right">0.275<br>0.301</td>
+      <td align="right">1.62<br>1.79</td>
+      <td align="right">12.8<br>12.5</td>
+      <td align="right">0.964<br>0.961</td>
+      <td align="right">0.128<br>0.0904</td>
+    </tr>
+    <tr>
+      <td>DeepESDcrps_IFCAv2-orog</td>
+      <td align="right">2.19<br>2.32</td>
+      <td align="right">0.216<br>0.434</td>
+      <td align="right">0.978<br>1.42</td>
+      <td align="right">2.28<br>1.72</td>
+      <td align="right">0.976<br>0.963</td>
+      <td align="right">0.141<br>0.096</td>
+      <td align="right">2.12<br>2.12</td>
+      <td align="right">0.281<br>0.229</td>
+      <td align="right">1.26<br>1.2</td>
+      <td align="right"><b>2.65</b><br><b>2.33</b></td>
+      <td align="right">0.974<br>0.975</td>
+      <td align="right">0.13<br>0.0899</td>
+    </tr>
+    <tr>
+      <td>DeepSensor</td>
+      <td align="right">2.27<br>2.33</td>
+      <td align="right">0.67<br>0.723</td>
+      <td align="right">1.88<br>1.99</td>
+      <td align="right">157<br>159</td>
+      <td align="right">0.958<br>0.958</td>
+      <td align="right">0.0979<br><b>0.0829</b></td>
+      <td align="right">2.06<br>2.12</td>
+      <td align="right">0.58<br>0.62</td>
+      <td align="right">1.43<br>1.55</td>
+      <td align="right">146<br>149</td>
+      <td align="right">0.958<br>0.959</td>
+      <td align="right">0.121<br>0.0965</td>
+    </tr>
+    <tr>
+      <td>DeepSensor-orog</td>
+      <td align="right">1.5<br>1.67</td>
+      <td align="right">0.333<br>0.349</td>
+      <td align="right">0.844<br>0.871</td>
+      <td align="right">94.3<br>96.9</td>
+      <td align="right">0.969<br><b>0.979</b></td>
+      <td align="right">0.0985<br>0.0888</td>
+      <td align="right">1.52<br>1.71</td>
+      <td align="right">0.35<br>0.363</td>
+      <td align="right">0.712<br>0.788</td>
+      <td align="right">109<br>113</td>
+      <td align="right">0.967<br>0.976</td>
+      <td align="right">0.109<br>0.0966</td>
     </tr>
     <tr>
       <td>DetUNet</td>
-      <td align="right"><b>1.31</b><br>1.74</td>
-      <td align="right">0.239<br>0.888</td>
-      <td align="right">0.793<br>1.97</td>
+      <td align="right">1.31<br>1.74</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
       <td align="right">5.49<br>4.43</td>
       <td align="right">0.978<br>0.926</td>
-      <td align="right">0.188<br>0.19</td>
+      <td align="right">–<br>–</td>
+      <td align="right">1.56<br>–</td>
       <td align="right">–<br>–</td>
       <td align="right">–<br>–</td>
+      <td align="right">7.03<br>–</td>
+      <td align="right">0.92<br>–</td>
+      <td align="right">–<br>–</td>
+    </tr>
+    <tr>
+      <td>DetUNet-orog</td>
+      <td align="right"><b>1.3</b><br>1.75</td>
+      <td align="right">0.259<br>0.935</td>
+      <td align="right">1.28<br>2.46</td>
+      <td align="right">4.97<br>4.04</td>
+      <td align="right">0.977<br>0.923</td>
+      <td align="right">0.196<br>0.199</td>
+      <td align="right">1.61<br>1.32</td>
+      <td align="right">0.906<br>0.487</td>
+      <td align="right">0.874<br><b>0.48</b></td>
+      <td align="right">4.84<br>3.72</td>
+      <td align="right">0.912<br>0.948</td>
+      <td align="right">0.149<br>0.138</td>
+    </tr>
+    <tr>
+      <td>DetUNet-v2</td>
+      <td align="right">1.46<br>1.69</td>
+      <td align="right">0.124<br>0.419</td>
+      <td align="right">1.02<br>2.14</td>
+      <td align="right">5.59<br>4.38</td>
+      <td align="right">0.972<br>0.952</td>
+      <td align="right">0.165<br>0.139</td>
+      <td align="right">1.39<br>1.36</td>
+      <td align="right">0.297<br>0.223</td>
+      <td align="right">0.522<br>0.508</td>
+      <td align="right">7.68<br>5.7</td>
+      <td align="right">0.955<br>0.967</td>
+      <td align="right">0.128<br>0.101</td>
+    </tr>
+    <tr>
+      <td>DetUNet-v2-orog</td>
+      <td align="right">1.37<br>1.61</td>
+      <td align="right">0.136<br>0.399</td>
+      <td align="right"><b>0.599</b><br>1.66</td>
+      <td align="right">4.89<br>3.7</td>
+      <td align="right">0.982<br>0.958</td>
+      <td align="right">0.151<br>0.125</td>
+      <td align="right">1.37<br>1.33</td>
+      <td align="right">0.333<br>0.244</td>
+      <td align="right"><b>0.499</b><br>0.501</td>
+      <td align="right">7.25<br>5.48</td>
+      <td align="right">0.955<br>0.968</td>
+      <td align="right">0.123<br>0.0976</td>
+    </tr>
+    <tr>
+      <td>GNN4CD-orog</td>
+      <td align="right">1.49<br>1.68</td>
+      <td align="right">0.224<br>0.417</td>
+      <td align="right">0.918<br>1.59</td>
+      <td align="right">8.63<br>7.89</td>
+      <td align="right">–<br>–</td>
+      <td align="right">0.102<br>0.103</td>
+      <td align="right">1.44<br>1.48</td>
+      <td align="right">0.287<br>0.261</td>
+      <td align="right">0.695<br>0.726</td>
+      <td align="right">8.04<br>7.7</td>
+      <td align="right">–<br>–</td>
+      <td align="right"><b>0.0887</b><br>0.0815</td>
+    </tr>
+    <tr>
+      <td>ParamUNET</td>
+      <td align="right">1.32<br>1.52</td>
       <td align="right">–<br>–</td>
       <td align="right">–<br>–</td>
+      <td align="right">14.6<br>13.4</td>
+      <td align="right"><b>0.986</b><br>0.971</td>
+      <td align="right">–<br>–</td>
+      <td align="right"><b>1.23</b><br><b>1.28</b></td>
       <td align="right">–<br>–</td>
       <td align="right">–<br>–</td>
+      <td align="right">17.4<br>16.1</td>
+      <td align="right">0.982<br>0.976</td>
+      <td align="right">–<br>–</td>
+    </tr>
+    <tr>
+      <td>Prithvi-UNet</td>
+      <td align="right">1.61<br>1.75</td>
+      <td align="right">0.402<br>0.447</td>
+      <td align="right">0.701<br>1.48</td>
+      <td align="right">5.09<br>3.77</td>
+      <td align="right">0.967<br>0.965</td>
+      <td align="right">0.125<br>0.137</td>
+      <td align="right">1.53<br>1.54</td>
+      <td align="right">0.309<br>0.244</td>
+      <td align="right">0.702<br>0.678</td>
+      <td align="right">7.89<br>5.99</td>
+      <td align="right">0.97<br>0.977</td>
+      <td align="right">0.103<br>0.0955</td>
+    </tr>
+    <tr>
+      <td>Prithvi-UNet-orog<sup>†</sup></td>
+      <td align="right">1.59<br>1.9</td>
+      <td align="right">0.692<br>0.848</td>
+      <td align="right">0.809<br>1.23</td>
+      <td align="right">6.65<br>8.39</td>
+      <td align="right">0.965<br>0.96</td>
+      <td align="right">0.111<br>0.089</td>
+      <td align="right">1.43<br>1.45</td>
+      <td align="right">0.555<br>0.535</td>
+      <td align="right">0.708<br>0.745</td>
+      <td align="right">6.96<br>5.92</td>
+      <td align="right">0.977<br>0.978</td>
+      <td align="right">0.0966<br>0.0801</td>
+    </tr>
+    <tr>
+      <td>Rossby-UNet</td>
+      <td align="right">1.44<br>1.88</td>
+      <td align="right">0.127<br>0.8</td>
+      <td align="right">0.909<br>2.63</td>
+      <td align="right">2.3<br>1.47</td>
+      <td align="right">0.985<br>0.931</td>
+      <td align="right">0.187<br>0.251</td>
+      <td align="right">1.3<br>1.36</td>
+      <td align="right">0.122<br><b>0.1</b></td>
+      <td align="right">0.541<br>0.498</td>
+      <td align="right">4.27<br>3.14</td>
+      <td align="right"><b>0.986</b><br><b>0.988</b></td>
+      <td align="right">0.139<br><b>0.0534</b></td>
+    </tr>
+    <tr>
+      <td>Rossby-UNet-orog</td>
+      <td align="right">1.4<br>1.8</td>
+      <td align="right">0.137<br>0.683</td>
+      <td align="right">0.765<br>2.04</td>
+      <td align="right"><b>2.27</b><br><b>1.21</b></td>
+      <td align="right">0.985<br>0.938</td>
+      <td align="right">0.172<br>0.22</td>
+      <td align="right">1.24<br>1.3</td>
+      <td align="right">0.115<br>0.115</td>
+      <td align="right">0.522<br>0.504</td>
+      <td align="right">4.24<br>3.11</td>
+      <td align="right">0.986<br>0.988</td>
+      <td align="right">0.14<br>0.0569</td>
+    </tr>
+    <tr>
+      <td>XGBoost_IDL</td>
+      <td align="right">1.33<br>1.56</td>
+      <td align="right"><b>0.111</b><br>0.353</td>
+      <td align="right">1.04<br>2.67</td>
+      <td align="right">12.2<br>14.9</td>
+      <td align="right">0.979<br>0.953</td>
+      <td align="right">0.151<br>0.133</td>
+      <td align="right">1.27<br>1.3</td>
+      <td align="right"><b>0.0842</b><br>0.111</td>
+      <td align="right">0.55<br>0.56</td>
+      <td align="right">12.3<br>12.6</td>
+      <td align="right">0.979<br>0.979</td>
+      <td align="right">0.138<br>0.0987</td>
     </tr>
   </tbody>
 </table>
+
+† Aggregated over a subset of domains only (Prithvi-UNet-orog, ESD, Perfect extrapolation: ALPS, SA).
 
 ### Daily precipitation
 
@@ -180,13 +437,13 @@ is in bold, and – marks results not available.
     </tr>
     <tr>
       <th>RMSE ↓</th>
-      <th>Clim Mean ↓</th>
+      <th>Clim. Mean ↓</th>
       <th>SDII ↓</th>
       <th>Rx1day ↓</th>
       <th>RALSD ↓</th>
       <th>LHD ↓</th>
       <th>RMSE ↓</th>
-      <th>Clim Mean ↓</th>
+      <th>Clim. Mean ↓</th>
       <th>SDII ↓</th>
       <th>Rx1day ↓</th>
       <th>RALSD ↓</th>
@@ -195,54 +452,309 @@ is in bold, and – marks results not available.
   </thead>
   <tbody>
     <tr>
+      <td>ANN</td>
+      <td align="right">6.89<br>7.8</td>
+      <td align="right">0.213<br>0.251</td>
+      <td align="right">2.6<br>2.89</td>
+      <td align="right">46.2<br>55.1</td>
+      <td align="right">90.8<br>99.5</td>
+      <td align="right">13<br>14.5</td>
+      <td align="right">6.76<br>7.64</td>
+      <td align="right">0.181<br>0.23</td>
+      <td align="right">2.53<br>2.93</td>
+      <td align="right">45.1<br>54.1</td>
+      <td align="right">96.5<br>112</td>
+      <td align="right">12.2<br>12.6</td>
+    </tr>
+    <tr>
+      <td>ANN-orog</td>
+      <td align="right">6.89<br>7.82</td>
+      <td align="right">0.236<br>0.302</td>
+      <td align="right">2.6<br>2.85</td>
+      <td align="right">45.8<br>54.7</td>
+      <td align="right">96.2<br>101</td>
+      <td align="right">13<br>12.2</td>
+      <td align="right">6.77<br>7.66</td>
+      <td align="right">0.223<br>0.288</td>
+      <td align="right">2.63<br>3.03</td>
+      <td align="right">45.7<br>55</td>
+      <td align="right">105<br>120</td>
+      <td align="right">11<br>13.9</td>
+    </tr>
+    <tr>
       <td>DeepESD-IFCAv1</td>
-      <td align="right"><b>4.1</b><br><b>4.64</b></td>
-      <td align="right">0.145<br>0.185</td>
-      <td align="right">0.918<br>1.08</td>
-      <td align="right"><b>13.3</b><br>16.9</td>
+      <td align="right">6.38<br>7.28</td>
+      <td align="right">0.369<br>0.46</td>
+      <td align="right">1.93<br>2.37</td>
+      <td align="right">32.7<br>41.5</td>
       <td align="right">84.4<br>104</td>
       <td align="right">10.6<br>10.7</td>
-      <td align="right">–<br><b>4.42</b></td>
-      <td align="right">–<br><b>0.129</b></td>
-      <td align="right">–<br><b>0.588</b></td>
-      <td align="right">–<br><b>12.1</b></td>
-      <td align="right">–<br><b>91.8</b></td>
-      <td align="right">–<br><b>7.9</b></td>
+      <td align="right">6.16<br>6.98</td>
+      <td align="right">0.308<br>0.33</td>
+      <td align="right">1.3<br>1.52</td>
+      <td align="right">26.1<br>32.1</td>
+      <td align="right">82.9<br>91.8</td>
+      <td align="right">8.25<br>7.9</td>
     </tr>
     <tr>
       <td>DeepESD-IFCAv1-orog</td>
-      <td align="right">4.13<br>4.67</td>
-      <td align="right"><b>0.11</b><br><b>0.134</b></td>
-      <td align="right"><b>0.681</b><br><b>0.82</b></td>
-      <td align="right">13.8<br>17.7</td>
-      <td align="right">83.2<br><b>99</b></td>
+      <td align="right">6.37<br>7.23</td>
+      <td align="right">0.311<br>0.352</td>
+      <td align="right">1.62<br>2.01</td>
+      <td align="right">33<br>41.8</td>
+      <td align="right">83.2<br>99</td>
       <td align="right">9.41<br>10.2</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
-      <td align="right">–<br>–</td>
+      <td align="right">6.16<br>6.98</td>
+      <td align="right">0.307<br>0.35</td>
+      <td align="right">1.29<br>1.52</td>
+      <td align="right">27.1<br>33.7</td>
+      <td align="right">82.2<br>92.6</td>
+      <td align="right">7.99<br>8.02</td>
+    </tr>
+    <tr>
+      <td>DeepESD_IDL</td>
+      <td align="right">9.04<br>10.2</td>
+      <td align="right"><b>0.156</b><br><b>0.222</b></td>
+      <td align="right"><b>0.577</b><br>0.902</td>
+      <td align="right">18.4<br>24.4</td>
+      <td align="right">207<br>194</td>
+      <td align="right">6.12<br>6.79</td>
+      <td align="right">9.13<br>10.2</td>
+      <td align="right">0.152<br>0.152</td>
+      <td align="right"><b>0.496</b><br><b>0.633</b></td>
+      <td align="right">19.2<br>20.2</td>
+      <td align="right">211<br>199</td>
+      <td align="right">6.63<br>6.89</td>
+    </tr>
+    <tr>
+      <td>DeepESDcrps_IFCAv2</td>
+      <td align="right">8.02<br>8.83</td>
+      <td align="right">0.236<br>0.38</td>
+      <td align="right">0.692<br>1.02</td>
+      <td align="right">28.8<br>38.1</td>
+      <td align="right">51.9<br>58.5</td>
+      <td align="right">8.8<br>9.74</td>
+      <td align="right">8.36<br>9.25</td>
+      <td align="right">0.156<br>0.174</td>
+      <td align="right">0.745<br>0.778</td>
+      <td align="right"><b>12.4</b><br><b>18.1</b></td>
+      <td align="right">41.1<br>46.2</td>
+      <td align="right">4.9<br>5.3</td>
+    </tr>
+    <tr>
+      <td>DeepESDcrps_IFCAv2-orog</td>
+      <td align="right">8<br>8.8</td>
+      <td align="right">0.334<br>0.374</td>
+      <td align="right">0.856<br><b>0.832</b></td>
+      <td align="right">30.8<br>40.7</td>
+      <td align="right"><b>30.6</b><br><b>34.7</b></td>
+      <td align="right">9.35<br>9.83</td>
+      <td align="right">8.05<br>8.83</td>
+      <td align="right">0.579<br>0.587</td>
+      <td align="right">1.18<br>1.02</td>
+      <td align="right">27.7<br>36.4</td>
+      <td align="right"><b>28</b><br><b>28.8</b></td>
+      <td align="right">8.76<br>9.38</td>
+    </tr>
+    <tr>
+      <td>DeepSensor</td>
+      <td align="right">7.86<br>8.76</td>
+      <td align="right">1.55<br>1.61</td>
+      <td align="right">4.14<br>4.58</td>
+      <td align="right">53.9<br>63.6</td>
+      <td align="right">1018<br>1045</td>
+      <td align="right">11.6<br>12.3</td>
+      <td align="right">7.26<br>8.03</td>
+      <td align="right">0.715<br>0.775</td>
+      <td align="right">2.3<br>2.44</td>
+      <td align="right">48.1<br>57.1</td>
+      <td align="right">295<br>405</td>
+      <td align="right">17.9<br>18.8</td>
+    </tr>
+    <tr>
+      <td>DeepSensor-orog</td>
+      <td align="right">6.76<br>7.71</td>
+      <td align="right">0.481<br>0.604</td>
+      <td align="right">2.52<br>2.49</td>
+      <td align="right">45.2<br>53.3</td>
+      <td align="right">328<br>335</td>
+      <td align="right">13.2<br>13</td>
+      <td align="right">6.83<br>7.74</td>
+      <td align="right">0.61<br>0.666</td>
+      <td align="right">3.09<br>3.46</td>
+      <td align="right">47.6<br>56.8</td>
+      <td align="right">327<br>356</td>
+      <td align="right">13.1<br>13.7</td>
     </tr>
     <tr>
       <td>DetUNet<sup>†</sup></td>
       <td align="right">5.54<br>5.14</td>
-      <td align="right">0.496<br>0.46</td>
-      <td align="right">1.57<br>1.38</td>
-      <td align="right">14.7<br><b>14.9</b></td>
-      <td align="right"><b>45</b><br>135</td>
-      <td align="right"><b>2.06</b><br><b>6.04</b></td>
       <td align="right">–<br>–</td>
       <td align="right">–<br>–</td>
       <td align="right">–<br>–</td>
+      <td align="right">45<br>135</td>
+      <td align="right"><b>2.06</b><br>6.04</td>
+      <td align="right">4.59<br><b>0.000121</b></td>
       <td align="right">–<br>–</td>
       <td align="right">–<br>–</td>
       <td align="right">–<br>–</td>
+      <td align="right">101<br>311</td>
+      <td align="right">2.76<br>5.65</td>
+    </tr>
+    <tr>
+      <td>DetUNet-orog</td>
+      <td align="right">6.91<br>7.91</td>
+      <td align="right">0.582<br>0.707</td>
+      <td align="right">2.16<br>2.7</td>
+      <td align="right">25.3<br>34.3</td>
+      <td align="right">99<br>111</td>
+      <td align="right">5.54<br>6.46</td>
+      <td align="right">7.21<br>7.98</td>
+      <td align="right">0.29<br>0.379</td>
+      <td align="right">1.15<br>1.51</td>
+      <td align="right">13.3<br>19.9</td>
+      <td align="right">75.7<br>89.9</td>
+      <td align="right"><b>2.5</b><br><b>3.16</b></td>
+    </tr>
+    <tr>
+      <td>DetUNet-v2</td>
+      <td align="right">7.47<br>8.7</td>
+      <td align="right">0.575<br>0.648</td>
+      <td align="right">1.78<br>2.12</td>
+      <td align="right"><b>16.3</b><br><b>21.9</b></td>
+      <td align="right">199<br>199</td>
+      <td align="right">2.93<br><b>3.17</b></td>
+      <td align="right">7.2<br>8.02</td>
+      <td align="right">0.576<br>0.649</td>
+      <td align="right">1.71<br>2.02</td>
+      <td align="right">17.4<br>21.9</td>
+      <td align="right">159<br>179</td>
+      <td align="right">3.12<br>3.25</td>
+    </tr>
+    <tr>
+      <td>DetUNet-v2-orog</td>
+      <td align="right">7.23<br>8.39</td>
+      <td align="right">0.59<br>0.668</td>
+      <td align="right">1.84<br>2.2</td>
+      <td align="right">19.8<br>24.4</td>
+      <td align="right">113<br>117</td>
+      <td align="right">2.92<br>3.18</td>
+      <td align="right">7.07<br>7.98</td>
+      <td align="right">0.501<br>0.571</td>
+      <td align="right">1.55<br>1.83</td>
+      <td align="right">18.1<br>22.3</td>
+      <td align="right">110<br>129</td>
+      <td align="right">2.96<br>3.76</td>
+    </tr>
+    <tr>
+      <td>GNN4CD-orog</td>
+      <td align="right">6.99<br>8.07</td>
+      <td align="right">0.471<br>0.6</td>
+      <td align="right">2.45<br>2.54</td>
+      <td align="right">27.7<br>32.6</td>
+      <td align="right">77.7<br>82.4</td>
+      <td align="right">–<br>–</td>
+      <td align="right">6.81<br>7.75</td>
+      <td align="right">0.438<br>0.425</td>
+      <td align="right">2.47<br>2.56</td>
+      <td align="right">28.3<br>33</td>
+      <td align="right">86.9<br>89.3</td>
+      <td align="right">–<br>–</td>
+    </tr>
+    <tr>
+      <td>ParamUNET</td>
+      <td align="right"><b>4.23</b><br><b>4.79</b></td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">335<br>363</td>
+      <td align="right">6.1<br>5.38</td>
+      <td align="right"><b>3.97</b><br>4.49</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">–<br>–</td>
+      <td align="right">298<br>318</td>
+      <td align="right">8.58<br>7.94</td>
+    </tr>
+    <tr>
+      <td>Prithvi-UNet</td>
+      <td align="right">7.05<br>8.07</td>
+      <td align="right">0.839<br>1.04</td>
+      <td align="right">3.41<br>4.09</td>
+      <td align="right">42.2<br>53.4</td>
+      <td align="right">325<br>376</td>
+      <td align="right">12.6<br>11.9</td>
+      <td align="right">6.84<br>7.73</td>
+      <td align="right">0.723<br>0.817</td>
+      <td align="right">3.03<br>3.5</td>
+      <td align="right">38.7<br>47.2</td>
+      <td align="right">315<br>344</td>
+      <td align="right">10.9<br>12.8</td>
+    </tr>
+    <tr>
+      <td>Prithvi-UNet-orog<sup>†</sup></td>
+      <td align="right">6.81<br>8.07</td>
+      <td align="right">0.774<br>0.924</td>
+      <td align="right">3.64<br>4.56</td>
+      <td align="right">43.8<br>58.3</td>
+      <td align="right">284<br>415</td>
+      <td align="right">13<br>13.2</td>
+      <td align="right">6.6<br>7.51</td>
+      <td align="right">0.619<br>0.709</td>
+      <td align="right">3.2<br>3.72</td>
+      <td align="right">39.1<br>48.6</td>
+      <td align="right">264<br>291</td>
+      <td align="right">10.9<br>11.7</td>
+    </tr>
+    <tr>
+      <td>Rossby-UNet</td>
+      <td align="right">6.87<br>7.77</td>
+      <td align="right">0.17<br>0.317</td>
+      <td align="right">2.84<br>3.61</td>
+      <td align="right">32.7<br>44.6</td>
+      <td align="right">77.8<br>108</td>
+      <td align="right">9.78<br>12.1</td>
+      <td align="right">6.53<br>7.36</td>
+      <td align="right">0.178<br>0.157</td>
+      <td align="right">2.55<br>2.83</td>
+      <td align="right">27.3<br>34</td>
+      <td align="right">80.6<br>89.7</td>
+      <td align="right">7.59<br>7.95</td>
+    </tr>
+    <tr>
+      <td>Rossby-UNet-orog</td>
+      <td align="right">6.79<br>7.71</td>
+      <td align="right">0.177<br>0.358</td>
+      <td align="right">2.79<br>3.6</td>
+      <td align="right">32.8<br>45.6</td>
+      <td align="right">74.8<br>109</td>
+      <td align="right">9.21<br>11.1</td>
+      <td align="right">6.42<br>7.27</td>
+      <td align="right">0.16<br>0.142</td>
+      <td align="right">2.54<br>2.83</td>
+      <td align="right">27.7<br>35.1</td>
+      <td align="right">79.3<br>89.2</td>
+      <td align="right">6.95<br>7.54</td>
+    </tr>
+    <tr>
+      <td>XGBoost_IDL</td>
+      <td align="right">6.94<br>9.19</td>
+      <td align="right">0.241<br>1.67</td>
+      <td align="right">2.87<br>2.64</td>
+      <td align="right">39.4<br>44.6</td>
+      <td align="right">45.9<br>42.5</td>
+      <td align="right">8.99<br>7.56</td>
+      <td align="right">6.72<br>7.64</td>
+      <td align="right"><b>0.134</b><br><b>0.109</b></td>
+      <td align="right">2.97<br>3.38</td>
+      <td align="right">39.5<br>48</td>
+      <td align="right">49.3<br>46.1</td>
+      <td align="right">10.1<br>10.7</td>
     </tr>
   </tbody>
 </table>
 
-† Aggregated over a subset of domains only (DetUNet, ESD, Perfect cross-validation: ALPS, NZ).
+† Aggregated over a subset of domains only (DetUNet, ESD, Perfect cross-validation: ALPS, NZ; DetUNet, Emulator, Perfect interpolation: SA; Prithvi-UNet-orog, ESD, Perfect extrapolation: ALPS, SA).
 
 <!-- SCOREBOARD:END -->
 
