@@ -1,4 +1,4 @@
-name: rcm-emulation
+name: ml-benchmark
 channels:
   - conda-forge
 dependencies:
