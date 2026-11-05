@@ -108,6 +108,12 @@ The table below summarizes the contributing models and provides links to their r
       <td><a href="https://github.com/nram812/Generative-CORDEX-ML-Bench/tree/main/models">GitHub</a></td>
     </tr>
     <tr>
+      <td>DetUNet-v2</td>
+      <td>U-Net + self-attention + FiLM (~3M params)</td>
+      <td><a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024MS004668">Rampal et al., 2025</a></td>
+      <td><a href="https://github.com/nram812/Generative-CORDEX-ML-Bench/tree/main/models">GitHub</a></td>
+    </tr>
+    <tr>
       <td>GNN4CD</td>
       <td>Graph Neural Network (GATv2Conv, 10 layers)</td>
       <td><a href="https://doi.org/10.1017/eds.2025.10022">Blasone et al., 2025</a></td>
@@ -143,6 +149,12 @@ The table below summarizes the contributing models and provides links to their r
       <td>Physics-inspired UNet regression + EDM diffusion</td>
       <td><a href="https://www.nature.com/articles/s43247-025-02042-5">Marani et al., 2025</a></td>
       <td><a href="https://github.com/NVIDIA/physicsnemo/tree/main/examples/weather/corrdiff">GitHub</a></td>
+    </tr>
+    <tr>
+      <td>DeepESDcrps_IFCAv2</td>
+      <td>Deep CNN (3 conv + 1 dense)</td>
+      <td>In preparation</td>
+      <td>In preparation</td>
     </tr>
     <tr>
       <td>EnScale</td>
