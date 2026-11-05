@@ -1,0 +1,67 @@
+# Metadata of a model contributing to the benchmark.
+#
+# One file per model, stored as data/<MODEL>/metadata.yaml. It is normally written
+# automatically from the submission issue (.github/ISSUE_TEMPLATE/
+# ml_benchmark_submission.yaml) when a maintainer adds the `approved` label, and it
+# is the source of the "Models contributing to the benchmark" table in README.md.
+# Edit it by hand only to fix mistakes; never edit the README table directly.
+#
+# Fields
+# ------
+# Fields from the submission issue (keys match the `id` of each form field):
+# emulator_id                Model identifier, `{emulator name}-{version}`, with the
+#                            suffix `-orog` if orography is used as a predictor. It
+#                            must match the directory data/<MODEL>.
+# institution_id             Short acronym of the institution.
+# institution                Full name of the institution.
+# short_description          One-line description shown in the README table.
+# description                Detailed description of the method (architecture, loss,
+#                            optimizer, predictors, standardization, ...).
+# hardware_training_details  Hardware, training time and inference time.
+# stochastic_output          true if the emulator generates stochastic realizations
+#                            (generative/probabilistic models), false otherwise.
+# reference_label            Citation text shown in the README table, e.g.
+#                            "Author et al., 2025". null -> "In preparation".
+# reference_url              URL of the reference (DOI, publication, docs).
+#                            null -> no link.
+#                            Several references: give reference_label and
+#                            reference_url as lists of the same length.
+# reproducibility_url        URL of the code/data for reproducibility (GitHub,
+#                            Zenodo, ...). null -> "In preparation".
+# additional_notes           Any other relevant information (optional).
+#
+# Fields added by the registration workflow:
+# issue                      Number of the submission issue in the repository.
+# submitted                  Date the issue was opened (YYYY-MM-DD, UTC).
+# approved                   Date the `approved` label was added (YYYY-MM-DD, UTC).
+#
+# Optional fields (from the form or unknown for older models) are `null`; they are
+# never filled with guessed values.
+#
+# The values below are only an example (taken from the issue form placeholders).
+
+# --- Submission issue ---------------------------------------------------------
+emulator_id: DeepESD-asym1
+institution_id: IFCA
+institution: Instituto de Física de Cantabria (IFCA), CSIC-Universidad de Cantabria
+short_description: Deep CNN (3 conv + 1 dense)
+description: >-
+  Deep convolutional neural network including 3 convolution and one dense layer,
+  with ReLU activation functions. Standardized input data at gridbox level using
+  mean/std of reanalysis in training period. No bias adjustment performed. Training
+  on historical and future experiments. For maximum temperature the MSE has been
+  used as loss function, for precipitation the ASYM.
+hardware_training_details: >-
+  Hardware: One node with two NVIDIA A100 GPUs (40GB). Training time: ~15 minutes
+  per epoch, ~5 hours total (20 epochs). Inference time: ~2 minutes per year of
+  predictions.
+stochastic_output: false
+reference_label: Author et al., 2022
+reference_url: https://doi.org/10.5194/gmd-15-6747-2022
+reproducibility_url: https://zenodo.org/records/6828304
+additional_notes: null
+
+# --- Registration workflow ----------------------------------------------------
+issue: 123
+submitted: 2026-01-15
+approved: 2026-01-20
