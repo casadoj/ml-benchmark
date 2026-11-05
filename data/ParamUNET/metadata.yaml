@@ -1,0 +1,61 @@
+# Metadata of a model contributing to the benchmark.
+#
+# One file per model, stored as data/<MODEL>/metadata.yaml. It is normally written
+# automatically from the submission issue (.github/ISSUE_TEMPLATE/
+# ml_benchmark_submission.yaml) when a maintainer adds the `approved` label, and it
+# is the source of the "Models contributing to the benchmark" table in README.md.
+# Edit it by hand only to fix mistakes; never edit the README table directly.
+#
+# Fields
+# ------
+# Fields from the submission issue (keys match the `id` of each form field):
+# emulator_id                Model identifier, `{emulator name}-{version}`, with the
+#                            suffix `-orog` if orography is used as a predictor. It
+#                            must match the directory data/<MODEL>.
+# institution_id             Short acronym of the institution.
+# institution                Full name of the institution.
+# short_description          One-line description shown in the README table.
+# description                Detailed description of the method (architecture, loss,
+#                            optimizer, predictors, standardization, ...).
+# hardware_training_details  Hardware, training time and inference time.
+# stochastic_output          true if the emulator generates stochastic realizations
+#                            (generative/probabilistic models), false otherwise.
+# reference_label            Citation text shown in the README table, e.g.
+#                            "Author et al., 2025". null -> "In preparation".
+# reference_url              URL of the reference (DOI, publication, docs).
+#                            null -> no link.
+# reproducibility_url        URL of the code/data for reproducibility (GitHub,
+#                            Zenodo, ...). null -> "In preparation".
+# additional_notes           Any other relevant information (optional).
+#
+# Fields added by the registration workflow:
+# issue                      Number of the submission issue in the repository.
+# submitted                  Date the issue was opened (YYYY-MM-DD, UTC).
+# approved                   Date the `approved` label was added (YYYY-MM-DD, UTC).
+#
+# Optional fields (from the form or unknown for older models) are `null`; they are
+# never filled with guessed values.
+#
+
+# --- Submission issue ---------------------------------------------------------
+emulator_id: ParamUNET  # in the issue: ParamUNET-gaussian-bernoulliGamma-0
+institution_id: LSCE-IPSL
+institution: |-
+  Laboratoire des Sciences du Climat et de l’Environnement (LSCE),  Institut Pierre-Simon Laplace (IPSL)
+short_description: U-Net outputting distribution parameters
+description: |-
+  UNET classical architecture, with a reduced number of blocks, outputting parameters for precipitation (Bernoulli-Gamma) and maximum temperature (Gaussian). 2 separate models for each variable. The emulator is trained using the predictors as-is, with no orography. The predictors are standardised by channel. No standardisation has been applied to predictand, although temperature standard deviation output layer has been clamped to 0.01 minimum. No bias adjustment. Training on historical and future experiments. Log likelihood has been employed for both variables (corresponding to each distribution). The expected value is used in this submission.
+hardware_training_details: |-
+  One node with a single Nvidia V100 GPU (16Gb). Training time (per experiment and variable): ~ 30 minutes (total).
+  Inference time: Immediate (< 1 second)
+stochastic_output: false
+reference_label: null
+reference_url: null
+reproducibility_url: null
+additional_notes: |-
+  This model is used as background for the Diffusion model (ParamDiffusion)
+
+# --- Registration workflow ----------------------------------------------------
+issue: 39
+submitted: 2026-02-13
+approved: 2026-03-18
