@@ -38,7 +38,7 @@
 #
 
 # --- Submission issue ---------------------------------------------------------
-emulator_id: RCMGEM-orog  # in the issue: RCMGEM-mv-orog
+emulator_id: RCMGEM-mv-orog  # in the issue: RCMGEM-mv-orog
 institution_id: UoB
 institution: University of Bristol
 short_description: NCSN++ diffusion (sub-VP SDE)
