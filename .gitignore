@@ -35,3 +35,8 @@ data/*/evaluation/**/*.zarr
 *.err
 *.out
 *.log
+
+# --- Discarded development path (kept locally, not versioned) --------------
+evaluation_master.sh
+plot_master.sh
+figures/
