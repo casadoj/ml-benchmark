@@ -1,22 +1,23 @@
 #!/usr/bin/env python
 """
-Build the table of contributing models in README.md from the models' metadata.
+Build the tables of contributing models of the docs site from the models'
+metadata.
 
 Reads `data/<MODEL>/metadata.yaml` (see `submission/metadata_template.yaml`) for
-every model and writes an HTML table (Model | Description | Reference |
-Implementation) between the markers `<!-- MODELS:START -->` and
-`<!-- MODELS:END -->` in README.md.
+every model and writes one HTML table per model type (Model | Description |
+Reference | Implementation) between the markers `<!-- MODELS:START -->` and
+`<!-- MODELS:END -->` in `docs/results/models.md`.
 
 A model and its orography variant (`<MODEL>-orog`) share one row, named after the
 model without the suffix and filled from the metadata of the version without
 orography when both exist. Models are grouped by type, from `stochastic_output`
-(deterministic, generative, then models whose type is not registered), each group
-under a full-width header row as in the scoreboard, and sorted alphabetically
-(case-insensitive) within each group.
+(deterministic, generative, then models whose type is not registered): each group
+is a section with its own heading and table, sorted alphabetically
+(case-insensitive). Groups without models are omitted.
 
 Usage
 -----
-    python submission/models_table.py            # update README.md in place
+    python submission/models_table.py            # update docs/results/models.md
     python submission/models_table.py --print    # print the table to stdout instead
 """
 from __future__ import annotations
@@ -31,7 +32,7 @@ import yaml
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT_DIR / "data"
-README_FILE = ROOT_DIR / "README.md"
+OUTPUT_FILE = ROOT_DIR / "docs" / "results" / "models.md"
 METADATA_FILE = "metadata.yaml"
 START_MARKER = "<!-- MODELS:START -->"
 END_MARKER = "<!-- MODELS:END -->"
@@ -60,9 +61,9 @@ REQUIRED_FIELDS = (
     "stochastic_output",
 )
 
-# sys.path is extended so the README helper shared with the scoreboard can be reused
+# sys.path is extended so the helper shared with the scoreboard can be reused
 sys.path.insert(0, str(ROOT_DIR / "evaluation"))
-from scoreboard import MODEL_TYPES, UNKNOWN_TYPE, update_readme  # noqa: E402
+from scoreboard import MODEL_TYPES, UNKNOWN_TYPE, update_block  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
@@ -75,12 +76,12 @@ def parse_args() -> argparse.Namespace:
         Arguments, with the attribute `print`.
     """
     parser = argparse.ArgumentParser(
-        description="Build the table of contributing models of README.md."
+        description="Build the table of contributing models of docs/results/models.md."
     )
     parser.add_argument(
         "--print",
         action="store_true",
-        help="print the table to stdout instead of updating README.md",
+        help="print the table to stdout instead of updating the file",
     )
     return parser.parse_args()
 
@@ -182,9 +183,41 @@ def _implementation(url: str | None) -> str:
     return _link(label, url)
 
 
+def _table(models: list[dict]) -> str:
+    """
+    Render one HTML table of models.
+
+    Parameters
+    ----------
+    models : list of dict
+        Metadata of the models in the table (orography variants merged), in
+        display order.
+
+    Returns
+    -------
+    str
+        HTML table with one row per model.
+    """
+    lines = ["<table>", "  <thead>", "    <tr>"]
+    lines += [f"      <th>{column}</th>" for column in COLUMNS]
+    lines += ["    </tr>", "  </thead>", "  <tbody>"]
+    for m in models:
+        cells = [
+            _text(m["name"]),
+            _text(m["short_description"] or ""),
+            _reference(m["reference_label"], m["reference_url"]),
+            _implementation(m["reproducibility_url"]),
+        ]
+        lines.append("    <tr>")
+        lines += [f"      <td>{cell}</td>" for cell in cells]
+        lines.append("    </tr>")
+    lines += ["  </tbody>", "</table>"]
+    return "\n".join(lines)
+
+
 def render(models: list[dict]) -> str:
     """
-    Render the HTML table of contributing models.
+    Render the tables of contributing models, one section per model type.
 
     Parameters
     ----------
@@ -194,35 +227,20 @@ def render(models: list[dict]) -> str:
     Returns
     -------
     str
-        HTML table with one row per model (orography variants merged), grouped by
-        model type under full-width header rows. Types without models are omitted.
+        Markdown with, for each model type (`MODEL_TYPES`, then `UNKNOWN_TYPE`), a
+        `## <type>` heading followed by an HTML table with one row per model
+        (orography variants merged). Types without models are omitted.
     """
     rows = sorted(merge_orography(models), key=lambda m: m["name"].lower())
-    lines = ["<table>", "  <thead>", "    <tr>"]
-    lines += [f"      <th>{column}</th>" for column in COLUMNS]
-    lines += ["    </tr>", "  </thead>", "  <tbody>"]
+    sections = []
     for group in [*MODEL_TYPES.values(), UNKNOWN_TYPE]:
         members = [
             m for m in rows
             if MODEL_TYPES.get(m["stochastic_output"], UNKNOWN_TYPE) == group
         ]
-        if not members:
-            continue
-        lines.append(
-            f'    <tr><th colspan="{len(COLUMNS)}" align="left">{group}</th></tr>'
-        )
-        for m in members:
-            cells = [
-                _text(m["name"]),
-                _text(m["short_description"] or ""),
-                _reference(m["reference_label"], m["reference_url"]),
-                _implementation(m["reproducibility_url"]),
-            ]
-            lines.append("    <tr>")
-            lines += [f"      <td>{cell}</td>" for cell in cells]
-            lines.append("    </tr>")
-    lines += ["  </tbody>", "</table>"]
-    return "\n".join(lines)
+        if members:
+            sections.append(f"## {group}\n\n{_table(members)}")
+    return "\n\n".join(sections)
 
 
 def main() -> None:
@@ -231,10 +249,10 @@ def main() -> None:
     block = render(collect())
     if args.print:
         print(block)
-    elif update_readme(README_FILE, block, START_MARKER, END_MARKER):
-        print(f"[models_table] INFO | Models table updated: {README_FILE}")
+    elif update_block(OUTPUT_FILE, block, START_MARKER, END_MARKER):
+        print(f"[models_table] INFO | Models table updated: {OUTPUT_FILE}")
     else:
-        print(f"[models_table] INFO | Models table already up to date: {README_FILE}")
+        print(f"[models_table] INFO | Models table already up to date: {OUTPUT_FILE}")
 
 
 if __name__ == "__main__":
