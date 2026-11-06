@@ -40,3 +40,6 @@ data/*/evaluation/**/*.zarr
 evaluation_master.sh
 plot_master.sh
 figures/
+
+# MkDocs build output (`pixi run docs-build`)
+site/

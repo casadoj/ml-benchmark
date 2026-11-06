@@ -3,6 +3,7 @@
 #     pixi install                                   # create the environment
 #     pixi run evaluate -c data/<MODEL>/config.yaml  # run evaluation/evaluate.py
 #     pixi run lab                                   # start JupyterLab
+#     pixi run docs                                  # preview the docs site
 
 [workspace]
 name = "ml-benchmark"
@@ -31,6 +32,7 @@ jupyterlab = ">=4.4.7"
 notebook = ">=7.4.5"
 ipykernel = ">=6.30.1"
 ipywidgets = ">=8.1.7"
+zensical = ">=0.0.73,<0.0.74"
 
 [pypi-dependencies]
 # Branch `feature/ml-benchmark` on GitHub; the exact commit is recorded in
@@ -41,3 +43,5 @@ ml-evaluation = { git = "https://github.com/c3s-cordex-ml/ml-evaluation.git", br
 [tasks]
 evaluate-model = "python evaluation/evaluate.py"
 lab = "jupyter lab"
+docs = "zensical serve"               # preview the documentation site locally
+docs-build = "zensical build --clean" # build it into site/

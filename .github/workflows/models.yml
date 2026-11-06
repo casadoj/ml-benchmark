@@ -1,11 +1,11 @@
-# Rebuild the table of contributing models of README.md from the models' metadata
-# (data/<MODEL>/metadata.yaml).
+# Rebuild the table of contributing models of docs/results/models.md from the
+# models' metadata (data/<MODEL>/metadata.yaml).
 #
 # - Pull requests: preview the table in the job summary; the job fails if a metadata
 #   file is invalid (nothing is committed; pull requests from forks only get a
 #   read-only token).
 # - Push to main (e.g. after merging a model submission) or manual run: regenerate
-#   the table and commit README.md if it changed.
+#   the table and commit docs/results/models.md if it changed.
 name: Models table
 
 on:
@@ -25,8 +25,8 @@ on:
 permissions:
   contents: write
 
-# the scoreboard workflow also commits README.md: share its group so that the two
-# never push at the same time
+# the scoreboard workflow also commits to the repository: share its group so
+# that the two never push at the same time
 concurrency:
   group: readme-${{ github.ref }}
   cancel-in-progress: false
@@ -48,20 +48,20 @@ jobs:
         if: github.event_name == 'pull_request'
         run: python submission/models_table.py --print >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Update README.md
+      - name: Update models table
         if: github.event_name != 'pull_request'
         run: python submission/models_table.py
 
-      - name: Commit README.md
+      - name: Commit models table
         if: github.event_name != 'pull_request'
         run: |
-          if git diff --quiet README.md; then
+          if git diff --quiet docs/results/models.md; then
             echo "Models table already up to date"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md
+          git add docs/results/models.md
           git commit -m "Update models table"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push
