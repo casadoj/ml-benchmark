@@ -48,6 +48,11 @@ jobs:
       - name: Install Zensical
         run: pip install "zensical==0.0.73"
 
+      # the images live in images/ (so that the READMEs show them on GitHub), but
+      # the site only publishes files inside docs/ (same as `pixi run docs-images`)
+      - name: Copy images
+        run: cp -r images docs/images
+
       - name: Build site
         run: zensical build --clean
 

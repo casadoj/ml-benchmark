@@ -2,7 +2,7 @@
 
 **A benchmark for Machine Learning-Based Regional Climate Downscaling**
 
---8<-- "README.md:intro"
+--8<-- "README.md:home1"
 
 ## Contents
 
@@ -17,3 +17,5 @@
     - [Scoreboards](results/scoreboard/index.md)
         - [ESD pseudo-reality](results/scoreboard/esd_pseudo_reality.md)
         - [Emulator hist+future](results/scoreboard/emulator_hist_future.md)
+
+--8<-- "README.md:home2"

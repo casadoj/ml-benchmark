@@ -11,8 +11,10 @@ RCM model: _CCAM-2203_ (from [CORDEX-CMIP6](https://wcrp-cordex.github.io/simula
 Driving GCM model 1 (training and test): _ACCESS-CM2_r4i1p1f1 (historical and ssp370 scenarios)_ <br>
 Driving GCM model 2 (test transferability): _EC-Earth3_r1i1p1f1 (historical and ssp370 scenarios)_ <br>
 For this domain the predictors and predictand have been interpolated to regular lon/lat grids.
-<div align="center">
-<img src="https://github.com/WCRP-CORDEX/ml-benchmark/blob/main/images/image_example_NZ.png" alt="NZ Domain" width="300"/>
+<div align="center" markdown>
+
+![NZ Domain](../images/image_example_NZ.png)
+
 </div>
 
 - **South Africa (SA) – 0.10° resolution**  <br>
@@ -20,8 +22,10 @@ RCM model: **** <br>
 Driving GCM model 1 (training and test): _ACCESS-CM2 (historical and *** scenarios)_ <br>
 Driving GCM model 2 (test transferability): _NorESM2-MM (historical and *** scenarios)_  <br>
 For this domain the predictors and predictand have been interpolated to regular lon/lat grids.
-<div align="center">
-<img src="https://github.com/WCRP-CORDEX/ml-benchmark/blob/main/images/image_example_SA.png" alt="SA Domain" width="300"/>
+<div align="center" markdown>
+
+![SA Domain](../images/image_example_SA.png)
+
 </div>
 <br>
 
@@ -30,8 +34,10 @@ RCM model: _Aladin63_ (from CORDEX-CMIP5) <br>
 Driving GCM model 1 (training and test): _CNRM-CM5 (historical and rcp85 scenarios)_ <br>
 Driving GCM model 2 (test transferability): _MPI-ESM-LR (historical and rcp85 scenarios)_ <br>
 For this domain, the predictors and predictand are provided on the _Lambert Conformal Conic_ projection as simulated by the Aladin63 RCM. This is transparent for the benchmark since the data is provided over the same 16x16 and 128x128 squared grids and can be used directly for model training without reprojection as in the other cases (see [./data](/data) for more details). When plotted on a regular lat–lon grid the domain appears curved (see the image below), but in its native projection the data lies on a square array (the `x` and `y` coordinates in the files represent the regular coordinates, whereas the `lat` and `lon` coordinates denote the corresponding geographical latitude and longitude values, which are automatically used by standard plotting functions). <br>
-<div align="center">
-  <img src="https://github.com/WCRP-CORDEX/ml-benchmark/blob/main/images/image_example_ALPS.png" alt="ALPS Domain" width="300"/>
+<div align="center" markdown>
+
+![ALPS Domain](../images/image_example_ALPS.png)
+
 </div>
 
 

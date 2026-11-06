@@ -43,5 +43,11 @@ ml-evaluation = { git = "https://github.com/c3s-cordex-ml/ml-evaluation.git", br
 [tasks]
 evaluate-model = "python evaluation/evaluate.py"
 lab = "jupyter lab"
-docs = "zensical serve"               # preview the documentation site locally
-docs-build = "zensical build --clean" # build it into site/
+# The images live in images/ (so that the READMEs show them on GitHub); the site
+# only publishes files inside docs/, so they are copied to docs/images/ (ignored
+# by git) before building
+docs-images = "rm -rf docs/images && cp -r images docs/images"
+# preview the site locally
+docs = { cmd = "zensical serve", depends-on = ["docs-images"] }
+# build the site into site/
+docs-build = { cmd = "zensical build --clean", depends-on = ["docs-images"] }

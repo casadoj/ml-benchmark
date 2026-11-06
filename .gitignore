@@ -43,3 +43,6 @@ figures/
 
 # MkDocs build output (`pixi run docs-build`)
 site/
+
+# copy of images/ made for the docs build (`pixi run docs`, .github/workflows/docs.yml)
+docs/images/
