@@ -1,0 +1,111 @@
+{
+  "model": "ViT-IFCAv1",
+  "train_experiment": "ESD_pseudo_reality",
+  "test_experiment": "Perfect_extrapolation",
+  "ensemble": {
+    "n_members": 10,
+    "member": 0
+  },
+  "variables": {
+    "tasmax": {
+      "bias_annstd": {
+        "aggregation": "mean",
+        "aggregate": 0.13143041729927063,
+        "domains": {
+          "NZ": 0.156297966837883,
+          "SA": 0.10656286776065826
+        }
+      },
+      "bias_max1day": {
+        "aggregation": "mean",
+        "aggregate": 0.9971133470535278,
+        "domains": {
+          "NZ": 0.7469284534454346,
+          "SA": 1.247298240661621
+        }
+      },
+      "bias_mean": {
+        "aggregation": "mean",
+        "aggregate": 0.32583826780319214,
+        "domains": {
+          "NZ": 0.3448060154914856,
+          "SA": 0.3068705201148987
+        }
+      },
+      "pss": {
+        "aggregation": "mean",
+        "aggregate": 0.9722940720204083,
+        "domains": {
+          "NZ": 0.9573573802821917,
+          "SA": 0.9872307637586247
+        }
+      },
+      "ralsd": {
+        "aggregation": "mean",
+        "aggregate": 8.786967054625212,
+        "domains": {
+          "NZ": 16.854463944234364,
+          "SA": 0.7194701650160606
+        }
+      },
+      "rmse": {
+        "aggregation": "quadratic_mean",
+        "aggregate": 1.7365431645952165,
+        "domains": {
+          "NZ": 1.2997965812683105,
+          "SA": 2.0836730003356934
+        }
+      }
+    },
+    "pr": {
+      "bias_max1day": {
+        "aggregation": "mean",
+        "aggregate": 22.48133786887908,
+        "domains": {
+          "NZ": 15.67880694808531,
+          "SA": 29.28386878967285
+        }
+      },
+      "bias_mean": {
+        "aggregation": "mean",
+        "aggregate": 0.3872634079525461,
+        "domains": {
+          "NZ": 0.33740625907373234,
+          "SA": 0.43712055683135986
+        }
+      },
+      "bias_sdii": {
+        "aggregation": "mean",
+        "aggregate": 1.206668766113382,
+        "domains": {
+          "NZ": 1.0026978885576354,
+          "SA": 1.4106396436691284
+        }
+      },
+      "lhd": {
+        "aggregation": "quadratic_mean",
+        "aggregate": 5.87992552663286,
+        "domains": {
+          "NZ": 4.78446359145122,
+          "SA": 6.801173173767531
+        }
+      },
+      "ralsd": {
+        "aggregation": "mean",
+        "aggregate": 14.515273455081054,
+        "domains": {
+          "NZ": 23.86988128227748,
+          "SA": 5.16066562788463
+        }
+      },
+      "rmse": {
+        "aggregation": "quadratic_mean",
+        "aggregate": 10.863506483216826,
+        "domains": {
+          "NZ": 8.67915913282172,
+          "SA": 12.676898002624512
+        }
+      }
+    }
+  }
+}
