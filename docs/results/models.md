@@ -8,6 +8,7 @@ Models submitted to the benchmark, with links to their references and implementa
 
 ## Deterministic
 
+<div class="models-table">
 <table>
   <thead>
     <tr>
@@ -92,9 +93,11 @@ Models submitted to the benchmark, with links to their references and implementa
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Generative
 
+<div class="models-table">
 <table>
   <thead>
     <tr>
@@ -179,5 +182,6 @@ Models submitted to the benchmark, with links to their references and implementa
     </tr>
   </tbody>
 </table>
+</div>
 
 <!-- MODELS:END -->

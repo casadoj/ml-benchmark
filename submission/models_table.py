@@ -198,7 +198,8 @@ def _table(models: list[dict]) -> str:
     str
         HTML table with one row per model.
     """
-    lines = ["<table>", "  <thead>", "    <tr>"]
+    # the wrapper's class lets docs/stylesheets/extra.css style these tables only
+    lines = ['<div class="models-table">', "<table>", "  <thead>", "    <tr>"]
     lines += [f"      <th>{column}</th>" for column in COLUMNS]
     lines += ["    </tr>", "  </thead>", "  <tbody>"]
     for m in models:
@@ -211,7 +212,7 @@ def _table(models: list[dict]) -> str:
         lines.append("    <tr>")
         lines += [f"      <td>{cell}</td>" for cell in cells]
         lines.append("    </tr>")
-    lines += ["  </tbody>", "</table>"]
+    lines += ["  </tbody>", "</table>", "</div>"]
     return "\n".join(lines)
 
 
