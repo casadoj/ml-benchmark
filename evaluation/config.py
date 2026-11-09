@@ -75,19 +75,19 @@ class Config:
                 continue
             available = experiment_mapping[train_exp]
             if tests is None:
-                tests = list(available)
+                tests = list(available['tests'])
             elif not isinstance(tests, list):
                 raise TypeError(
                     f"The tests of '{train_exp}' must be a list, "
                     f"got {type(tests).__name__}"
                 )
             for test_exp in tests:
-                if test_exp not in available:
+                if test_exp not in available['tests']:
                     print(
                         f"[config] WARNING | Test {test_exp!r} of {train_exp!r} not in "
                         f"{EXPERIMENTS_FILE}; skipped"
                     )
-            valid_tests = [test_exp for test_exp in tests if test_exp in available]
+            valid_tests = [test_exp for test_exp in tests if test_exp in available['tests']]
             if valid_tests:
                 valid[train_exp] = valid_tests
         self.experiments = valid

@@ -354,9 +354,9 @@ def main() -> None:
     experiment_mapping = load_yaml(BENCHMARK_DIR / "experiments.yaml")
 
     n_failed = 0
-    for train_exp, test_exps in config.experiments.items():
-        for test_exp in test_exps:
-            attrs = experiment_mapping[train_exp][test_exp]
+    for train_exp, dct in config.experiments.items():
+        test_exps = dct['tests']
+        for test_exp, attrs in test_exps.items():
             print(f"[main] INFO | Train/test experiments: {train_exp} / {test_exp}")
             summary_file = experiment_dir(config, train_exp, test_exp) / SUMMARY_FILE
 
