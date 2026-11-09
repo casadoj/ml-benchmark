@@ -115,7 +115,7 @@ Benchmarking allows users to compare the performance of their own models against
 
 The models currently included in the benchmark and their performance can be explored in the following pages:
 
-- [Contributing models](https://casadoj.github.io/ml-benchmark/results/models/) summarizes the models currently included in the benchmark and provides, when available, links to their respective reference and implementation repositories.
+- [Contributing models](https://casadoj.github.io/ml-benchmark/results/models/) lists the models and provides, when available, links to their respective reference and implementation repositories.
 - The [Scoreboards](https://casadoj.github.io/ml-benchmark/results/scoreboard/) section compares model performances, with a specific page for each training experiment.
 
 <!-- --8<-- [end:results] -->

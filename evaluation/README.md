@@ -106,16 +106,16 @@ across domains and domain by domain:
 |---|---|---|---|
 | `rmse` | both | Root mean square error of the daily values | K, mm/day |
 | `clim_mean` | both | Bias of the climatological mean | K, mm/day |
-| `ralsd` | both | Radially averaged log spectral distance: error in the spatial structure | dB² |
-| `txx` | tasmax | Bias of the mean annual maximum (TXx) | K |
+| `ralsd` | both | Radially Averaged Log Spectral Distance: error in the spatial structure | dB² |
+| `txx` | tasmax | Bias in mean TXx (annual max. of daily max. temperature) | K |
+| `rx1day` | pr | Bias in mean Rx1day (annual max. 1-day precipitation) | mm/day |
 | `pss` | tasmax | Perkins skill score: overlap of the daily distributions (0–1) | – |
-| `iav` | tasmax | Bias of the interannual variability (std. dev. of annual means) | K |
-| `sdii` | pr | Bias of the simple daily intensity index (mean precipitation on wet days) | mm/day |
-| `rx1day` | pr | Bias of the mean annual maximum 1-day precipitation | mm |
-| `lhd` | pr | Logarithmic histogram distance between the daily distributions | – |
+| `lhd` | pr | Logarithmic Histogram Distance between the daily distributions | – |
+| `iav` | tasmax | Bias of the InterAnnual Variability (std. dev. of annual means) | K |
+| `sdii` | pr | Bias of the Simple Daily Intensity Index (mean precipitation on wet days) | mm/day |
 
 All metrics are errors (lower is better), except PSS (higher is better). Biases
 are spatial means of the absolute bias.
-The metric definitions come from `ml-evaluation`;
-[`diagnostics.md`](diagnostics.md) describes the original indices and
+The metric definitions come from [`ml-evaluation`](https://github.com/c3s-cordex-ml/ml-evaluation/tree/main);
+[`diagnostics.md`](https://github.com/WCRP-CORDEX/ml-benchmark/blob/main/evaluation/README.md) describes the original indices and
 diagnostics they were derived from.

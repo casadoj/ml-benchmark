@@ -7,12 +7,12 @@
 ## Contents
 
 - [**Introduction**](introduction.md)
-- [**Contributing**](contributing/intro.md)
+- [**Contributing**](contributing/index.md)
     - [Dataset overview](contributing/data.md)
     - [Train your model](contributing/training.md)
     - [Submit your model](contributing/submission.md)
     - [Evaluate your model](contributing/evaluation.md)
-- [**Results**](results/intro.md)
+- [**Results**](results/index.md)
     - [Contributing models](results/models.md)
     - [Scoreboards](results/scoreboard/index.md)
         - [ESD pseudo-reality](results/scoreboard/esd_pseudo_reality.md)

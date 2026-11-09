@@ -69,13 +69,13 @@ nav:
   - Home: index.md
   - Introduction: introduction.md
   - Contributing:
-      - Contributing to the benchmark: contributing/intro.md
+      - contributing/index.md
       - Dataset overview: contributing/data.md
       - Train your model: contributing/training.md
       - Submit your model: contributing/submission.md
       - Evaluate your model: contributing/evaluation.md
   - Results:
-      - Overview: results/intro.md
+      - results/index.md
       - Contributing models: results/models.md
       - Scoreboards:
           - results/scoreboard/index.md
