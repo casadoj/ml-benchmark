@@ -8,5 +8,5 @@ per training experiment and one table per variable:
 - [Emulator hist+future](emulator_hist_future.md): trained on 1961–1980 and
   2080–2099; perfect cross-validation and perfect interpolation tests.
 
-See the [Introduction](../../introduction.md) for the description of the
+See the [Introduction](../../introduction.md#experiments) for the description of the
 experiments and tests.
