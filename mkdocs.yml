@@ -38,6 +38,9 @@ extra_css:
 
 extra_javascript:
   - javascripts/scoreboard.js  # sortable scoreboard tables
+  # LaTeX math (`$...$`): configuration, then MathJax itself
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
   - search
@@ -51,6 +54,9 @@ markdown_extensions:
       permalink: true
   - pymdownx.superfences     # fenced code blocks
   - pymdownx.details         # collapsible admonitions
+  # LaTeX math (`$...$`, `$$...$$`), rendered by MathJax (extra_javascript)
+  - pymdownx.arithmatex:
+      generic: true
   # Snippets let docs pages pull in the READMEs that live in their own folders
   # (`--8<-- "data/README.md"`), or a marked section of one
   # (`--8<-- "README.md:citation"`), so the markdown is not duplicated.
@@ -64,11 +70,12 @@ nav:
   - Introduction: introduction.md
   - Contributing:
       - Contributing to the benchmark: contributing/intro.md
-      - Get the data: contributing/data.md
+      - Dataset overview: contributing/data.md
       - Train your model: contributing/training.md
       - Submit your model: contributing/submission.md
       - Evaluate your model: contributing/evaluation.md
   - Results:
+      - Overview: results/intro.md
       - Contributing models: results/models.md
       - Scoreboards:
           - results/scoreboard/index.md

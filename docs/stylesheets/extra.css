@@ -1,6 +1,19 @@
 /* Custom styles of the CORDEX ML-Bench documentation site. */
 
 /* ---------------------------------------------------------------------------
+   Default for all tables: less padding than the theme's (0.9375em 1.25em) and
+   no minimum header width (theme: 5rem), so tables are more compact.
+   --------------------------------------------------------------------------- */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  padding: 0.4em 0.8em;  /* vertical horizontal */
+}
+
+.md-typeset table:not([class]) th {
+  min-width: 5rem;
+}
+
+/* ---------------------------------------------------------------------------
    Table of contents in the left menu on pages without the right sidebar.
 
    A page that hides the right-hand table of contents (front matter

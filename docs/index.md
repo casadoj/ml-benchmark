@@ -8,11 +8,11 @@
 
 - [**Introduction**](introduction.md)
 - [**Contributing**](contributing/intro.md)
-    - [Get the data](contributing/data.md)
+    - [Dataset overview](contributing/data.md)
     - [Train your model](contributing/training.md)
     - [Submit your model](contributing/submission.md)
     - [Evaluate your model](contributing/evaluation.md)
-- **Results**
+- [**Results**](results/intro.md)
     - [Contributing models](results/models.md)
     - [Scoreboards](results/scoreboard/index.md)
         - [ESD pseudo-reality](results/scoreboard/esd_pseudo_reality.md)
