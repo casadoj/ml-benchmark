@@ -7,6 +7,4 @@
 historical: 1981-2000
 mid_century: 2041-2060
 end_century: 2080-2099
-mid_end_century: 
-  - 2041-2060
-  - 2080-2099
+mid_end_century: '*-*'    # wildcard
