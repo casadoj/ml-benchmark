@@ -19,6 +19,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import subprocess
 import sys
@@ -67,12 +68,6 @@ AGGREGATION = {
 # horizon -> 20-year period, as in the benchmark file names
 with open(BENCHMARK_DIR / "horizons.yaml") as f:
     PERIODS = yaml.safe_load(f)
-
-# ensemble member to be used in probabilistic models:
-#   a non-negative integer selects that member. By default 0.
-#   -1 uses the ensemble mean
-# Ignored by `ml-eval` for deterministic models
-MEMBER_NUMBER = 0
 
 
 def parse_args() -> argparse.Namespace:
@@ -132,16 +127,34 @@ def metrics_file(out_dir: Path, var: str, domain: str) -> Path:
     return out_dir / f"metrics_{var}_{domain}.json"
 
 
+def input_exists(path: Path) -> bool:
+    """
+    Whether an input file exists, or a glob pattern matches at least one file.
+
+    `Path.is_file()` treats wildcards (`*`, `?`, `[`) as literal characters, so
+    patterns (e.g. `*_century` for the mid- and end-century tests together) are
+    resolved with `glob` instead.
+    """
+    if any(char in str(path) for char in "*?["):
+        return bool(glob.glob(str(path)))
+    return path.is_file()
+
+
 def _check_attributes(values: list, name: str, out_dir: Path) -> object:
     """
     Value shared by all the per-domain metric files of an experiment.
 
+    Values may be lists (e.g. the positions of the selected ensemble members);
+    they are compared as tuples, since lists cannot be dictionary keys.
+
     Returns None (null in the JSON), with a warning, if the files disagree; a
     value is never picked silently.
     """
-    unique = list(dict.fromkeys(values))
+    hashable = [tuple(v) if isinstance(v, list) else v for v in values]
+    unique = list(dict.fromkeys(hashable))
     if len(unique) == 1:
-        return unique[0]
+        value = unique[0]
+        return list(value) if isinstance(value, tuple) else value
     if unique:
         print(f"[aggregate] WARNING | Inconsistent {name!r} {unique} in {out_dir}")
     return None
@@ -170,7 +183,8 @@ def evaluate_experiment(
     Parameters
     ----------
     config : Config
-        Model, domains and variables to evaluate.
+        Model, domains and variables to evaluate, and the maximum number of
+        ensemble members (`max_members`) passed to `ml-eval benchmark`.
     train_exp : str
         Training experiment, e.g. `ESD_pseudo_reality`.
     test_exp : str
@@ -191,6 +205,7 @@ def evaluate_experiment(
     """
     horizon, case = attrs["horizon"], attrs["case"]
     period = PERIODS[horizon]
+    horizon = '*_century' if horizon == 'mid_end_century' else horizon
     gcm_key = "test_gcm" if attrs["transfer"] else "train_gcm"
     out_dir = experiment_dir(config, train_exp, test_exp)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -199,20 +214,20 @@ def evaluate_experiment(
     for domain in config.domains:
         forcing = dataset_mapping[domain][gcm_key]
 
-        # x0: reference file
+        # x0: reference file(s)
         x0 = (
             DATA_DIR / "Bench-data" / f"{domain}_domain" / "test" / horizon
             / "target" / f"pr_tasmax_{forcing}_{period}.nc"
         )
-        if not x0.is_file():
+        if not input_exists(x0):
             print(f"[evaluate] WARNING | Reference file not found: {x0}")
             continue
-        # x1: prediction file
+        # x1: prediction file(s)
         x1 = (
             DATA_DIR / config.model / "predictions" / f"{domain}_Domain"
             / train_exp / horizon / case / f"Predictions_pr_tasmax_{forcing}_{period}.nc"
         )
-        if not x1.is_file():
+        if not input_exists(x1):
             print(f"[evaluate] WARNING | Prediction file not found: {x1}")
             continue
 
@@ -229,7 +244,7 @@ def evaluate_experiment(
                 "--x1", str(x1),
                 "--var", var,
                 "--output", str(out_file),
-                "--member-num", str(MEMBER_NUMBER),
+                "--max-members", str(config.max_members),
             ]
             result = subprocess.run(cmd)
             if result.returncode != 0:
@@ -256,8 +271,9 @@ def aggregate_experiment(
     (null in the JSON). Domains listed in the configuration without a metric file
     are reported, and the aggregate covers only the domains found. If no metric
     file is found, nothing is written and an existing summary is left untouched.
-    `member_num` and `n_members` are null if the domain files disagree or lack
-    them (files written by older versions of `ml-eval`).
+    `n_members` (members in the predictions) and `members` (positions of the
+    members used; null for deterministic models) are null if the domain files
+    disagree or lack them (files written by older versions of `ml-eval`).
 
     Parameters
     ----------
@@ -280,12 +296,12 @@ def aggregate_experiment(
         "test_experiment": test_exp,
         "ensemble": {
             "n_members": None,
-            "member": None,
+            "members": None,
         },
         "variables": {},
     }
     src_files = []
-    n_members, member_num = [], []
+    n_members, members = [], []
     for var in config.variables:
         # read domain-specific metrics
         results = {}
@@ -299,7 +315,7 @@ def aggregate_experiment(
             # extract ensemble information
             attrs = results[domain].pop("attrs", {})
             n_members.append(attrs.get("n_members"))
-            member_num.append(attrs.get("member"))
+            members.append(attrs.get("members"))
             src_files.append(file)
         if not results:
             continue
@@ -329,7 +345,7 @@ def aggregate_experiment(
         print(f"[aggregate] WARNING | No metric files in {out_dir}")
         return
     summary["ensemble"]["n_members"] = _check_attributes(n_members, "n_members", out_dir)
-    summary["ensemble"]["member"] = _check_attributes(member_num, "member", out_dir)
+    summary["ensemble"]["members"] = _check_attributes(members, "members", out_dir)
 
     # export
     summary_file = out_dir / SUMMARY_FILE
@@ -354,12 +370,11 @@ def main() -> None:
     experiment_mapping = load_yaml(BENCHMARK_DIR / "experiments.yaml")
 
     n_failed = 0
-    for train_exp, dct in config.experiments.items():
-        test_exps = dct['tests']
-        for test_exp, attrs in test_exps.items():
+    for train_exp, test_exps in config.experiments.items():
+        for test_exp in test_exps:
             print(f"[main] INFO | Train/test experiments: {train_exp} / {test_exp}")
             summary_file = experiment_dir(config, train_exp, test_exp) / SUMMARY_FILE
-
+            attrs = experiment_mapping[train_exp]['tests'][test_exp]
             if not args.aggregate_only:
                 if summary_file.is_file() and not args.overwrite:
                     print(f"[main] INFO | Summary already computed: {summary_file}")

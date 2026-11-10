@@ -28,6 +28,10 @@ class Config:
         (the former format) is also accepted and means all their tests.
     variables : list[str]
         Variables to evaluate.
+    max_members : int, default 5
+        Maximum number of ensemble members, randomly selected (with a fixed seed)
+        by `ml-eval benchmark`, used to score ensemble predictions. 1 scores a
+        single random member. Ignored for deterministic models.
     """
 
     model: str
@@ -45,6 +49,7 @@ class Config:
         }
     )
     variables: list[str] = field(default_factory=lambda: ["tasmax", "pr"])
+    max_members: int = 5
 
     def __post_init__(self) -> None:
         """
@@ -53,7 +58,22 @@ class Config:
 
         Training or test experiments not defined in that file are reported with a
         warning and removed, so `experiments` only holds valid combinations.
+
+        Raises
+        ------
+        ValueError
+            If `max_members` is not a positive integer.
         """
+        # bool is a subclass of int, so exclude it explicitly
+        if (
+            not isinstance(self.max_members, int)
+            or isinstance(self.max_members, bool)
+            or self.max_members < 1
+        ):
+            raise ValueError(
+                f"'max_members' must be a positive integer, got {self.max_members!r}"
+            )
+
         if isinstance(self.experiments, list):
             self.experiments = {train_exp: None for train_exp in self.experiments}
         if not isinstance(self.experiments, dict):

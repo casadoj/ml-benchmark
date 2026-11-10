@@ -37,8 +37,9 @@ zensical = ">=0.0.73,<0.0.74"
 [pypi-dependencies]
 # Branch `feature/ml-benchmark` on GitHub; the exact commit is recorded in
 # pixi.lock (`pixi update ml-evaluation` pulls the latest commit). To develop
-# against a local clone instead: { path = "../ml-evaluation", editable = true }
-ml-evaluation = { git = "https://github.com/c3s-cordex-ml/ml-evaluation.git", branch = "feature/ml-benchmark" }
+# against a local clone instead: 
+ml-evaluation = { path = "../ml-evaluation", editable = true }
+# ml-evaluation = { git = "https://github.com/c3s-cordex-ml/ml-evaluation.git", branch = "feature/ml-benchmark" }
 
 [tasks]
 evaluate-model = "python evaluation/evaluate.py"

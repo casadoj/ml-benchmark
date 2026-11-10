@@ -391,7 +391,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/zarr-3.4.2-pyhc364b38_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/zict-3.0.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/zipp-4.1.2-pyh5ded981_0.conda
-      - pypi: git+https://github.com/c3s-cordex-ml/ml-evaluation.git?branch=feature%2Fml-benchmark#792285860d2794c77deca4ba53fd29f4648b6944
+      - pypi: ../ml-evaluation
 packages:
 - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-8_kmp_llvm.conda
   build_number: 8
@@ -6575,9 +6575,8 @@ packages:
   run_exports: {}
   size: 24791
   timestamp: 1792622774790
-- pypi: git+https://github.com/c3s-cordex-ml/ml-evaluation.git?branch=feature%2Fml-benchmark#792285860d2794c77deca4ba53fd29f4648b6944
+- pypi: ../ml-evaluation
   name: ml-evaluation
-  version: 0.1.0
   requires_dist:
   - numpy>=2.0.0
   - xarray>=2025.0.0

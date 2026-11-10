@@ -36,8 +36,9 @@ cp ./evaluation/config_template.yaml ./data/<MODEL>/config.yaml
 
 **3. Edit the configuration.** By default only `model` needs to change; it must
 match the folder name `<MODEL>`. The other fields select the domains, the
-training/test experiments and the variables to evaluate; they are documented at
-the top of the file.
+training/test experiments and the variables to evaluate, and, for ensemble
+models, the maximum number of members to score (`max_members`, 5 by default; see
+[Ensemble models](#ensemble-models)). They are documented at the top of the file.
 
 **4. Run the evaluation**, with either option:
 
@@ -75,7 +76,7 @@ across domains and domain by domain:
   "model": "<MODEL>",
   "train_experiment": "ESD_pseudo_reality",
   "test_experiment": "Perfect_cross_validation",
-  "ensemble": {"n_members": 1, "member_num": null},
+  "ensemble": {"n_members": 10, "members": [0, 2, 5, 6, 8]},
   "variables": {
     "tasmax": {
       "rmse": {
@@ -90,11 +91,10 @@ across domains and domain by domain:
 }
 ```
 
-- **`ensemble`**: number of members in the predictions, and the member that was
-  scored. Generative models are scored on a single member, member 0
-  by default (`MEMBER_NUMBER` in `evaluate.py`), so that they are compared on the
-  same footing as deterministic models. For a deterministic model, `n_members`
-  is 1 and `member_num` is `null`.
+- **`ensemble`**: number of members in the predictions (`n_members`), and the
+  positions of the members used to compute the metrics (`members`). For a
+  deterministic model, `n_members` is 1 and `members` is `null`. Both are `null`
+  if the domains disagree (e.g. a different number of members per domain).
 - **`aggregate`**: combination of the domain values, with the rule given in
   `aggregation`: quadratic mean for RMSE and LHD, arithmetic mean otherwise. A
   missing value (`null`) in any domain makes the aggregate `null`; it is never
@@ -116,6 +116,24 @@ across domains and domain by domain:
 
 All metrics are errors (lower is better), except PSS (higher is better). Biases
 are spatial means of the absolute bias.
+
+### Ensemble models
+
+If the predictions have a member dimension, `ml-eval benchmark` handles the
+members as in the CORDEX ML-Bench paper. It randomly selects a subset of up to
+`max_members` members (5 by default, set in the configuration file). The
+selection uses a fixed seed, so repeated runs score the same members. All the
+metrics use this same subset, aggregated as follows:
+
+| Metrics | Member aggregation |
+|---|---|
+| RMSE, bias of the climatological mean | Metric of the ensemble mean of the subset |
+| Rx1day/TXx bias, SDII bias | Index per member; bias averaged over members, then absolute value and spatial mean |
+| LHD, PSS | Score per member, averaged over members |
+| RALSD, IAV bias | One random member of the subset |
+
+With `max_members: 1`, the model is scored on a single random member. The
+setting is ignored for deterministic models.
 The metric definitions come from [`ml-evaluation`](https://github.com/c3s-cordex-ml/ml-evaluation/tree/main);
 [`diagnostics.md`](https://github.com/WCRP-CORDEX/ml-benchmark/blob/main/evaluation/README.md) describes the original indices and
 diagnostics they were derived from.
