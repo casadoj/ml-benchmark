@@ -91,15 +91,15 @@ TYPE_BADGES = {
 }
 
 VARIABLE_LABELS = {
-    "tasmax": "Daily maximum temperature",
-    "pr": "Daily precipitation",
+    "tasmax": "Maximum temperature",
+    "pr": "Total precipitation",
 }
 
 LEGEND = """\
 Metrics are computed per domain by `ml-eval benchmark` and aggregated across
 domains (quadratic mean for RMSE and LHD, arithmetic mean otherwise). Biases are
-spatial means of the absolute bias, in the units of the variable. ↓ lower is
-better, ↑ higher is better. Each cell shows the two tests of the training
+spatial means of the absolute bias, in the units of the variable. Lower is
+better for all metrics except PSS, where higher is better. Each cell shows the two tests of the training
 experiment, separated by a slash in the order given in the column header; the best
 value of each test is in bold, and – marks results not available. Models using
 orography as a predictor are in italics. Type: Det. = deterministic, Gen. =
@@ -291,11 +291,10 @@ def build_table(
     lines.append(f'      <th colspan="{len(metrics)}">{order}</th>')
     lines += ["    </tr>", "    <tr>"]
     for col, (label, higher_is_better) in enumerate(metrics.values(), start=2):
-        arrow = "↑" if higher_is_better else "↓"
         direction = "desc" if higher_is_better else "asc"
         lines.append(
             f'      <th class="sortable" data-col="{col}" data-best="{direction}">'
-            f"{label} {arrow}</th>"
+            f"{label}</th>"
         )
     lines += ["    </tr>", "  </thead>", "  <tbody>"]
     # rows grouped by type (in `groups` order), alphabetical within a type; the
