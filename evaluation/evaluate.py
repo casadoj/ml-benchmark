@@ -59,10 +59,10 @@ AGGREGATION = {
     "bias_max1day": np.mean,
     "bias_mean": np.mean,
     "bias_sdii": np.mean,
-    "lhd": quadratic_mean,
+    "lhd": np.mean, # quadratic mean
     "pss": np.mean,
     "ralsd": np.mean,
-    "rmse": quadratic_mean,
+    "rmse": np.mean, # quadratic mean
 }
 
 # horizon -> 20-year period, as in the benchmark file names
