@@ -97,17 +97,16 @@ VARIABLE_LABELS = {
 
 LEGEND = """\
 Metrics are computed per domain by `ml-eval benchmark` and aggregated across
-domains (quadratic mean for RMSE and LHD, arithmetic mean otherwise). Biases are
-spatial means of the absolute bias, in the units of the variable. Lower is
-better for all metrics except PSS, where higher is better. Each cell shows the two tests of the training
-experiment, separated by a slash in the order given in the column header; the best
-value of each test is in bold, and – marks results not available. Models using
-orography as a predictor are in italics. Type: Det. = deterministic, Gen. =
-generative.
+domains. Biases are spatial means of the absolute bias, in the units of the variable. 
+Lower is better for all metrics except PSS. Each cell shows  the two tests of the 
+training experiment, separated by a slash in the order given in  the column header; 
+the best value of each test is in bold, and – marks results not  available. 
+Models using orography as a predictor are in italics. Type: 
+Det. = deterministic, Gen. = generative.
 
-On the documentation site, click a metric to sort the models: successive clicks
-sort by the first test (best first, then worst first) and then by the second test;
-missing values always go last. Click Type to group the models by type again.
+Click a metric to sort the models: successive clicks sort by the first test (best first, 
+then worst first) and then by the second test; missing values always go last. Click "Type" 
+to reset the original sorting.
 """
 
 
@@ -181,10 +180,10 @@ def model_type(model: str, data_dir: Path = DATA_DIR) -> str:
 
 
 def _format(value: float | None) -> str:
-    """Format a metric value with 3 decimals; None -> en dash."""
+    """Format a metric value with 2 decimals; None -> en dash."""
     if value is None:
         return "–"
-    return f"{value:.3f}"
+    return f"{value:.2f}"
 
 
 def _domains(summary: dict, var: str) -> set[str]:
@@ -354,7 +353,7 @@ def render(results: dict[str, dict[tuple[str, str], dict]], train_exp: str) -> s
     -------
     str
         Markdown/HTML text to place between the scoreboard markers of the page:
-        the legend and one table per variable, each under a `##` heading.
+        the legend and one table per variable, each under a `###` heading.
     """
     with open(BENCHMARK_DIR / "datasets.yaml") as f:
         all_domains = list(yaml.safe_load(f))
@@ -362,7 +361,7 @@ def render(results: dict[str, dict[tuple[str, str], dict]], train_exp: str) -> s
     types = {model: model_type(model) for model in results}
     parts = [LEGEND]
     for var in METRICS:
-        parts.append(f"## {VARIABLE_LABELS[var]}\n")
+        parts.append(f"### {VARIABLE_LABELS[var]}\n")
         # blank lines around the HTML so GitHub renders the Markdown that follows
         parts.append(build_table(results, var, all_domains, types, train_exp) + "\n")
     return "\n".join(parts)
