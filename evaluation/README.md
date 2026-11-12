@@ -44,7 +44,7 @@ models, the maximum number of members to score (`max_members`, 5 by default; see
 
 - Pixi:
   ```bash
-  pixi run evaluate-model --config-file ./data/<MODEL>/config.yaml
+  pixi run evaluate --config-file ./data/<MODEL>/config.yaml
   ```
 - Another environment (e.g. Conda): activate it, then
   ```bash

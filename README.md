@@ -70,7 +70,7 @@ curl -fsSL https://pixi.sh/install.sh | sh   # install Pixi (Linux/macOS), only 
 pixi install                                 # create the environment
 ```
 
-Commands are then run with `pixi run`, e.g. `pixi run evaluate-model ...`.
+Commands are then run with `pixi run`, e.g. `pixi run evaluate ...`.
 
 **Option 2: Conda.** The [requirements](https://github.com/WCRP-CORDEX/ml-benchmark/tree/main/requirements) directory contains an `environment.yaml` file to create the Conda environment `ml-benchmark`:
 
@@ -105,7 +105,7 @@ Benchmarking allows users to compare the performance of their own models against
 * [Dataset overview](https://casadoj.github.io/ml-benchmark/contributing/data/) introduces the dataset: the three domains, the variables used as predictors or predictands, and the file structure.
 * [Train your model](https://casadoj.github.io/ml-benchmark/contributing/training/) gives you a possible training workflow.
 * [Submit your model](https://casadoj.github.io/ml-benchmark/contributing/submission/) explains how your model output must be organized and how to register your model via [GitHub Issues](https://github.com/WCRP-CORDEX/ml-benchmark/issues/new?template=ml_benchmark_submission.yaml).
-* [Evaluate your model](https://casadoj.github.io/ml-benchmark/contributing/evaluation/) teaches how to run the `evaluate-model` tool within this repository to produce the necessary benchmark metrics.
+* [Evaluate your model](https://casadoj.github.io/ml-benchmark/contributing/evaluation/) teaches how to run the `evaluate` tool within this repository to produce the necessary benchmark metrics.
 
 <!-- --8<-- [end:contributing] -->
 

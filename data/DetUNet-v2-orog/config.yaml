@@ -1,7 +1,7 @@
 # Configuration of a model evaluation.
 #
 # Copy this file to data/<MODEL>/config.yaml, edit it and run
-#     pixi run evaluate-model -c data/<MODEL>/config.yaml
+#     pixi run evaluate -c data/<MODEL>/config.yaml
 #
 # Structure
 # ---------
