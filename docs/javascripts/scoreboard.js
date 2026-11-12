@@ -9,8 +9,8 @@
  * test, separated by ";", empty if missing). The table's `data-tests` lists the
  * test names, in the order of the values.
  *
- * Clicking a metric cycles through: test 1 best first, test 1 worst first,
- * test 2 best first, test 2 worst first, ... Clicking Type toggles between the
+ * Clicking a metric cycles through the tests, always with the best values
+ * first: test 1, test 2, ... Clicking Type toggles between the
  * generated order (grouped by type, alphabetical within a type) and the types
  * in reverse order. Missing values always go last, and ties keep the
  * generated order.
@@ -76,15 +76,13 @@ function setupScoreboard(table) {
         return;
       }
 
-      // metric: (test, best/worst first) pairs, cycling through the tests
-      step %= 2 * tests.length;
-      const test = Math.floor(step / 2);
-      const bestFirst = step % 2 === 0;
-      const ascending = (header.dataset.best === "asc") === bestFirst;
+      // metric: best values first, cycling through the tests
+      step %= tests.length;
+      const test = step;
+      const ascending = header.dataset.best === "asc";
       sort(col, test, !ascending);
-      const order = bestFirst ? "best first" : "worst first";
       mark(header, `${ascending ? "▲" : "▼"}${test + 1}`,
-        `Sorted by ${tests[test]}, ${order}. Click again to change.`);
+        `Sorted by ${tests[test]}, best first. Click again to change.`);
       header.setAttribute("aria-sort", ascending ? "ascending" : "descending");
     });
   });

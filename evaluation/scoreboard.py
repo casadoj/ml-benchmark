@@ -104,9 +104,9 @@ the best value of each test is in bold, and – marks results not  available.
 Models using orography as a predictor are in italics. Type: 
 Det. = deterministic, Gen. = generative.
 
-Click a metric to sort the models: successive clicks sort by the first test (best first, 
-then worst first) and then by the second test; missing values always go last. Click "Type" 
-to reset the original sorting.
+Click a metric to sort the models, best first: the first click sorts by the first test,
+the next one by the second test; missing values always go last. Click "Type" to reset
+the original sorting.
 """
 
 

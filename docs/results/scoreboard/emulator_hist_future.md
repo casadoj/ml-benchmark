@@ -33,9 +33,9 @@ the best value of each test is in bold, and – marks results not  available.
 Models using orography as a predictor are in italics. Type: 
 Det. = deterministic, Gen. = generative.
 
-Click a metric to sort the models: successive clicks sort by the first test (best first, 
-then worst first) and then by the second test; missing values always go last. Click "Type" 
-to reset the original sorting.
+Click a metric to sort the models, best first: the first click sorts by the first test,
+the next one by the second test; missing values always go last. Click "Type" to reset
+the original sorting.
 
 ### Maximum temperature
 
@@ -340,7 +340,7 @@ to reset the original sorting.
     <tr class="model-type--generative">
       <td><i>ParamDiffusion-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="1.1726073026657104;1.212101896603902"><b>1.17</b> / <b>1.21</b></td>
+      <td align="right" data-values="1.1726073026657104;1.212101896603902">1.17 / 1.21</td>
       <td align="right" data-values="0.07686500996351242;0.08022217576702435">0.08 / <b>0.08</b></td>
       <td align="right" data-values="0.2705682615439097;0.31830844283103943"><b>0.27</b> / <b>0.32</b></td>
       <td align="right" data-values="0.9594665744184834;0.8279173431894259">0.96 / 0.83</td>
@@ -350,92 +350,92 @@ to reset the original sorting.
     <tr class="model-type--generative">
       <td><i>RCMFlow-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="1.868138950811811;1.6255284310648663">1.87 / 1.63</td>
-      <td align="right" data-values="1.0223984917004902;0.6474555134773254">1.02 / 0.65</td>
-      <td align="right" data-values="1.5832203427950542;1.179807225863139">1.58 / 1.18</td>
-      <td align="right" data-values="0.5763873294454404;0.5516326105317544">0.58 / 0.55</td>
-      <td align="right" data-values="0.9107670015269819;0.9425287349532147">0.91 / 0.94</td>
-      <td align="right" data-values="0.12973028421401978;0.12906998892625174">0.13 / 0.13</td>
+      <td align="right" data-values="1.6679304440816243;1.3873124519983928">1.67 / 1.39</td>
+      <td align="right" data-values="1.0221900641918182;0.6480198502540588">1.02 / 0.65</td>
+      <td align="right" data-values="1.5829765399297078;1.170960267384847">1.58 / 1.17</td>
+      <td align="right" data-values="0.5715281099756794;0.5500334871151625">0.57 / 0.55</td>
+      <td align="right" data-values="0.9112207055980983;0.942567289538733">0.91 / 0.94</td>
+      <td align="right" data-values="0.12847597151994705;0.12851067632436752">0.13 / 0.13</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>RCMGEM-mv-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="1.3668236358604116;1.384451267002127">1.37 / 1.38</td>
-      <td align="right" data-values="0.07514272867765998;0.09458418780687877"><b>0.08</b> / 0.09</td>
-      <td align="right" data-values="0.5945591258576116;0.5813231031870033">0.59 / 0.58</td>
-      <td align="right" data-values="0.07320701351104701;0.07416513169182531"><b>0.07</b> / <b>0.07</b></td>
-      <td align="right" data-values="0.9893360994412963;0.9900749162415575">0.99 / <b>0.99</b></td>
-      <td align="right" data-values="0.09962908688897537;0.07908871007455752">0.10 / 0.08</td>
+      <td align="right" data-values="1.0822254418200978;1.0987375053875532"><b>1.08</b> / <b>1.10</b></td>
+      <td align="right" data-values="0.07448490005465443;0.09714682449669314"><b>0.07</b> / 0.10</td>
+      <td align="right" data-values="0.5479071648048544;0.5778231350423458">0.55 / 0.58</td>
+      <td align="right" data-values="0.07373886792241419;0.07621134582065923"><b>0.07</b> / <b>0.08</b></td>
+      <td align="right" data-values="0.989267220136402;0.9897441404130438">0.99 / <b>0.99</b></td>
+      <td align="right" data-values="0.10282842400866687;0.07818511184443167">0.10 / 0.08</td>
     </tr>
     <tr class="model-type--generative">
       <td>ResGAN</td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="1.7446710027652643;1.5386935911305613">1.74 / 1.54</td>
-      <td align="right" data-values="0.8456367452939352;0.45032910505930585">0.85 / 0.45</td>
-      <td align="right" data-values="1.185207466284434;0.7545238335927328">1.19 / 0.75</td>
-      <td align="right" data-values="0.6681433864971278;0.3156076106045468">0.67 / 0.32</td>
-      <td align="right" data-values="0.9212800942841969;0.954183021757646">0.92 / 0.95</td>
-      <td align="right" data-values="0.15660553177197775;0.13273506363232931">0.16 / 0.13</td>
+      <td align="right" data-values="1.6283046404520671;1.3977953990300496">1.63 / 1.40</td>
+      <td align="right" data-values="0.8458971679210663;0.44999687870343524">0.85 / 0.45</td>
+      <td align="right" data-values="1.187570850054423;0.752411017815272">1.19 / 0.75</td>
+      <td align="right" data-values="0.6702135308303317;0.316424288865331">0.67 / 0.32</td>
+      <td align="right" data-values="0.9215110772671506;0.9545045473691981">0.92 / 0.95</td>
+      <td align="right" data-values="0.15656636655330658;0.1327881763378779">0.16 / 0.13</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>ResGAN-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="1.7696165842519287;1.5271591422186557">1.77 / 1.53</td>
-      <td align="right" data-values="0.890619287888209;0.4657460202773412">0.89 / 0.47</td>
-      <td align="right" data-values="1.154276579618454;0.7017760276794434">1.15 / 0.70</td>
-      <td align="right" data-values="0.7423623935400127;0.5915580804462736">0.74 / 0.59</td>
-      <td align="right" data-values="0.9139390172235289;0.9517964665289756">0.91 / 0.95</td>
-      <td align="right" data-values="0.14623126884301504;0.1348270649711291">0.15 / 0.13</td>
+      <td align="right" data-values="1.656510353088379;1.3833726247151692">1.66 / 1.38</td>
+      <td align="right" data-values="0.8903725842634836;0.46587860584259033">0.89 / 0.47</td>
+      <td align="right" data-values="1.1481877863407135;0.69749187429746">1.15 / 0.70</td>
+      <td align="right" data-values="0.7461914146485044;0.5878810758442818">0.75 / 0.59</td>
+      <td align="right" data-values="0.9139782739039384;0.9512839788522753">0.91 / 0.95</td>
+      <td align="right" data-values="0.1459086835384369;0.134696955482165">0.15 / 0.13</td>
     </tr>
     <tr class="model-type--generative">
       <td>SpaGAN</td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="4.060855790419576;3.9614953035817044">4.06 / 3.96</td>
-      <td align="right" data-values="1.808382620414098;1.7284452319145203">1.81 / 1.73</td>
-      <td align="right" data-values="1.9009184837341309;2.010352224111557">1.90 / 2.01</td>
-      <td align="right" data-values="2.9834240361393793;3.4585842022532614">2.98 / 3.46</td>
-      <td align="right" data-values="0.9728137569774745;0.9705313742214994">0.97 / 0.97</td>
-      <td align="right" data-values="0.15621971587340036;0.1122039258480072">0.16 / 0.11</td>
+      <td align="right" data-values="3.1625224351882935;3.1333936850229898">3.16 / 3.13</td>
+      <td align="right" data-values="1.8083827594916027;1.7284465432167053">1.81 / 1.73</td>
+      <td align="right" data-values="1.900909314552943;2.0104011992613473">1.90 / 2.01</td>
+      <td align="right" data-values="2.9833456367705096;3.458579267650716">2.98 / 3.46</td>
+      <td align="right" data-values="0.9727943168805427;0.9705461912780294">0.97 / 0.97</td>
+      <td align="right" data-values="0.1562201976776123;0.11220356325308482">0.16 / 0.11</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>SpaGAN-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="3.9963731475593884;3.9063596651204775">4.00 / 3.91</td>
-      <td align="right" data-values="1.6938813875118892;1.596137265364329">1.69 / 1.60</td>
-      <td align="right" data-values="1.6833809713522594;1.9527133107185364">1.68 / 1.95</td>
-      <td align="right" data-values="3.231610857479947;3.6004581356251304">3.23 / 3.60</td>
-      <td align="right" data-values="0.9727063174944918;0.9749924217874959">0.97 / 0.97</td>
-      <td align="right" data-values="0.14570177594820657;0.08898353079954784">0.15 / 0.09</td>
+      <td align="right" data-values="3.017232875029246;3.0334695974985757">3.02 / 3.03</td>
+      <td align="right" data-values="1.6938813428084056;1.5961385816335678">1.69 / 1.60</td>
+      <td align="right" data-values="1.683348000049591;1.9527645309766133">1.68 / 1.95</td>
+      <td align="right" data-values="3.2315715938205885;3.600476127124233">3.23 / 3.60</td>
+      <td align="right" data-values="0.9726958902316124;0.9749778846677714">0.97 / 0.97</td>
+      <td align="right" data-values="0.1456942930817604;0.08898812159895897">0.15 / 0.09</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>UiBCorrDiff-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="1.480854937784148;1.518785555077057">1.48 / 1.52</td>
-      <td align="right" data-values="0.6878084739049276;0.6988855799039205">0.69 / 0.70</td>
-      <td align="right" data-values="0.8559725483258566;0.890190045038859">0.86 / 0.89</td>
-      <td align="right" data-values="1.0376764415632274;1.5160404762969852">1.04 / 1.52</td>
-      <td align="right" data-values="0.96909925665156;0.966389241168424">0.97 / 0.97</td>
-      <td align="right" data-values="0.11071837693452835;0.08219662308692932">0.11 / 0.08</td>
+      <td align="right" data-values="1.1945298314094543;1.2214231292406719">1.19 / 1.22</td>
+      <td align="right" data-values="0.311800017952919;0.3168712556362152">0.31 / 0.32</td>
+      <td align="right" data-values="0.5195852716763815;0.5614286462465922">0.52 / 0.56</td>
+      <td align="right" data-values="5.681093883111752;6.406865507297592">5.68 / 6.41</td>
+      <td align="right" data-values="0.9697745126650176;0.9700538634756279">0.97 / 0.97</td>
+      <td align="right" data-values="0.10417092839876811;0.07795412341753642">0.10 / 0.08</td>
     </tr>
     <tr class="model-type--generative">
       <td>ViT-IFCAv1<sup>†</sup></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="1.4161422772258385;1.501526162761088">1.42 / 1.50</td>
-      <td align="right" data-values="0.2222980111837387;0.27624453604221344">0.22 / 0.28</td>
-      <td align="right" data-values="0.6342852413654327;0.8179713785648346">0.63 / 0.82</td>
-      <td align="right" data-values="6.935469021351309;6.691034080392276">6.94 / 6.69</td>
-      <td align="right" data-values="0.9818926388291794;0.9786536682298907">0.98 / 0.98</td>
-      <td align="right" data-values="0.11151586472988129;0.08608047664165497">0.11 / 0.09</td>
+      <td align="right" data-values="1.1628387570381165;1.234756201505661">1.16 / 1.23</td>
+      <td align="right" data-values="0.22138038277626038;0.273046039044857">0.22 / 0.27</td>
+      <td align="right" data-values="0.6609870195388794;0.812747597694397">0.66 / 0.81</td>
+      <td align="right" data-values="6.933172132687258;6.661071601236428">6.93 / 6.66</td>
+      <td align="right" data-values="0.9819279354671724;0.9787125604932001">0.98 / 0.98</td>
+      <td align="right" data-values="0.11542762070894241;0.08700787276029587">0.12 / 0.09</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>ViT-IFCAv1-orog</i><sup>†</sup></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="1.430079621849472;1.508261251307422">1.43 / 1.51</td>
-      <td align="right" data-values="0.17058753222227097;0.1931084468960762">0.17 / 0.19</td>
-      <td align="right" data-values="0.6401958912611008;0.731612503528595">0.64 / 0.73</td>
-      <td align="right" data-values="7.82517588979504;7.381998162392525">7.83 / 7.38</td>
-      <td align="right" data-values="0.9851429518156427;0.9837440078327084">0.99 / 0.98</td>
-      <td align="right" data-values="0.11684371531009674;0.09013375267386436">0.12 / 0.09</td>
+      <td align="right" data-values="1.1559906005859375;1.22063547372818">1.16 / 1.22</td>
+      <td align="right" data-values="0.16909269243478775;0.19204996526241302">0.17 / 0.19</td>
+      <td align="right" data-values="0.6279580295085907;0.7270094752311707">0.63 / 0.73</td>
+      <td align="right" data-values="7.81731593384405;7.357267641417015">7.82 / 7.36</td>
+      <td align="right" data-values="0.9855216417054791;0.9836847757572545">0.99 / 0.98</td>
+      <td align="right" data-values="0.11295844614505768;0.08802621439099312">0.11 / 0.09</td>
     </tr>
   </tbody>
 </table>
@@ -748,100 +748,100 @@ to reset the original sorting.
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
       <td align="right" data-values="6.166394011245081;6.984861592796584">6.17 / 6.98</td>
       <td align="right" data-values="0.10673069707502314;0.11404133874943108"><b>0.11</b> / 0.11</td>
-      <td align="right" data-values="0.2988011154961335;0.3635838540652379"><b>0.30</b> / <b>0.36</b></td>
-      <td align="right" data-values="6.131316651043199;8.543944695668555"><b>6.13</b> / 8.54</td>
+      <td align="right" data-values="0.2988011154961335;0.3635838540652379">0.30 / <b>0.36</b></td>
+      <td align="right" data-values="6.131316651043199;8.543944695668555">6.13 / 8.54</td>
       <td align="right" data-values="0.837404946032641;1.6921005690543556">0.84 / 1.69</td>
       <td align="right" data-values="0.8573408430810033;1.0463656909586796"><b>0.86</b> / 1.05</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>RCMFlow-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="8.297757078285283;9.229802190579624">8.30 / 9.23</td>
-      <td align="right" data-values="0.20431521251428045;0.15490760382780486">0.20 / 0.15</td>
-      <td align="right" data-values="0.39312231413690507;0.4652123826294858">0.39 / 0.47</td>
-      <td align="right" data-values="9.42616250081745;10.104086016513255">9.43 / 10.10</td>
-      <td align="right" data-values="4.096803810322979;2.681809934744113">4.10 / 2.68</td>
-      <td align="right" data-values="2.0530362869811762;1.863892110296513">2.05 / 1.86</td>
+      <td align="right" data-values="6.241564947550984;7.003300894531814">6.24 / 7.00</td>
+      <td align="right" data-values="0.19529020270465378;0.15085978439660033">0.20 / 0.15</td>
+      <td align="right" data-values="0.3596231613213048;0.4454544510826344">0.36 / 0.45</td>
+      <td align="right" data-values="7.915555697541982;8.401785052617845">7.92 / 8.40</td>
+      <td align="right" data-values="4.019231409140814;2.6603363079497444">4.02 / 2.66</td>
+      <td align="right" data-values="2.0461620330627377;1.4737074336826563">2.05 / 1.47</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>RCMGEM-mv-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="7.560151711687969;8.60958325634297">7.56 / 8.61</td>
-      <td align="right" data-values="0.13732392106880856;0.1338890052326089">0.14 / 0.13</td>
-      <td align="right" data-values="0.31623338717704486;0.385516189089883">0.32 / 0.39</td>
-      <td align="right" data-values="6.645352513135175;8.132321121500253">6.65 / <b>8.13</b></td>
-      <td align="right" data-values="0.06672189623474732;0.18785165513584126"><b>0.07</b> / <b>0.19</b></td>
-      <td align="right" data-values="1.1494132277040408;0.9607561661211417">1.15 / <b>0.96</b></td>
+      <td align="right" data-values="5.798465051862277;6.598251531665024">5.80 / 6.60</td>
+      <td align="right" data-values="0.13188853769639727;0.12601367276577127">0.13 / 0.13</td>
+      <td align="right" data-values="0.29274518951804873;0.370587275312205"><b>0.29</b> / 0.37</td>
+      <td align="right" data-values="5.6328493709706535;6.948881818273445"><b>5.63</b> / <b>6.95</b></td>
+      <td align="right" data-values="0.0718414762266597;0.18405471775710772"><b>0.07</b> / <b>0.18</b></td>
+      <td align="right" data-values="1.0125814915885214;1.001713864697787">1.01 / <b>1.00</b></td>
     </tr>
     <tr class="model-type--generative">
       <td>ResGAN</td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="8.257469553830507;9.0726906715948">8.26 / 9.07</td>
-      <td align="right" data-values="0.24932120338678776;0.22545301029353584">0.25 / 0.23</td>
-      <td align="right" data-values="0.5091171890738369;0.6530618108476945">0.51 / 0.65</td>
-      <td align="right" data-values="9.538629788104373;10.697476387094733">9.54 / 10.70</td>
-      <td align="right" data-values="6.489406531134534;4.36235311091088">6.49 / 4.36</td>
-      <td align="right" data-values="2.000565640522117;1.3458785727927018">2.00 / 1.35</td>
+      <td align="right" data-values="7.295408624066597;8.009175763002625">7.30 / 8.01</td>
+      <td align="right" data-values="0.24755539839781085;0.22337762963562743">0.25 / 0.22</td>
+      <td align="right" data-values="0.5034363336683868;0.6462807755311857">0.50 / 0.65</td>
+      <td align="right" data-values="9.06040345989877;10.149151470215399">9.06 / 10.15</td>
+      <td align="right" data-values="6.483058764438677;4.370423881525192">6.48 / 4.37</td>
+      <td align="right" data-values="2.620951008220057;1.9056051206027973">2.62 / 1.91</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>ResGAN-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="8.290204336053955;9.080988005979659">8.29 / 9.08</td>
-      <td align="right" data-values="0.23753845359790304;0.1668771545394906">0.24 / 0.17</td>
-      <td align="right" data-values="0.47235182673510606;0.5604478455436331">0.47 / 0.56</td>
-      <td align="right" data-values="8.897140066831573;10.201383857976111">8.90 / 10.20</td>
-      <td align="right" data-values="8.633224804525227;5.835794405269309">8.63 / 5.84</td>
-      <td align="right" data-values="2.1001608283984234;1.1632462884136445">2.10 / 1.16</td>
+      <td align="right" data-values="7.375040872639971;8.061634705892974">7.38 / 8.06</td>
+      <td align="right" data-values="0.23592161088924313;0.16432896174854775">0.24 / 0.16</td>
+      <td align="right" data-values="0.4663036243101964;0.553354251013006">0.47 / 0.55</td>
+      <td align="right" data-values="8.459076170491548;9.642768163852901">8.46 / 9.64</td>
+      <td align="right" data-values="8.385098721303242;5.750584248576971">8.39 / 5.75</td>
+      <td align="right" data-values="2.73560547959521;1.4805338862915305">2.74 / 1.48</td>
     </tr>
     <tr class="model-type--generative">
       <td>SpaGAN</td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="8.089907384054667;9.006411452273843">8.09 / 9.01</td>
-      <td align="right" data-values="0.7818888154889946;0.7822320143166747">0.78 / 0.78</td>
-      <td align="right" data-values="1.847317310862237;1.9767629171288543">1.85 / 1.98</td>
-      <td align="right" data-values="21.447500165570215;24.790031778824698">21.45 / 24.79</td>
-      <td align="right" data-values="33.09681444346625;23.761602294381643">33.10 / 23.76</td>
-      <td align="right" data-values="4.458162066956351;3.948793004785432">4.46 / 3.95</td>
+      <td align="right" data-values="7.11367173586424;7.861937911059332">7.11 / 7.86</td>
+      <td align="right" data-values="0.7812091758024474;0.7817120857659203">0.78 / 0.78</td>
+      <td align="right" data-values="1.8451150233353182;1.9755783910226634">1.85 / 1.98</td>
+      <td align="right" data-values="21.078780110926395;24.307145736957846">21.08 / 24.31</td>
+      <td align="right" data-values="32.927265571505316;22.244527986727075">32.93 / 22.24</td>
+      <td align="right" data-values="3.1181695127038562;2.57215204991015">3.12 / 2.57</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>SpaGAN-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="7.638976899648997;8.529720878472268">7.64 / 8.53</td>
-      <td align="right" data-values="0.6259820719039952;0.6495151251601458">0.63 / 0.65</td>
-      <td align="right" data-values="1.528988685443488;1.7655124698310907">1.53 / 1.77</td>
-      <td align="right" data-values="19.903201092386677;25.215246003720704">19.90 / 25.22</td>
-      <td align="right" data-values="12.083238294157589;9.110442310116133">12.08 / 9.11</td>
-      <td align="right" data-values="1.9112525282948554;1.7525016373293203">1.91 / 1.75</td>
+      <td align="right" data-values="6.947573161089244;7.7330831024925795">6.95 / 7.73</td>
+      <td align="right" data-values="0.6259723882705498;0.6494694084327823">0.63 / 0.65</td>
+      <td align="right" data-values="1.5287997578513057;1.7660289908322362">1.53 / 1.77</td>
+      <td align="right" data-values="19.70987366892057;25.087973797227065">19.71 / 25.09</td>
+      <td align="right" data-values="11.978386529577309;9.211428304751498">11.98 / 9.21</td>
+      <td align="right" data-values="2.2173013687790903;1.4128124748184216">2.22 / 1.41</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>UiBCorrDiff-orog</i></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="8.171994420324708;9.264061202337235">8.17 / 9.26</td>
-      <td align="right" data-values="1.9571217136385506;2.0799376838344967">1.96 / 2.08</td>
-      <td align="right" data-values="2.9040895381260143;3.248263531470435">2.90 / 3.25</td>
-      <td align="right" data-values="30.638928294209535;36.8816176671433">30.64 / 36.88</td>
-      <td align="right" data-values="13.795454209013009;12.360894823498432">13.80 / 12.36</td>
-      <td align="right" data-values="2.1856179240818205;2.502046081175913">2.19 / 2.50</td>
+      <td align="right" data-values="6.134123760437485;6.936053122279335">6.13 / 6.94</td>
+      <td align="right" data-values="1.0528302535128458;1.1234864573036842">1.05 / 1.12</td>
+      <td align="right" data-values="1.9202403520975235;2.203824106679735">1.92 / 2.20</td>
+      <td align="right" data-values="24.22187812636567;29.374296459681645">24.22 / 29.37</td>
+      <td align="right" data-values="37.70076820764205;31.771945877849248">37.70 / 31.77</td>
+      <td align="right" data-values="2.358914770005087;2.463156814593553">2.36 / 2.46</td>
     </tr>
     <tr class="model-type--generative">
       <td>ViT-IFCAv1<sup>†</sup></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="9.780104928588951;11.196453783428584">9.78 / 11.20</td>
-      <td align="right" data-values="0.23486698012192983;0.2771194752046949">0.23 / 0.28</td>
-      <td align="right" data-values="1.0786368579448673;1.4070906213806307">1.08 / 1.41</td>
-      <td align="right" data-values="14.161641281129462;17.299992380639793">14.16 / 17.30</td>
-      <td align="right" data-values="25.59106404327128;22.252777088991717">25.59 / 22.25</td>
-      <td align="right" data-values="2.194499821278906;3.553613589517393">2.19 / 3.55</td>
+      <td align="right" data-values="7.469111544656842;8.61285145182324">7.47 / 8.61</td>
+      <td align="right" data-values="0.22493179789555415;0.2668755932581395">0.22 / 0.27</td>
+      <td align="right" data-values="1.0635347315169452;1.3875082572065502">1.06 / 1.39</td>
+      <td align="right" data-values="13.290268247812477;17.005573200364807">13.29 / 17.01</td>
+      <td align="right" data-values="25.52661485675302;22.187373361455936">25.53 / 22.19</td>
+      <td align="right" data-values="2.1419588528658853;3.5254240200757616">2.14 / 3.53</td>
     </tr>
     <tr class="model-type--generative">
       <td><i>ViT-IFCAv1-orog</i><sup>†</sup></td>
       <td data-sort="1" title="Generative"><span class="model-type">Gen.</span></td>
-      <td align="right" data-values="9.593757650568303;10.929941660089975">9.59 / 10.93</td>
-      <td align="right" data-values="0.23874473330941265;0.24884717307525508">0.24 / 0.25</td>
-      <td align="right" data-values="0.8521192853731481;0.9955255673441543">0.85 / 1.00</td>
-      <td align="right" data-values="14.663789186823223;18.636070067303365">14.66 / 18.64</td>
-      <td align="right" data-values="15.064406419806355;12.050495101804872">15.06 / 12.05</td>
-      <td align="right" data-values="2.137296848573498;3.1484047557389347">2.14 / 3.15</td>
+      <td align="right" data-values="7.453541168856844;8.56491964321403">7.45 / 8.56</td>
+      <td align="right" data-values="0.23031306718135336;0.23848285752060505">0.23 / 0.24</td>
+      <td align="right" data-values="0.8249793800548189;0.965814348291318">0.82 / 0.97</td>
+      <td align="right" data-values="13.916052382890545;17.914830774267706">13.92 / 17.91</td>
+      <td align="right" data-values="15.053376518741478;11.930565189919314">15.05 / 11.93</td>
+      <td align="right" data-values="1.9963406894375277;2.968015883887775">2.00 / 2.97</td>
     </tr>
   </tbody>
 </table>
