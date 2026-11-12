@@ -35,6 +35,11 @@
 # submitted                  Date the issue was opened (YYYY-MM-DD, UTC).
 # approved                   Date the `approved` label was added (YYYY-MM-DD, UTC).
 #
+# Field set by a maintainer at approval:
+# blind                      true if the predictions were submitted before the public
+#                            release of the test targets, false if after, null if 
+#                            unknown.
+#
 # Optional fields (from the form or unknown for older models) are `null`; they are
 # never filled with guessed values.
 #
@@ -65,3 +70,4 @@ additional_notes: null
 issue: 123
 submitted: 2026-01-15
 approved: 2026-01-20
+blind: true

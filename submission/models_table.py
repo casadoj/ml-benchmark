@@ -5,7 +5,7 @@ metadata.
 
 Reads `data/<MODEL>/metadata.yaml` (see `submission/metadata_template.yaml`) for
 every model and writes one HTML table per model type (Model | Description |
-Reference | Implementation) between the markers `<!-- MODELS:START -->` and
+Submission | Reference | Implementation) between the markers `<!-- MODELS:START -->` and
 `<!-- MODELS:END -->` in `docs/results/models.md`.
 
 A model and its orography variant (`<MODEL>-orog`) share one row, named after the
@@ -39,10 +39,14 @@ END_MARKER = "<!-- MODELS:END -->"
 OROG_SUFFIX = "-orog"
 
 # table columns, in display order
-COLUMNS = ("Model", "Description", "Reference", "Implementation")
+COLUMNS = ("Model", "Description", "Submission", "Reference", "Implementation")
 
 # text shown for a missing reference or implementation
 MISSING = "In preparation"
+
+# value of `blind` -> text of the Submission column; null shows UNKNOWN_RELEASE
+RELEASE_LABELS = {True: "Pre-release", False: "Post-release"}
+UNKNOWN_RELEASE = "Unknown"
 
 # host of the implementation URL -> link text; any other host shows "Link"
 HOST_LABELS = {
@@ -59,6 +63,7 @@ REQUIRED_FIELDS = (
     "reference_url",
     "reproducibility_url",
     "stochastic_output",
+    "blind",
 )
 
 # sys.path is extended so the helper shared with the scoreboard can be reused
@@ -183,6 +188,33 @@ def _implementation(url: str | None) -> str:
     return _link(label, url)
 
 
+def _release(blind: bool | None) -> str:
+    """
+    Render the Submission column from the `blind` field.
+
+    Parameters
+    ----------
+    blind : bool or None
+        True if the predictions were submitted before the release of the test
+        targets, False if after, None if unknown.
+
+    Returns
+    -------
+    str
+        "Pre-release", "Post-release" or "Unknown".
+
+    Raises
+    ------
+    ValueError
+        If `blind` is not a boolean or null (e.g. the string "false").
+    """
+    if blind is None:
+        return UNKNOWN_RELEASE
+    if not isinstance(blind, bool):
+        raise ValueError(f"blind must be true, false or null, not {blind!r}")
+    return RELEASE_LABELS[blind]
+
+
 def _table(models: list[dict]) -> str:
     """
     Render one HTML table of models.
@@ -206,6 +238,7 @@ def _table(models: list[dict]) -> str:
         cells = [
             _text(m["name"]),
             _text(m["short_description"] or ""),
+            _release(m["blind"]),
             _reference(m["reference_label"], m["reference_url"]),
             _implementation(m["reproducibility_url"]),
         ]
