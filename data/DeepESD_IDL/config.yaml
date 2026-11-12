@@ -13,6 +13,7 @@
 #     - <TEST_EXPERIMENT>
 # variables:                      # list of variables
 #   - <VARIABLE>
+# max_members: <N>                # positive integer
 #
 # Fields
 # ------
@@ -25,9 +26,12 @@
 #              with a warning. An empty test list (`<TRAINING_EXPERIMENT>:`)
 #              selects all the tests of that training experiment.
 # variables    Variables to evaluate: tasmax | pr.
+# max_members  Ensemble models only: maximum number of members, randomly selected
+#              with a fixed seed, used to compute the metrics. 1 scores a single
+#              random member. Ignored for deterministic models.
 #
 # All fields except `model` are optional; if missing, they default to all
-# domains, the experiments below, and both variables.
+# domains, the experiments below, both variables and 5 members.
 
 model: DeepESD_IDL
 domains:
@@ -44,3 +48,4 @@ experiments:
 variables:
   - tasmax
   - pr
+max_members: 5
