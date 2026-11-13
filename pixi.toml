@@ -42,6 +42,7 @@ ml-evaluation = { path = "../ml-evaluation", editable = true }
 # ml-evaluation = { git = "https://github.com/c3s-cordex-ml/ml-evaluation.git", branch = "feature/ml-benchmark" }
 
 [tasks]
+validate = "python submission/validate.py"
 evaluate = "python evaluation/evaluate.py"
 lab = "jupyter lab"
 # The images live in images/ (so that the READMEs show them on GitHub); the site
