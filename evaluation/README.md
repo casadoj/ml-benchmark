@@ -1,122 +1,139 @@
-# Evaluation Diagnostics
+# Evaluating a model
 
-This module provides the set of evaluation diagnostics recommended by CORDEX-ML-Bench for assessing ML-based regional climate downscaling. It supports seasonal filtering and exposes both single-variable indices and diagnostic tools that compare predictions against reference datasets.
+This folder holds the script that computes the benchmark metrics of a model:
+`evaluate.py`. It runs [`ml-evaluation`](https://github.com/c3s-cordex-ml/ml-evaluation)
+(`ml-eval benchmark`) on every domain, training/test experiment and variable, and
+summarises the results in one JSON file per experiment.
 
-## Indices
+## Before you start
 
-Indices quantify particular characteristics or properties of a single simulation `x`, for example, the mean, specific quantiles, or extremes. These indices are always calculated for an individual simulation and often form the foundation for various diagnostics.
+- **Reference data**: the benchmark data must be in `data/Bench-data/` (see
+  [`data/data_download.ipynb`](../data/data_download.ipynb)). The targets are read from
+  `data/Bench-data/<DOMAIN>_domain/test/<horizon>/target/`.
+- **Environment**: a Pixi or Conda environment with `ml-evaluation` installed;
+  see [Requirements](../README.md#requirements) in the main README.
 
-| Index | Description | Key parameters |
-|-------|-------------|----------------|
-| `mean` | Mean of a variable over the time dimension. | `x`, `var` |
-| `quantile` | Specified time quantile of a variable. | `x`, `var`, `q` |
-| `su` | Mean annual count of days above a temperature threshold (summer days). | `x`, `var`, `season`, `threshold` |
-| `txx` | Mean annual maximum of daily maximum temperature. | `x`, `var`, `season` |
-| `txn` | Mean annual minimum of daily maximum temperature. | `x`, `var`, `season` |
-| `rx1day` | Mean annual maximum 1-day precipitation. | `x`, `var`, `season` |
-| `sdii` | Mean precipitation on wet days above a threshold. | `x`, `var`, `season`, `wet_threshold` |
-| `cdd` | Mean annual maximum dry spell length below a precipitation threshold. | `x`, `var`, `season`, `dry_threshold` |
-| `cwd` | Mean annual maximum wet spell length above a precipitation threshold. | `x`, `var`, `season`, `wet_threshold` |
-| `lag1_corr` | Lag-1 autocorrelation of a variable along time. | `x`, `var`, `season` |
-| `interannual_var` | Interannual variability (standard deviation of annual means). | `x`, `var`, `season` |
+All commands below are run from the root of the repository.
 
-## Diagnostics
+## Steps
 
-Diagnostics compare two simulations, `x0` and `x1`, which correspond to the ground-truth (reference) data and the model predictions, respectively. These diagnostics are designed to evaluate different aspects of model performance. For example, to assess how well a model captures warm extremes, one might use the bias of the TXx index. Some diagnostics rely on specific indices, while others, such as RMSE, PSD, or the Wasserstein distance, do not depend on them.
+**1. Add the predictions.** Copy or link them to `data/<MODEL>/predictions/`,
+following the structure described in [`submission/README.md`](../submission/README.md):
 
-To simplify comparisons between models in the benchmark, every diagnostic should be reducible to a single summary value. For example, the RMSE can be expressed as its mean across all relevant dimensions, and the bias of a specific index can be reported as the spatial mean of its absolute values.
-
-| Diagnostic | Description | Key parameters |
-|------------|-------------|----------------|
-| `rmse` | Root mean square error between x0 and x1. | `x0`, `x1`, `var`, `season`, `dim` |
-| `psd` | Power spectral density with radial averaging for 2D spatial fields. | `x0`, `x1`, `var`, `season` |
-| `ralsd` | Radially averaged log spectral distance between two RAPSD curves (Harris et al., 2022). | `psd_x0`, `psd_x1` |
-| `wasserstein_distance` | Wasserstein distance between the distributions of x0 and x1. With `spatial=False`, returns a single scalar (all values flattened); with `spatial=True`, returns a field of distances at each grid point (computed over time). | `x0`, `x1`, `var`, `season`, `spatial` |
-| `bias_index` | Absolute or relative bias for any index function. | `x0`, `x1`, `index_fn`, `season`, index-specific kwargs |
-| `ratio_index` | Ratio (x1 / x0) for any index function. | `x0`, `x1`, `index_fn`, `season`, index-specific kwargs |
-| `bias_multivariable_correlation` | Bias in correlations between two variables. | `x0`, `x1`, `var_x`, `var_y`, `season` |
-
-## Examples
-
-### Tasmax diagnostics
-
-```python
-import xarray as xr
-import indices, diagnostics
-
-x0 = xr.open_dataset("target_tasmax.nc")
-x1 = xr.open_dataset("prediction_tasmax.nc")
-
-# RMSE over time dimension
-rmse = diagnostics.rmse(x0, x1, var="tasmax", dim="time")
-
-# Bias of annual maximum temperature
-bias_txx = diagnostics.bias_index(x0, x1, index_fn=indices.txx, var="tasmax")
-
-# Bias of mean temperature
-bias_mean = diagnostics.bias_index(x0, x1, index_fn=indices._mean, var="tasmax")
-
-# Bias of summer days count
-bias_summer_days = diagnostics.bias_index(x0, x1, index_fn=indices.su, var="tasmax")
-
-# Power Spectral Density
-psd_x0, psd_x1 = diagnostics.psd(x0, x1, var="tasmax")
-
-# Radially Averaged Log Spectral Distance
-ralsd_value = diagnostics.ralsd(psd_x0, psd_x1)
-
-# Wasserstein distance (single scalar over all space-time)
-wd_scalar = diagnostics.wasserstein_distance(x0, x1, var="tasmax")
-
-# Wasserstein distance at each grid point (over time)
-wd_field = diagnostics.wasserstein_distance(x0, x1, var="tasmax", spatial=True)
+```
+data/<MODEL>/predictions/
+├── ALPS_Domain/
+├── NZ_Domain/
+└── SA_Domain/
+    └── <TRAINING_EXPERIMENT>/<horizon>/<case>/Predictions_pr_tasmax_<GCM>_<period>.nc
 ```
 
-### Precipitation diagnostics
+**2. Copy the configuration template** into the model folder:
 
-```python
-import xarray as xr
-import indices, diagnostics
-
-x0 = xr.open_dataset("target_pr.nc")
-x1 = xr.open_dataset("prediction_pr.nc")
-
-# RMSE over time dimension
-rmse = diagnostics.rmse(x0, x1, var="pr", dim="time")
-
-# Bias of SDII
-bias_sdii = diagnostics.bias_index(x0, x1, index_fn=indices.sdii, var="pr")
-
-# Bias of annual maximum 1-day precipitation
-bias_rx1day = diagnostics.bias_index(x0, x1, index_fn=indices.rx1day, var="pr")
-
-# Bias of maximum wet spell length
-bias_cwd = diagnostics.bias_index(x0, x1, index_fn=indices.cwd, var="pr")
-
-# Power Spectral Density
-psd_x0, psd_x1 = diagnostics.psd(x0, x1, var="pr")
-
-# Radially Averaged Log Spectral Distance
-ralsd_value = diagnostics.ralsd(psd_x0, psd_x1)
-
-# Wasserstein distance between precipitation distributions
-wd_pr = diagnostics.wasserstein_distance(x0, x1, var="pr", season="summer")
+```bash
+cp ./evaluation/config_template.yaml ./data/<MODEL>/config.yaml
 ```
 
-### Multivariate correlation bias
+**3. Edit the configuration.** By default only `model` needs to change; it must
+match the folder name `<MODEL>`. The other fields select the domains, the
+training/test experiments and the variables to evaluate, and, for ensemble
+models, the maximum number of members to score (`max_members`, 5 by default; see
+[Ensemble models](#ensemble-models)). They are documented at the top of the file.
 
-```python
-import xarray as xr
-import diagnostics
+**4. Run the evaluation**, with either option:
 
-# Load joint x0 dataset with both variables
-x0 = xr.open_dataset("target_joint.nc")
-x1 = xr.open_dataset("pred_joint.nc")
+- Pixi:
+  ```bash
+  pixi run evaluate --config-file ./data/<MODEL>/config.yaml
+  ```
+- Another environment (e.g. Conda): activate it, then
+  ```bash
+  python ./evaluation/evaluate.py --config-file ./data/<MODEL>/config.yaml
+  ```
 
-# Compute correlation bias between temperature and precipitation
-correlation_bias = diagnostics.bias_multivariable_correlation(
-    x0,
-    x1,
-    var_x="tasmax",
-    var_y="pr"
-)
+Useful options:
+
+| Option | Effect |
+|---|---|
+| `-o`, `--overwrite` | Recompute experiments that already have a summary (skipped by default). |
+| `--keep-domain-files` | Keep the per-domain metric files (deleted by default once the summary is written). |
+| `--aggregate-only` | Do not run `ml-eval` on each domain; only rebuild the summaries from the kept domain files. |
+
+## Output
+
+For each training/test experiment in the configuration, the evaluation writes one
+summary file:
+
+```
+data/<MODEL>/evaluation/<TRAINING_EXPERIMENT>/<TEST_EXPERIMENT>/metrics_summary.json
+```
+
+It contains some metadata and, for each variable, every metric both aggregated
+across domains and domain by domain:
+
+```json
+{
+  "model": "<MODEL>",
+  "train_experiment": "ESD_pseudo_reality",
+  "test_experiment": "Perfect_cross_validation",
+  "ensemble": {"n_members": 10, "members": [0, 2, 5, 6, 8]},
+  "variables": {
+    "tasmax": {
+      "rmse": {
+        "aggregation": "quadratic_mean",
+        "aggregate": 1.23,
+        "domains": {"ALPS": 1.10, "NZ": 0.98, "SA": 1.55}
+      },
+      ...
+    },
+    "pr": { ... }
+  }
+}
+```
+
+- **`ensemble`**: number of members in the predictions (`n_members`), and the
+  positions of the members used to compute the metrics (`members`). For a
+  deterministic model, `n_members` is 1 and `members` is `null`. Both are `null`
+  if the domains disagree (e.g. a different number of members per domain).
+- **`aggregate`**: combination of the domain values, with the rule given in
+  `aggregation`: quadratic mean for RMSE and LHD, arithmetic mean otherwise. A
+  missing value (`null`) in any domain makes the aggregate `null`; it is never
+  dropped.
+
+### Metrics
+
+| Metric | Variable | Description | Units |
+|---|---|---|---|
+| `rmse` | both | Root mean square error of the daily values | K, mm/day |
+| `clim_mean` | both | Bias of the climatological mean | K, mm/day |
+| `ralsd` | both | Radially Averaged Log Spectral Distance: error in the spatial structure | dB² |
+| `txx` | tasmax | Bias in mean TXx (annual max. of daily max. temperature) | K |
+| `rx1day` | pr | Bias in mean Rx1day (annual max. 1-day precipitation) | mm/day |
+| `pss` | tasmax | Perkins skill score: overlap of the daily distributions (0–1) | – |
+| `lhd` | pr | Logarithmic Histogram Distance between the daily distributions | – |
+| `iav` | tasmax | Bias of the InterAnnual Variability (std. dev. of annual means) | K |
+| `sdii` | pr | Bias of the Simple Daily Intensity Index (mean precipitation on wet days) | mm/day |
+
+All metrics are errors (lower is better), except PSS (higher is better). Biases
+are spatial means of the absolute bias.
+
+### Ensemble models
+
+If the predictions have a member dimension, `ml-eval benchmark` handles the
+members as in the CORDEX ML-Bench paper. It randomly selects a subset of up to
+`max_members` members (5 by default, set in the configuration file). The
+selection uses a fixed seed, so repeated runs score the same members. All the
+metrics use this same subset, aggregated as follows:
+
+| Metrics | Member aggregation |
+|---|---|
+| RMSE, bias of the climatological mean | Metric of the ensemble mean of the subset |
+| Rx1day/TXx bias, SDII bias | Index per member; bias averaged over members, then absolute value and spatial mean |
+| LHD, PSS | Score per member, averaged over members |
+| RALSD, IAV bias | One random member of the subset |
+
+With `max_members: 1`, the model is scored on a single random member. The
+setting is ignored for deterministic models.
+The metric definitions come from [`ml-evaluation`](https://github.com/c3s-cordex-ml/ml-evaluation/tree/main);
+[`diagnostics.md`](https://github.com/WCRP-CORDEX/ml-benchmark/blob/main/evaluation/README.md) describes the original indices and
+diagnostics they were derived from.
