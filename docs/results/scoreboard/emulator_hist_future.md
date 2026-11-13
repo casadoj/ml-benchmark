@@ -238,16 +238,6 @@ the original sorting.
       <td align="right" data-values="0.1397202710310618;0.056923078993956246">0.14 / 0.06</td>
     </tr>
     <tr class="model-type--deterministic">
-      <td>TestModel</td>
-      <td data-sort="0" title="Deterministic"><span class="model-type">Det.</span></td>
-      <td align="right" data-values="1.3863863945007324;1.4195372660954793">1.39 / 1.42</td>
-      <td align="right" data-values="0.17646176119645438;0.20807525515556335">0.18 / 0.21</td>
-      <td align="right" data-values="0.5792138973871866;0.6062005360921224">0.58 / 0.61</td>
-      <td align="right" data-values="4.733908395632227;4.633960515214586">4.73 / 4.63</td>
-      <td align="right" data-values="0.976108667085145;0.9760505108461413">0.98 / 0.98</td>
-      <td align="right" data-values="0.11763678739468257;0.09068797280391057">0.12 / 0.09</td>
-    </tr>
-    <tr class="model-type--deterministic">
       <td>XGBoost_IDL</td>
       <td data-sort="0" title="Deterministic"><span class="model-type">Det.</span></td>
       <td align="right" data-values="1.2505725131286558;1.2847632024900102">1.25 / 1.28</td>
@@ -652,16 +642,6 @@ the original sorting.
       <td align="right" data-values="27.706786981505104;35.06107558977052">27.71 / 35.06</td>
       <td align="right" data-values="79.28959398249648;89.15607432237947">79.29 / 89.16</td>
       <td align="right" data-values="6.046411051999904;6.995797044644466">6.05 / 7.00</td>
-    </tr>
-    <tr class="model-type--deterministic">
-      <td>TestModel</td>
-      <td data-sort="0" title="Deterministic"><span class="model-type">Det.</span></td>
-      <td align="right" data-values="5.913387842013495;6.676235630864">5.91 / 6.68</td>
-      <td align="right" data-values="0.3084148215828337;0.33016814265194366">0.31 / 0.33</td>
-      <td align="right" data-values="1.298906389382824;1.5166160331197354">1.30 / 1.52</td>
-      <td align="right" data-values="26.0818189168016;32.11895625473212">26.08 / 32.12</td>
-      <td align="right" data-values="82.92578600521783;91.77743692773724">82.93 / 91.78</td>
-      <td align="right" data-values="6.663464048620518;6.928276117855487">6.66 / 6.93</td>
     </tr>
     <tr class="model-type--deterministic">
       <td>XGBoost_IDL</td>
