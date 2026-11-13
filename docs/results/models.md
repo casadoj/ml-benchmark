@@ -98,13 +98,6 @@ The tables below enumerate the models currently included in the benchmark, with 
       <td>In preparation</td>
     </tr>
     <tr>
-      <td>TestModel</td>
-      <td></td>
-      <td>Post-release</td>
-      <td><a href="---">Link</a></td>
-      <td><a href="---">Link</a></td>
-    </tr>
-    <tr>
       <td>XGBoost_IDL</td>
       <td>Gradient boosted decision trees</td>
       <td>Pre-release</td>
